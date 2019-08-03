@@ -1,0 +1,37 @@
+header .app-name {
+    background-color:skyblue;
+    /* headerデフォルト余白の打消し */
+    margin-bottom:0;
+}
+
+nav.navbar {
+    /* .navbarデフォルト余白の打消し */
+    padding:0;
+}
+
+nav .navbar-brand {
+    /* .navbar-brandデフォルト余白の打消し */
+    margin-right:0;
+}
+
+li.active {
+    background-color:lightgrey;
+}
+
+main {
+    background-color:ghostwhite;
+}
+
+table.table {
+    /* .tableデフォルト余白の打消し */
+    margin-bottom:0; 
+}
+
+footer {
+    background-color:skyblue;
+}
+
+footer p {
+    /* pデフォルト余白の打消し */
+    margin-bottom:0;
+}
