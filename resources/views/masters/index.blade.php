@@ -34,70 +34,25 @@
                     </tr>
                 </thead>
                 <tbody class="bg-light">
-                    <tr>
-                        <td>5</td>
-                        <td>伊藤絵里香</td>
-                        <td>111-1111</td>
-                        <td>東京都新宿区西新宿2-8-1</td>
-                        <td>03-0000-0000</td>
-                        <td>090-0000-0000</td>
-                        <td>abc@gmail.com</td>
-                        <td>
-                            <a href="" class="btn btn-success">編集</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>4</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>3</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>2</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                    </tr>
-                    <tr>
-                            <td>出張不可</td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
+                    @foreach ($masters as $master)
+                        <tr>
+                            <td>{{ $master->rank }}</td>
+                            <td>{{ $master->name }}</td>
+                            <td>{{ $master->zip_code }}</td>
+                            <td>{{ $master->address }}</td>
+                            <td>{{ $master->home_phone }}</td>
+                            <td>{{ $master->cell_phone }}</td>
+                            <td>{{ $master->mail }}</td>
+                            <td>
+                                <a href="" class="btn btn-success">編集</a>
+                            </td>
                         </tr>
+                    @endforeach
                 </tbody>
             </table>
+            <div class="d-flex justify-content-center mt-2">
+                {{ $masters->links() }}
+            </div>
         </div>
     </div>
 @endsection
