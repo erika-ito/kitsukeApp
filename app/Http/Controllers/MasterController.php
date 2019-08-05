@@ -7,13 +7,27 @@ use Illuminate\Http\Request;
 
 class MasterController extends Controller
 {
-    public function index()
+    // 一覧表示（検索あり）
+    public function index(Request $request)
     {
-        $masters = Master::orderBy('rank','desc')
+        $keyword = $request->keyword;
+
+        $query = Master::query();
+
+        // キーワードがある場合
+        if (! empty($keyword))
+        {
+            $query->where('name', 'like', '%'.$keyword.'%')
+                ->orwhere('furigana', 'like', '%'.$keyword.'%');
+        }
+
+        // ページネーション
+        $masters = $query->orderBy('rank','desc')
             ->orderBy('furigana','asc')->paginate(5);
         
         return view('masters/index', [
             'masters' => $masters,
+            'keyword' => $keyword,
         ]);
     }
 }

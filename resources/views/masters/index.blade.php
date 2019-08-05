@@ -9,7 +9,7 @@
             <div class="col-10">
                 <form action="" method="get" class="form-inline">
                     <div class="form-group mr-5">
-                        <input type="text" name="keyword" class="form-control" value="" placeholder="講師名">
+                        <input type="text" name="keyword" class="form-control" value="{{ $keyword }}" placeholder="講師名">
                     </div>
                     <input type="submit" value="検索" class="btn btn-info">
                 </form>
@@ -55,7 +55,7 @@
             </table>
             <!-- ページネーション -->
             <div class="d-flex justify-content-center mt-2">
-                {{ $masters->links() }}
+                {{ $masters->appends(['keyword' => $keyword])->links() }}
             </div>
         </div>
     </div>
