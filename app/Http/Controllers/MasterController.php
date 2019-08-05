@@ -9,7 +9,8 @@ class MasterController extends Controller
 {
     public function index()
     {
-        $masters = Master::orderBy('rank','desc')->paginate(5);
+        $masters = Master::orderBy('rank','desc')
+            ->orderBy('furigana','asc')->paginate(5);
         
         return view('masters/index', [
             'masters' => $masters,

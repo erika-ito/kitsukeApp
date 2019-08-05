@@ -5,6 +5,7 @@
 @section('content')
     <div class="container">
         <div class="row pt-3">
+            <!-- 検索フォーム -->
             <div class="col-10">
                 <form action="" method="get" class="form-inline">
                     <div class="form-group mr-5">
@@ -13,6 +14,7 @@
                     <input type="submit" value="検索" class="btn btn-info">
                 </form>
             </div>
+            <!-- 新規登録ボタン -->
             <div class="col-2">
                 <a href="" class="btn btn-warning">新規登録</a>
             </div>
@@ -20,6 +22,7 @@
 
         <div class="masters-list-wrapper py-4">
             <div class="h4">講師一覧</div>
+            <!-- 講師一覧表 -->
             <table class="table">
                 <thead>
                     <tr class="table-info text-center">
@@ -50,6 +53,7 @@
                     @endforeach
                 </tbody>
             </table>
+            <!-- ページネーション -->
             <div class="d-flex justify-content-center mt-2">
                 {{ $masters->links() }}
             </div>
