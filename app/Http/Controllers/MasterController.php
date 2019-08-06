@@ -25,9 +25,18 @@ class MasterController extends Controller
         $masters = $query->orderBy('rank','desc')
             ->orderBy('furigana','asc')->paginate(5);
         
-        return view('masters/index', [
+        return view('masters.index', [
             'masters' => $masters,
             'keyword' => $keyword,
         ]);
     }
+
+    // 新規登録フォーム表示
+    public function showCreateForm()
+    {
+        return view('masters.create', [
+            
+        ]);
+    }
+
 }

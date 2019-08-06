@@ -15,4 +15,13 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/kitsuke/masters', 'MasterController@index')->name('masters.index');
+// 講師
+Route::group(['prefix' => 'kitsuke/masters'], function() {
+    // 一覧
+    Route::get('/', 'MasterController@index')->name('masters.index');
+
+    // 新規登録
+    Route::get('/create', 'MasterController@showCreateForm')->name('masters.create');
+    Route::post('/', 'MasterController@create');
+
+});
