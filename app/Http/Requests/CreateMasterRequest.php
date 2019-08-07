@@ -28,7 +28,7 @@ class CreateMasterRequest extends FormRequest
             'name' => 'required',
             'furigana' => 'required',
             'zip_code' => 'required',
-            'address' => 'required | email',
+            'address' => 'required',
         ];
     }
 
