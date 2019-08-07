@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Master;
 use Illuminate\Http\Request;
+use App\Http\Requests\CreateMasterRequest;
 
 class MasterController extends Controller
 {
@@ -39,7 +40,7 @@ class MasterController extends Controller
     }
 
     // 新規登録処理
-    public function create(Request $request)
+    public function create(CreateMasterRequest $request)
     {
         $master = new Master();
 

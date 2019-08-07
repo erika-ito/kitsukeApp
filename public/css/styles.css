@@ -19,11 +19,6 @@ li.active {
     background-color:lightgrey;
 }
 
-/* メインコンテンツ */
-main {
-    background-color:ghostwhite;
-}
-
 table.table {
     /* .tableデフォルト余白の打消し */
     margin-bottom:0; 
@@ -37,4 +32,14 @@ footer {
 footer p {
     /* pデフォルト余白の打消し */
     margin-bottom:0;
+}
+
+/* 一覧メインコンテンツ */
+main {
+    background-color:ghostwhite;
+}
+
+/* 登録フォーム */
+.form-control::placeholder {
+    color:lightgrey;
 }

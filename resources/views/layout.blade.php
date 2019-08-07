@@ -23,7 +23,7 @@
                         <a class="nav-link" href="#">予約</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">講師</a>
+                        <a class="nav-link" href="{{ route('masters.index') }}">講師</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="#">連絡者</a>
