@@ -35,8 +35,26 @@ class MasterController extends Controller
     public function showCreateForm()
     {
         return view('masters.create', [
-            
         ]);
+    }
+
+    // 新規登録処理
+    public function create(Request $request)
+    {
+        $master = new Master();
+
+        $master->rank = $request->rank;
+        $master->name = $request->name;
+        $master->furigana = $request->furigana;
+        $master->zip_code = $request->zip_code;
+        $master->address = $request->address;
+        $master->home_phone = $request->home_phone;
+        $master->cell_phone = $request->cell_phone;
+        $master->mail = $request->mail;
+
+        $master->save();
+
+        return redirect()->route('masters.index');
     }
 
 }

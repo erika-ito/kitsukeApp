@@ -16,7 +16,7 @@
             </div>
             <!-- 新規登録ボタン -->
             <div class="col-2">
-                <a href="" class="btn btn-warning">新規登録</a>
+                <a href="{{ route('masters.create') }}" class="btn btn-warning">新規登録</a>
             </div>
         </div>
 

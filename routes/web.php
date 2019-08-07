@@ -22,6 +22,6 @@ Route::group(['prefix' => 'kitsuke/masters'], function() {
 
     // 新規登録
     Route::get('/create', 'MasterController@showCreateForm')->name('masters.create');
-    Route::post('/', 'MasterController@create');
+    Route::post('/create', 'MasterController@create');
 
 });
