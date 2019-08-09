@@ -3,25 +3,16 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
+use App\Master;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class MasterTest extends TestCase
 {
-    /**
-     * A basic feature test example.
-     *
-     * @return void
-     */
-    // public function testExample()
-    // {
-    //     $response = $this->get('/');
-
-    //     $response->assertStatus(200);
-    // }
+    use RefreshDatabase;
 
     // テスト前処理
-    public function setUp()
+    public function setUp():void
     {
         parent::setUp();
         $this->seed('MasterTestSeeder');
@@ -30,23 +21,24 @@ class MasterTest extends TestCase
     // 検索一致の場合
     public function testMatch()
     {
-        $keyword = 'いし';
+        $response = $this->get('/kitsuke/masters', [
+            'keyword' => 'いと',
+        ]);
 
-        $response = 
-
-        $response->assertViewIs('masters.index');
-        $response->assertViewHas('いしばし');
+        $response->assertViewHas('name', '石橋');
+        // $response->assertSee('石橋');
+        // var_dump($response);
     }
 
     // 検索不一致の場合
-    public function testNotMatch()
-    {
+    // public function testNotMatch()
+    // {
         
-    }
+    // }
 
     // 検索キーワードがない場合
-    public function testNoKeyword()
-    {
+    // public function testNoKeyword()
+    // {
         
-    }
+    // }
 }
