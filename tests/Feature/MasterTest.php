@@ -22,10 +22,12 @@ class MasterTest extends TestCase
     public function testMatch()
     {
         $response = $this->get('/kitsuke/masters', [
-            'keyword' => 'いと',
+            'keyword' => 'いし',
         ]);
 
-        $response->assertViewHas('name', '石橋');
+        $response->assertViewHas('masters', function($masters) {
+            return $masters->contains($this->name, '石橋');
+        });
         // $response->assertSee('石橋');
         // var_dump($response);
     }
