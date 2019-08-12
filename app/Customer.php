@@ -4,7 +4,7 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Master extends Model
+class Customer extends Model
 {
     public funciton reservations()
     {
