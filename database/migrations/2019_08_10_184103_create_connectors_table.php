@@ -24,7 +24,7 @@ class CreateConnectorsTable extends Migration
             $table->string('address')->nullable();
             $table->string('mark')->nullable();
             $table->string('home_phone')->nullable();
-            $table->string('cell-phone')->nullable();
+            $table->string('cell_phone')->nullable();
             $table->string('mail')->nullable();
             $table->integer('connect_method')->nullable();
             $table->integer('is_student')->nullable();
