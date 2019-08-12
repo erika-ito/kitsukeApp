@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMastersTable extends Migration
+class CreateCustomersTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,20 @@ class CreateMastersTable extends Migration
      */
     public function up()
     {
-        Schema::create('masters', function (Blueprint $table) {
+        Schema::create('customers', function (Blueprint $table) {
             // 必須項目
             $table->increments('id');
-            $table->integer('rank');
+            $table->integer('connector_id')->unsigned();
             $table->string('name');
             $table->string('furigana');
-            $table->string('zip_code');
-            $table->string('address');
 
             // null可
-            $table->string('home_phone')->nullable();
-            $table->string('cell_phone')->nullable();
-            $table->string('mail')->nullable();
-            $table->timestamps();
+            $table->integer('age');
+            $table->integer('height');
+            $table->integer('body_type');
+
+            // 外部キー設定
+            $table->foreign('connector_id')->references('id')->on('connectors');
         });
     }
 
@@ -37,6 +37,6 @@ class CreateMastersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('masters');
+        Schema::dropIfExists('customers');
     }
 }
