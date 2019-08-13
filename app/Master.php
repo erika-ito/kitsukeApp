@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Master extends Model
 {
-    public funciton reservations()
+    public function reservations()
     {
         return $this->belongsToMany('App\Reservation');
     }
