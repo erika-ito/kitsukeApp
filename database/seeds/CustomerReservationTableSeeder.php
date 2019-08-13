@@ -20,6 +20,13 @@ class CustomerReservationTableSeeder extends Seeder
                 'obi_type' => '1',
                 'obi_knot' => '1',
             ],
+            [
+                'reservation_id' => '2',
+                'customer_id' => '2',
+                'kimono_type' => '8',
+                'obi_type' => '1',
+                'obi_knot' => '1',
+            ],
         ]);
     }
 }

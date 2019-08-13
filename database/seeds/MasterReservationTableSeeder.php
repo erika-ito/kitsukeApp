@@ -17,6 +17,10 @@ class MasterReservationTableSeeder extends Seeder
                 'reservation_id' => '1',
                 'master_id' => '1',
             ],
+            [
+                'reservation_id' => '2',
+                'master_id' => '1',
+            ],
         ]);
     }
 }

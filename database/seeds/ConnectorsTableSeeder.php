@@ -27,6 +27,20 @@ class ConnectorsTableSeeder extends Seeder
                 'total_count' => '1',
                 'current_use_date' => '2019/4/1',
             ],
+            [
+                'name' => '伊藤雪',
+                'furigana' => 'いとうゆき',
+                'zip_code' => '111-1111',
+                'address' => '東京都新宿区1-1-1',
+                'mark' => '7階建て。1階がコンビニ。',
+                'home_phone' => '03-1111-1111',
+                'cell_phone' => '090-1111-1111',
+                'mail' => 'abc@gmail.com',
+                'connect_method' => '1',
+                'is_student' => '1',
+                'total_count' => '1',
+                'current_use_date' => '2019/4/1',
+            ],
         ]);
     }
 }
