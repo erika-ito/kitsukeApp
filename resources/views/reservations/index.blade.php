@@ -37,6 +37,31 @@
                     </tr>
                 </thead>
                 <tbody class="bg-light">
+                    @foreach ($reservations as $reservation)
+                        <tr>
+                            <td>{{ $reservation->status }}</td>
+                            <td>{{ $reservation->location_date }}</td>
+                            <td>
+                                {{ $reservation->start_time }}～{{ $reservation->finish_time }}
+                            </td>
+                            <td>{{ $reservation->connector->name }}</td>
+                            <td>{{ $reservation->count_person }}</td>
+                            <td>
+                                @foreach ($reservation->masters as $master)
+                                    <p>{{ $master->name }}</p>
+                                @endforeach
+                            </td>
+                            <td>
+                                @foreach ($reservation->customers as $customer)
+                                    <p>{{ $customer->pivot->kimono_type }}</p>
+                                @endforeach
+                            </td>
+                            <td>
+                                <a href="" class="btn btn-success">詳細</a>
+                            </td>
+                        </tr>
+                    @endforeach
+
                     <tr>
                         <td>予約済</td>
                         <td>2019/8/1</td>

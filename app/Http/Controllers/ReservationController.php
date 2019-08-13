@@ -11,6 +11,20 @@ class ReservationController extends Controller
     // 一覧表示（検索あり）
     public function index(Request $request)
     {
-        return view('reservations.index');
+        $columns = [
+            'id',
+            'status',
+            'location_date',
+            'start_time',
+            'finish_time',
+            'connector_id',
+            'count_person',
+        ];
+
+        $reservations = Reservation::get($columns);
+
+        return view('reservations.index', [
+            'reservations' => $reservations,
+        ]);
     }
 }
