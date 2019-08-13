@@ -26,7 +26,7 @@
             <table class="table">
                 <thead>
                     <tr class="table-info text-center">
-                        <th scope="col">状況</th>
+                        <th scope="col">予約状況</th>
                         <th scope="col">出張日</th>
                         <th scope="col">時間帯</th>
                         <th scope="col">連絡者氏名</th>
@@ -40,9 +40,11 @@
                     @foreach ($reservations as $reservation)
                         <tr>
                             <td>{{ $reservation->status }}</td>
-                            <td>{{ $reservation->location_date }}</td>
+                            <td>{{ $reservation->formatted_location_date }}</td>
                             <td>
-                                {{ $reservation->start_time }}～{{ $reservation->finish_time }}
+                                {{ $reservation->formatted_start_time }}
+                                ～
+                                {{ $reservation->formatted_finish_time }}
                             </td>
                             <td>{{ $reservation->connector->name }}</td>
                             <td>{{ $reservation->count_person }}</td>
