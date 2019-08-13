@@ -74,5 +74,19 @@ class Reservation extends Model
             case 7:
                 return 'キャンセル';
         }
-     }
+    }
+
+    // ローカルスコープ
+    public function scopeKeyword ($query, $keyword)
+    {
+        // キーワードがあるとき
+        if (! empty($keyword))
+        {
+            return $query
+                    ->join('connectors', 'connectors.id', 'reservations.connector_id')
+                    ->where('name', 'like', '%'.$keyword.'%')
+                    ->orwhere('furigana', 'like', '%'.$keyword.'%')
+                    ->orwhere('location_date', '=', $keyword);
+        }
+    }
 }

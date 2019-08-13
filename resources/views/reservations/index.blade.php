@@ -9,7 +9,7 @@
             <div class="col-10">
                 <form action="" method="get" class="form-inline">
                     <div class="form-group mr-5">
-                        <input type="text" name="keyword" class="form-control" value="" placeholder="日付、氏名　等">
+                        <input type="text" name="keyword" class="form-control" value="{{ $keyword }}" placeholder="出張日、連絡者氏名">
                     </div>
                     <input type="submit" value="検索" class="btn btn-info">
                 </form>
@@ -63,23 +63,11 @@
                             </td>
                         </tr>
                     @endforeach
-
-                    <tr>
-                        <td>予約済</td>
-                        <td>2019/8/1</td>
-                        <td>7:30～8:30</td>
-                        <td>伊藤絵里香</td>
-                        <td>1</td>
-                        <td>伊藤絵里香</td>
-                        <td>色無地</td>
-                        <td>
-                            <a href="" class="btn btn-success">詳細</a>
-                        </td>
-                    </tr>
                 </tbody>
             </table>
             <!-- ページネーション -->
             <div class="d-flex justify-content-center mt-2">
+                {{ $reservations->appends(['keyword' => $keyword])->links() }}
             </div>
         </div>
     </div>
