@@ -38,4 +38,16 @@ class ReservationController extends Controller
             'keyword' => $keyword,
         ]);
     }
+
+    // 詳細表示
+    public function show()
+    {
+        return view('reservations.show');
+    }
+
+    // 新規登録フォーム表示
+    public function showCreateForm()
+    {
+        return view('reservations.create');
+    }
 }

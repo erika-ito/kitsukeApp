@@ -35,8 +35,7 @@ class MasterController extends Controller
     // 新規登録フォーム表示
     public function showCreateForm()
     {
-        return view('masters.create', [
-        ]);
+        return view('masters.create');
     }
 
     // 新規登録処理

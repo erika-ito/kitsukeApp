@@ -25,7 +25,7 @@
             <!-- 予約一覧表 -->
             <table class="table">
                 <thead>
-                    <tr class="table-info text-center">
+                    <tr class="table-info">
                         <th scope="col">予約状況</th>
                         <th scope="col">出張日</th>
                         <th scope="col">時間帯</th>
