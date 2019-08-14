@@ -28,6 +28,7 @@ class ReservationController extends Controller
 
         // 検索、並び替え、ページネーション
         $reservations = Reservation::keyword($keyword)
+            // ->select()
             ->orderBy('location_date','asc')
             ->orderBy('start_time','asc')
             ->paginate(5);

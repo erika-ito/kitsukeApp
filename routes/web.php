@@ -21,7 +21,7 @@ Route::group(['prefix' => 'kitsuke/reservations'], function() {
     Route::get('/', 'ReservationController@index')->name('reservations.index');
 
     // 詳細
-    Route::get('/', 'ReservationController@show')->name('reservations.show');
+    Route::get('/{id}', 'ReservationController@show')->name('reservations.show');
 
     // 新規登録
     Route::get('/create', 'ReservationController@showCreateForm')->name('reservations.create');
