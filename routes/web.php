@@ -20,13 +20,12 @@ Route::group(['prefix' => 'kitsuke/reservations'], function() {
     // 一覧
     Route::get('/', 'ReservationController@index')->name('reservations.index');
 
-    // 詳細
-    Route::get('/{id}', 'ReservationController@show')->name('reservations.show');
-
     // 新規登録
     Route::get('/create', 'ReservationController@showCreateForm')->name('reservations.create');
     Route::post('/create', 'ReservationController@create');
 
+    // 詳細
+    Route::get('/{id}', 'ReservationController@show')->name('reservations.show');
 });
 
 // 講師
