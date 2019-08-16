@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Carbon\Carbon;
 use App\Reservation;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateReservationRequest;
@@ -49,6 +50,11 @@ class ReservationController extends Controller
     // 新規登録フォーム表示
     public function showCreateForm()
     {
-        return view('reservations.create');
+        $today = Carbon::today();
+        $formatted_today = $today->format('Y-m-d');
+        
+        return view('reservations.create',[
+            'today' => $formatted_today,
+        ]);
     }
 }
