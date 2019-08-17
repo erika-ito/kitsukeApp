@@ -195,12 +195,12 @@
                     <hr>
                     
                     <div class="form-group row">
-                        <label for="tool_method" class="col-2 offset-1">小物の連絡方法</label>
+                        <label for="connect_method" class="col-2 offset-1">小物の連絡方法</label>
                         <div class="col-2">
-                            <select class="form-control" name="tool_method" id="tool_method" >
-                                <option value="1" @if(old('tool_method') == '1') selected @endif>メール</option>
-                                <option value="2" @if(old('tool_method') == '2') selected @endif>FAX</option>
-                                <option value="3" @if(old('tool_method') == '3') selected @endif>郵送</option>
+                            <select class="form-control" name="connect_method" id="connect_method" >
+                                <option value="1" @if(old('connect_method') == '1') selected @endif>メール</option>
+                                <option value="2" @if(old('connect_method') == '2') selected @endif>FAX</option>
+                                <option value="3" @if(old('connect_method') == '3') selected @endif>郵送</option>
                             </select>                            </div>
                         <label for="tool_buying" class="col-2 offset-2">小物の購入</label>
                         <div class="col-2">
@@ -208,7 +208,7 @@
                                 <option value="1" @if(old('tool_buying') == '1') selected @endif>なし</option>
                                 <option value="2" @if(old('tool_buying') == '2') selected @endif>脱脂綿</option>
                                 <option value="3" @if(old('tool_buying') == '3') selected @endif>腰ひも</option>
-                                <option value="4" @if(old('tool_buying') == '4') selected @endif>その他（備考へ）</option>
+                                <option value="4" @if(old('tool_buying') == '4') selected @endif>その他（備考）</option>
                             </select>
                             </div>
                     </div>
@@ -235,8 +235,9 @@
                             <input type="number" class="form-control" name="total_price" id="total_price" value="{{ old('total_price') }}">                            
                         </div>
                     </div>
-                    <hr>
                     <br>
+                    <hr>
+                    
 
                     <div class="form-group row">
                         <label for="tool_connect_date" class="col-2 offset-1">小物連絡日</label>
@@ -336,7 +337,7 @@
                                     <option value="12" @if(old('status') == '12') selected @endif>女袴</option>
                                     <option value="13" @if(old('status') == '13') selected @endif>七五三</option>
                                     <option value="14" @if(old('status') == '14') selected @endif>浴衣</option>
-                                    <option value="15" @if(old('status') == '15') selected @endif>その他（備考へ）</option>
+                                    <option value="15" @if(old('status') == '15') selected @endif>その他（備考）</option>
                                 </select>
                             </div>
                         </div>
@@ -346,7 +347,7 @@
                                 <select class="form-control" name="obi_type" id="obi_type" >
                                     <option value="1" @if(old('obi_type') == '1') selected @endif>名古屋帯</option>
                                     <option value="2" @if(old('obi_type') == '2') selected @endif>袋帯</option>
-                                    <option value="3" @if(old('obi_type') == '3') selected @endif>その他（備考へ）</option>
+                                    <option value="3" @if(old('obi_type') == '3') selected @endif>その他（備考）</option>
                                 </select>
                             </div>
                             <label for="obi_knot" class="col-2 offset-2">結び方</label>
@@ -355,7 +356,7 @@
                                     <option value="1" @if(old('obi_knot') == '1') selected @endif>お太鼓</option>
                                     <option value="2" @if(old('obi_knot') == '2') selected @endif>二重太鼓</option>
                                     <option value="3" @if(old('obi_knot') == '3') selected @endif>変わり結び</option>
-                                    <option value="4" @if(old('obi_knot') == '4') selected @endif>その他（備考へ）</option>
+                                    <option value="4" @if(old('obi_knot') == '4') selected @endif>その他（備考）</option>
                                 </select>
                             </div>
                         </div>
@@ -412,7 +413,7 @@
                                     <option value="12" @if(old('status') == '12') selected @endif>女袴</option>
                                     <option value="13" @if(old('status') == '13') selected @endif>七五三</option>
                                     <option value="14" @if(old('status') == '14') selected @endif>浴衣</option>
-                                    <option value="15" @if(old('status') == '15') selected @endif>その他（備考へ）</option>
+                                    <option value="15" @if(old('status') == '15') selected @endif>その他（備考）</option>
                                 </select>
                             </div>
                         </div>
@@ -422,16 +423,16 @@
                                 <select class="form-control" name="obi_type" id="obi_type" >
                                     <option value="1" @if(old('obi_type') == '1') selected @endif>名古屋帯</option>
                                     <option value="2" @if(old('obi_type') == '2') selected @endif>袋帯</option>
-                                    <option value="3" @if(old('obi_type') == '3') selected @endif>その他（備考へ）</option>
+                                    <option value="3" @if(old('obi_type') == '3') selected @endif>その他（備考）</option>
                                 </select>
                             </div>
-                            <label for="obi_knot" class="col-2 offset-2">結び方</label>
+                            <label for="obi_knot" class="col-2 offset-2">帯結び</label>
                             <div class="col-2">
                                 <select class="form-control" name="obi_knot" id="obi_knot" >
                                     <option value="1" @if(old('obi_knot') == '1') selected @endif>お太鼓</option>
                                     <option value="2" @if(old('obi_knot') == '2') selected @endif>二重太鼓</option>
                                     <option value="3" @if(old('obi_knot') == '3') selected @endif>変わり結び</option>
-                                    <option value="4" @if(old('obi_knot') == '4') selected @endif>その他（備考へ）</option>
+                                    <option value="4" @if(old('obi_knot') == '4') selected @endif>その他（備考）</option>
                                 </select>
                             </div>
                         </div>
@@ -488,7 +489,7 @@
                                     <option value="12" @if(old('status') == '12') selected @endif>女袴</option>
                                     <option value="13" @if(old('status') == '13') selected @endif>七五三</option>
                                     <option value="14" @if(old('status') == '14') selected @endif>浴衣</option>
-                                    <option value="15" @if(old('status') == '15') selected @endif>その他（備考へ）</option>
+                                    <option value="15" @if(old('status') == '15') selected @endif>その他（備考）</option>
                                 </select>
                             </div>
                         </div>
@@ -498,7 +499,7 @@
                                 <select class="form-control" name="obi_type" id="obi_type" >
                                     <option value="1" @if(old('obi_type') == '1') selected @endif>名古屋帯</option>
                                     <option value="2" @if(old('obi_type') == '2') selected @endif>袋帯</option>
-                                    <option value="3" @if(old('obi_type') == '3') selected @endif>その他（備考へ）</option>
+                                    <option value="3" @if(old('obi_type') == '3') selected @endif>その他（備考）</option>
                                 </select>
                             </div>
                             <label for="obi_knot" class="col-2 offset-2">結び方</label>
@@ -507,7 +508,7 @@
                                     <option value="1" @if(old('obi_knot') == '1') selected @endif>お太鼓</option>
                                     <option value="2" @if(old('obi_knot') == '2') selected @endif>二重太鼓</option>
                                     <option value="3" @if(old('obi_knot') == '3') selected @endif>変わり結び</option>
-                                    <option value="4" @if(old('obi_knot') == '4') selected @endif>その他（備考へ）</option>
+                                    <option value="4" @if(old('obi_knot') == '4') selected @endif>その他（備考）</option>
                                 </select>
                             </div>
                         </div>

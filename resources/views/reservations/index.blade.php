@@ -16,7 +16,7 @@
             </div>
             <!-- 新規登録ボタン -->
             <div class="col-2">
-                <a href="" class="btn btn-warning">新規登録</a>
+                <a href="{{ route('reservations.create') }}" class="btn btn-warning">新規登録</a>
             </div>
         </div>
 
@@ -59,7 +59,7 @@
                                 @endforeach
                             </td>
                             <td>
-                                <a href="" class="btn btn-success">詳細</a>
+                                <a href="{{ route('reservations.show', ['id' => $reservation->id]) }}" class="btn btn-success">詳細</a>
                             </td>
                         </tr>
                     @endforeach

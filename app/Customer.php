@@ -20,4 +20,20 @@ class Customer extends Model
     {
         return $this->belongsToMany('App\Reservation');
     }
+
+    // アクセサ
+    // 体型
+    public function getBodyTypeAttribute()
+    {
+        switch($this->attributes['body_type']){
+            case 1:
+                return 'ほそめ';
+            
+            case 2:
+                return 'ふつう';
+                
+            case 3:
+                return 'ふっくら';
+        }
+    }
 }

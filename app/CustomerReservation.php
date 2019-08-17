@@ -8,7 +8,8 @@ class CustomerReservation extends Pivot
 {
     protected $table = 'customer_reservation';
     
-    // アクセサ　着物の種類
+    // アクセサ
+    // 着物の種類
     public function getKimonoTypeAttribute()
     {
         switch($this->attributes['kimono_type']){
@@ -55,8 +56,40 @@ class CustomerReservation extends Pivot
                 return '浴衣';
         
             case 15:
-                return 'その他（備考へ）';
+                return 'その他（備考）';
         }
+    }
 
+    // 帯の種類
+    public function getObiTypeAttribute()
+    {
+        switch($this->attributes['obi_type']){
+            case 1:
+                return '名古屋帯';
+            
+            case 2:
+                return '袋帯';
+                
+            case 3:
+                return 'その他（備考）';
+        }
+    }
+
+    // 帯結び
+    public function getObiKnotAttribute()
+    {
+        switch($this->attributes['obi_knot']){
+            case 1:
+                return 'お太鼓';
+            
+            case 2:
+                return '二重太鼓';
+                
+            case 3:
+                return '変わり結び';
+
+            case 4:
+                return 'その他（備考）';
+        }
     }
 }

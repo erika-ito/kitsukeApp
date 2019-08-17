@@ -42,9 +42,14 @@ class ReservationController extends Controller
     }
 
     // 詳細表示
-    public function show()
+    public function show(int $id)
     {
-        return view('reservations.show');
+        $reservation = Reservation::find($id);
+        
+        return view('reservations.show', [
+            'reservation' => $reservation,
+            'id' => $id,
+        ]);
     }
 
     // 新規登録フォーム表示

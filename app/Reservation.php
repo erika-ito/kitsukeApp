@@ -26,13 +26,58 @@ class Reservation extends Model
     {
         return $this->belongsToMany('App\Customer')
                     ->using('App\CustomerReservation')
-                    ->withPivot('kimono_type');
+                    ->withPivot('kimono_type', 'obi_type', 'obi_knot');
     }
 
+    // ローカルスコープ
+    public function scopeKeyword ($query, $keyword)
+    {
+        // キーワードがあるとき
+        if (! empty($keyword))
+        {
+            return $query
+                    ->join('connectors', 'connectors.id', 'reservations.connector_id')
+                    ->where('name', 'like', '%'.$keyword.'%')
+                    ->orwhere('furigana', 'like', '%'.$keyword.'%')
+                    ->orwhere('location_date', '=', $keyword);
+        }
+    }
+
+    // アクセサ
     // 日付のフォーマットを変更
+    public function getFormattedReservationDateAttribute()
+    {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $this->attributes['reservation_date'])
+            ->format('Y/m/d');
+    }
+
     public function getFormattedLocationDateAttribute()
     {
         return Carbon::createFromFormat('Y-m-d', $this->attributes['location_date'])
+            ->format('Y/m/d');
+    }
+
+    public function getFormattedToolConnectDateAttribute()
+    {
+        return Carbon::createFromFormat('Y-m-d', $this->attributes['tool_connect_date'])
+            ->format('Y/m/d');
+    }
+
+    public function getFormattedToolConfirmDateAttribute()
+    {
+        return Carbon::createFromFormat('Y-m-d', $this->attributes['tool_confirm_date'])
+            ->format('Y/m/d');
+    }
+
+    public function getFormattedMasterRequestDateAttribute()
+    {
+        return Carbon::createFromFormat('Y-m-d', $this->attributes['master_request_date'])
+            ->format('Y/m/d');
+    }
+
+    public function getFormattedToolPassDateAttribute()
+    {
+        return Carbon::createFromFormat('Y-m-d', $this->attributes['tool_pass_date'])
             ->format('Y/m/d');
     }
 
@@ -49,7 +94,20 @@ class Reservation extends Model
             ->format('H:i');
     }
 
-    // アクセサ　予約状況
+    // 金額をカンマで区切る
+    public function getCommaTotalPriceAttribute() {
+
+        return number_format($this->attributes['total_price']);
+    
+    }
+
+    public function getCommaPaymentAttribute() {
+
+        return number_format($this->attributes['payment']);
+    
+    }
+
+    // 予約状況
     public function getStatusAttribute()
     {
         switch($this->attributes['status']){
@@ -76,17 +134,72 @@ class Reservation extends Model
         }
     }
 
-    // ローカルスコープ
-    public function scopeKeyword ($query, $keyword)
+    // 受付方法
+    public function getReservationTypeAttribute()
     {
-        // キーワードがあるとき
-        if (! empty($keyword))
-        {
-            return $query
-                    ->join('connectors', 'connectors.id', 'reservations.connector_id')
-                    ->where('name', 'like', '%'.$keyword.'%')
-                    ->orwhere('furigana', 'like', '%'.$keyword.'%')
-                    ->orwhere('location_date', '=', $keyword);
+        switch($this->attributes['reservation_type']){
+            case 1:
+                return '電話';
+            
+            case 2:
+                return 'メール';
+                
+            case 3:
+                return '対面';
+        }
+    }
+
+    // 折り返し連絡
+    public function getReplyAttribute()
+    {
+        switch($this->attributes['reply']){
+            case 1:
+                return '必要';
+            
+            case 2:
+                return '不要';
+        }
+    }
+
+    // 着付場所分類
+    public function getLocationTypeAttribute()
+    {
+        switch($this->attributes['location_type']){
+            case 1:
+                return '自宅';
+            
+            case 2:
+                return 'A校';
+                
+            case 3:
+                return 'B校';
+
+            case 4:
+                return 'C校';
+
+            case 5:
+                return 'D校';
+
+            case 6:
+                return 'その他（出張場所）';
+        }
+    }
+
+    // 小物の購入
+    public function getToolBuyingAttribute()
+    {
+        switch($this->attributes['tool_buying']){
+            case 1:
+                return 'なし';
+            
+            case 2:
+                return '脱脂綿';
+                
+            case 3:
+                return '腰ひも';
+
+            case 4:
+                return 'その他（備考）';
         }
     }
 }
