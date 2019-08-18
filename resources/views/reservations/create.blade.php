@@ -21,7 +21,7 @@
                 @endif
 
                 <!-- 登録フォーム 1 -->
-                <div class="reservation-form-1 pt-3 d-none">
+                <div id="reservation_form_1" class="pt-3">
                     <div class="form-group row">
                         <div class="col-1"><span class="badge badge-danger">必須</span></div>
                         <label for="status" class="col-2">予約状況</label>
@@ -274,7 +274,7 @@
                 </div>
 
                 <!-- 登録フォーム 2 -->
-                <div class="reservation-form-2 pt-3">
+                <div id="reservation_form_2" class="pt-3 d-none">
                     <div class="form-group row">
                         <div class="col-1"><span class="badge badge-danger">必須</span></div>
                         <label for="purpose" class="col-2">着用目的</label>
@@ -528,9 +528,27 @@
             <!-- 送信ボタン -->
             <div class="row">
                 <div class="col-2 offset-9 mt-3">
-                    <input type="submit" value="登録" class="btn btn-primary">
+                    <button type="button" id="reservation_form_btn_1" class="btn btn-primary">次へ</button>
+                    <input type="submit" value="登録" id="reservation_form_btn_2" class="btn btn-primary d-none">
                 </div>
             </div>
         </form>
     </div> 
+@endsection
+
+@section('scripts')
+    <script>
+        $(function() {
+            //　青色ボタンがクリックされたとき
+            $('#reservation_form_btn_1').click(function() {
+                //　内容1から2へ表示の切り替え
+                $('#reservation_form_2').removeClass('d-none');
+                $('#reservation_form_1').addClass('d-none');
+
+                // ボタンの表示切り替え
+                $('#reservation_form_btn_2').removeClass('d-none');
+                $(this).addClass('d-none');
+            });
+        });
+    </script>
 @endsection
