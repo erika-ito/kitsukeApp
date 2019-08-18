@@ -292,7 +292,9 @@
         <!-- 送信ボタン -->
         <div class="row">
             <div class="col-2 offset-7 mt-3">
-                <button type="button" id="reservation_show_btn" class="btn btn-primary">着付内容</button>
+                <button type="button" id="reservation_show_btn" class="btn btn-primary">
+                    着付内容
+                </button>
             </div>
             <div class="col-2 mt-3">
                 <a href="" class="btn btn-success">編集</a>
@@ -304,10 +306,22 @@
 @section('scripts')
     <script>
         $(function() {
+            //　青色ボタンがクリックされたとき
             $('#reservation_show_btn').click(function() {
+                //　内容1・2の切り替え
                 $('#reservation-show-1').toggleClass('d-none');
                 $('#reservation-show-2').toggleClass('d-none');
+                
+                // 青色ボタンの表示文字の切り替え
+                var hasNone = $('#reservation-show-2').hasClass('d-none');
+                if(hasNone) {
+                    $(this).text('着付内容');
+                } else {
+                    $(this).text('予約概要');
+                }
             });
+
+            
         });
     </script>
 @endsection
