@@ -14,25 +14,22 @@ class ReservationController extends Controller
     {
         $keyword = str_replace('/', '-', $request->keyword);
 
-        //　下記でconnectorテーブルと結合しているため、
-        //　どちらidか明示化する
-        // $columns = [
-        //     'reservations.id',
-        //     'status',
-        //     'location_date',
-        //     'start_time',
-        //     'finish_time',
-        //     'connector_id',
-        //     'count_person',
-        // ];
-        // $reservations = Reservation::get($columns);
+        //　一覧表示のカラムを限定
+        $columns = [
+            'id', 
+            'status',
+            'location_date',
+            'start_time',
+            'finish_time',
+            'connector_id',
+            'count_person',
+        ];
 
         // 検索、並び替え、ページネーション
         $reservations = Reservation::keyword($keyword)
-            // ->select()
             ->orderBy('location_date','asc')
             ->orderBy('start_time','asc')
-            ->paginate(5);
+            ->paginate(5, $columns);
 
         // 予約一覧へ
         return view('reservations.index', [
