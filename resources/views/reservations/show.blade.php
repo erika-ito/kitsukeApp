@@ -284,7 +284,14 @@
                 <div class="form-group row">
                     <label for="notes" class="col-2 offset-1">備考：</label>
                     <div class="col-6">
-                        {{ $customer->notes }}                        </div>
+                        {{ $customer->notes }}
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="special" class="col-2 offset-1">特記事項：</label>
+                    <div class="col-6">
+                        {{ $customer->special }}
+                    </div>
                 </div>
             </div>
         </div>
