@@ -10,6 +10,9 @@ class Reservation extends Model
     // タイムスタンプを無効
     public $timestamps = false;
 
+    // 属性保護
+    protected $guarded = ['id'];
+
     // リレーション 
     public function connector()
     {
@@ -57,28 +60,38 @@ class Reservation extends Model
             ->format('Y/m/d');
     }
 
+    //　初回任意
     public function getFormattedToolConnectDateAttribute()
     {
-        return Carbon::createFromFormat('Y-m-d', $this->attributes['tool_connect_date'])
+        // 日付が入力されたときのみ、フォーマット適用（エラー防止）
+        if ($this->attributes['tool_connect_date']) {
+            return Carbon::createFromFormat('Y-m-d', $this->attributes['tool_connect_date'])
             ->format('Y/m/d');
+        }
     }
 
     public function getFormattedToolConfirmDateAttribute()
     {
-        return Carbon::createFromFormat('Y-m-d', $this->attributes['tool_confirm_date'])
+        if ($this->attributes['tool_confirm_date']) {
+            return Carbon::createFromFormat('Y-m-d', $this->attributes['tool_confirm_date'])
             ->format('Y/m/d');
+        }
     }
 
     public function getFormattedMasterRequestDateAttribute()
     {
-        return Carbon::createFromFormat('Y-m-d', $this->attributes['master_request_date'])
+        if ($this->attributes['master_request_date']) {
+            return Carbon::createFromFormat('Y-m-d', $this->attributes['master_request_date'])
             ->format('Y/m/d');
+        }        
     }
 
     public function getFormattedToolPassDateAttribute()
     {
-        return Carbon::createFromFormat('Y-m-d', $this->attributes['tool_pass_date'])
+        if ($this->attributes['tool_pass_date']) {
+            return Carbon::createFromFormat('Y-m-d', $this->attributes['tool_pass_date'])
             ->format('Y/m/d');
+        }        
     }
 
     // 時間のフォーマットを変更

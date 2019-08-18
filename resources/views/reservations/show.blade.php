@@ -284,13 +284,13 @@
                 <div class="form-group row">
                     <label for="notes" class="col-2 offset-1">備考：</label>
                     <div class="col-6">
-                        {{ $customer->notes }}
+                        {{ $reservation->notes }}
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="special" class="col-2 offset-1">特記事項：</label>
                     <div class="col-6">
-                        {{ $customer->special }}
+                        {{ $reservation->connector->special }}
                     </div>
                 </div>
             </div>
@@ -327,8 +327,6 @@
                     $(this).text('予約概要');
                 }
             });
-
-            
         });
     </script>
 @endsection

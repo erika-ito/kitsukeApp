@@ -4,10 +4,10 @@
 
 @section('content')
     <div class="container py-4">
-        <form action="{{ route('masters.create') }}" method="post">
+        <form action="{{ route('reservations.create') }}" method="post">
             @csrf
             <div class="h4">予約登録フォーム</div>
-            <div class="master-create-wrapper border bg-white px-5 py-4">
+            <div class="reservation-create-wrapper border bg-white px-5 py-4">
                 
                 <!-- エラー表示 -->
                 @if($errors->any())
@@ -289,74 +289,74 @@
                         <p>【着付1人目（必須）】</p>
                         <div class="form-group row">
                             <div class="col-1"><span class="badge badge-danger">必須</span></div>
-                            <label for="name" class="col-2">氏名</label>
+                            <label for="name_1" class="col-2">氏名</label>
                             <div class="col-2">
-                                <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}">
+                                <input type="text" class="form-control" name="name_1" id="name_1" value="{{ old('name_1') }}">
                             </div>
                             <div class="col-1 offset-1"><span class="badge badge-danger">必須</span></div>
-                            <label for="furigana" class="col-2">ふりがな</label>
+                            <label for="furigana_1" class="col-2">ふりがな</label>
                             <div class="col-2">
-                                <input type="text" class="form-control" name="furigana" id="furigana" value="{{ old('furigana') }}">
+                                <input type="text" class="form-control" name="furigana_1" id="furigana_1" value="{{ old('furigana_1') }}">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="age" class="col-2 offset-1">年齢</label>
+                            <label for="age_1" class="col-2 offset-1">年齢</label>
                             <div class="col-2">
-                                <input type="number" class="form-control" name="age" id="age" value="{{ old('age') }}">
+                                <input type="number" class="form-control" name="age_1" id="age_1" value="{{ old('age_1') }}">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="height" class="col-2 offset-1">身長</label>
+                            <label for="height_1" class="col-2 offset-1">身長</label>
                             <div class="col-2">
-                                <input type="number" class="form-control" name="height" id="height" value="{{ old('height') }}">
+                                <input type="number" class="form-control" name="height_1" id="height_1" value="{{ old('height_1') }}">
                             </div>
-                            <label for="body_type" class="col-2 offset-2">体型</label>
+                            <label for="body_type_1" class="col-2 offset-2">体型</label>
                             <div class="col-2">
-                                <select class="form-control" name="body_type" id="body_type" >
-                                    <option value="1" @if(old('body_type') == '1') selected @endif>ほそめ</option>
-                                    <option value="2" @if(old('body_type') == '2') selected @endif>ふつう</option>
-                                    <option value="3" @if(old('body_type') == '3') selected @endif>ふっくら</option>
+                                <select class="form-control" name="body_type_1" id="body_type_1" >
+                                    <option value="1" @if(old('body_type_1') == '1') selected @endif>ほそめ</option>
+                                    <option value="2" @if(old('body_type_1') == '2') selected @endif>ふつう</option>
+                                    <option value="3" @if(old('body_type_1') == '3') selected @endif>ふっくら</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="kimono_type" class="col-2 offset-1">着物の種類</label>
+                            <label for="kimono_type_1" class="col-2 offset-1">着物の種類</label>
                             <div class="col-2">
-                                <select class="form-control" name="kimono_type" id="kimono_type" >
-                                    <option value="1" @if(old('status') == '1') selected @endif>白無垢</option>
-                                    <option value="2" @if(old('status') == '2') selected @endif>色打掛</option>
-                                    <option value="3" @if(old('status') == '3') selected @endif>紋付袴</option>
-                                    <option value="4" @if(old('status') == '4') selected @endif>振袖</option>
-                                    <option value="5" @if(old('status') == '5') selected @endif>留袖</option>
-                                    <option value="6" @if(old('status') == '6') selected @endif>色留袖</option>
-                                    <option value="7" @if(old('status') == '7') selected @endif>喪服</option>
-                                    <option value="8" @if(old('status') == '8') selected @endif>訪問着</option>
-                                    <option value="9" @if(old('status') == '9') selected @endif>付け下げ</option>
-                                    <option value="10" @if(old('status') == '10') selected @endif>色無地</option>
-                                    <option value="11" @if(old('status') == '11') selected @endif>小紋</option>
-                                    <option value="12" @if(old('status') == '12') selected @endif>女袴</option>
-                                    <option value="13" @if(old('status') == '13') selected @endif>七五三</option>
-                                    <option value="14" @if(old('status') == '14') selected @endif>浴衣</option>
-                                    <option value="15" @if(old('status') == '15') selected @endif>その他（備考）</option>
+                                <select class="form-control" name="kimono_type_1" id="kimono_type_1" >
+                                    <option value="1" @if(old('kimono_type_1') == '1') selected @endif>白無垢</option>
+                                    <option value="2" @if(old('kimono_type_1') == '2') selected @endif>色打掛</option>
+                                    <option value="3" @if(old('kimono_type_1') == '3') selected @endif>紋付袴</option>
+                                    <option value="4" @if(old('kimono_type_1') == '4') selected @endif>振袖</option>
+                                    <option value="5" @if(old('kimono_type_1') == '5') selected @endif>留袖</option>
+                                    <option value="6" @if(old('kimono_type_1') == '6') selected @endif>色留袖</option>
+                                    <option value="7" @if(old('kimono_type_1') == '7') selected @endif>喪服</option>
+                                    <option value="8" @if(old('kimono_type_1') == '8') selected @endif>訪問着</option>
+                                    <option value="9" @if(old('kimono_type_1') == '9') selected @endif>付け下げ</option>
+                                    <option value="10" @if(old('kimono_type_1') == '10') selected @endif>色無地</option>
+                                    <option value="11" @if(old('kimono_type_1') == '11') selected @endif>小紋</option>
+                                    <option value="12" @if(old('kimono_type_1') == '12') selected @endif>女袴</option>
+                                    <option value="13" @if(old('kimono_type_1') == '13') selected @endif>七五三</option>
+                                    <option value="14" @if(old('kimono_type_1') == '14') selected @endif>浴衣</option>
+                                    <option value="15" @if(old('kimono_type_1') == '15') selected @endif>その他（備考）</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="obi_type" class="col-2 offset-1">帯の種類</label>
+                            <label for="obi_type_1" class="col-2 offset-1">帯の種類</label>
                             <div class="col-2">
-                                <select class="form-control" name="obi_type" id="obi_type" >
-                                    <option value="1" @if(old('obi_type') == '1') selected @endif>名古屋帯</option>
-                                    <option value="2" @if(old('obi_type') == '2') selected @endif>袋帯</option>
-                                    <option value="3" @if(old('obi_type') == '3') selected @endif>その他（備考）</option>
+                                <select class="form-control" name="obi_type_1" id="obi_type_1" >
+                                    <option value="1" @if(old('obi_type_1') == '1') selected @endif>名古屋帯</option>
+                                    <option value="2" @if(old('obi_type_1') == '2') selected @endif>袋帯</option>
+                                    <option value="3" @if(old('obi_type_1') == '3') selected @endif>その他（備考）</option>
                                 </select>
                             </div>
-                            <label for="obi_knot" class="col-2 offset-2">結び方</label>
+                            <label for="obi_knot_1" class="col-2 offset-2">結び方</label>
                             <div class="col-2">
-                                <select class="form-control" name="obi_knot" id="obi_knot" >
-                                    <option value="1" @if(old('obi_knot') == '1') selected @endif>お太鼓</option>
-                                    <option value="2" @if(old('obi_knot') == '2') selected @endif>二重太鼓</option>
-                                    <option value="3" @if(old('obi_knot') == '3') selected @endif>変わり結び</option>
-                                    <option value="4" @if(old('obi_knot') == '4') selected @endif>その他（備考）</option>
+                                <select class="form-control" name="obi_knot_1" id="obi_knot_1" >
+                                    <option value="1" @if(old('obi_knot_1') == '1') selected @endif>お太鼓</option>
+                                    <option value="2" @if(old('obi_knot_1') == '2') selected @endif>二重太鼓</option>
+                                    <option value="3" @if(old('obi_knot_1') == '3') selected @endif>変わり結び</option>
+                                    <option value="4" @if(old('obi_knot_1') == '4') selected @endif>その他（備考）</option>
                                 </select>
                             </div>
                         </div>
@@ -366,149 +366,149 @@
                     <div class="customer">
                         <p>【着付2人目】</p>
                         <div class="form-group row">
-                            <label for="name" class="col-2 offset-1">氏名</label>
+                            <label for="name_2" class="col-2 offset-1">氏名</label>
                             <div class="col-2">
-                                <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}">
+                                <input type="text" class="form-control" name="name_2" id="name_2" value="{{ old('name_2') }}">
                             </div>
-                            <label for="furigana" class="col-2 offset-2">ふりがな</label>
+                            <label for="furigana_2" class="col-2 offset-2">ふりがな</label>
                             <div class="col-2">
-                                <input type="text" class="form-control" name="furigana" id="furigana" value="{{ old('furigana') }}">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="age" class="col-2 offset-1">年齢</label>
-                            <div class="col-2">
-                                <input type="number" class="form-control" name="age" id="age" value="{{ old('age') }}">
+                                <input type="text" class="form-control" name="furigana_2" id="furigana_2" value="{{ old('furigana_2') }}">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="height" class="col-2 offset-1">身長</label>
+                            <label for="age_2" class="col-2 offset-1">年齢</label>
                             <div class="col-2">
-                                <input type="number" class="form-control" name="height" id="height" value="{{ old('height') }}">
+                                <input type="number" class="form-control" name="age_2" id="age_2" value="{{ old('age_2') }}">
                             </div>
-                            <label for="body_type" class="col-2 offset-2">体型</label>
+                        </div>
+                        <div class="form-group row">
+                            <label for="height_2" class="col-2 offset-1">身長</label>
                             <div class="col-2">
-                                <select class="form-control" name="body_type" id="body_type" >
-                                    <option value="1" @if(old('body_type') == '1') selected @endif>ほそめ</option>
-                                    <option value="2" @if(old('body_type') == '2') selected @endif>ふつう</option>
-                                    <option value="3" @if(old('body_type') == '3') selected @endif>ふっくら</option>
+                                <input type="number" class="form-control" name="height_2" id="height_2" value="{{ old('height_2') }}">
+                            </div>
+                            <label for="body_type_2" class="col-2 offset-2">体型</label>
+                            <div class="col-2">
+                                <select class="form-control" name="body_type_2" id="body_type_2" >
+                                    <option value="1" @if(old('body_type_2') == '1') selected @endif>ほそめ</option>
+                                    <option value="2" @if(old('body_type_2') == '2') selected @endif>ふつう</option>
+                                    <option value="3" @if(old('body_type_2') == '3') selected @endif>ふっくら</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="kimono_type" class="col-2 offset-1">着物の種類</label>
+                            <label for="kimono_type_2" class="col-2 offset-1">着物の種類</label>
                             <div class="col-2">
-                                <select class="form-control" name="kimono_type" id="kimono_type" >
-                                    <option value="1" @if(old('status') == '1') selected @endif>白無垢</option>
-                                    <option value="2" @if(old('status') == '2') selected @endif>色打掛</option>
-                                    <option value="3" @if(old('status') == '3') selected @endif>紋付袴</option>
-                                    <option value="4" @if(old('status') == '4') selected @endif>振袖</option>
-                                    <option value="5" @if(old('status') == '5') selected @endif>留袖</option>
-                                    <option value="6" @if(old('status') == '6') selected @endif>色留袖</option>
-                                    <option value="7" @if(old('status') == '7') selected @endif>喪服</option>
-                                    <option value="8" @if(old('status') == '8') selected @endif>訪問着</option>
-                                    <option value="9" @if(old('status') == '9') selected @endif>付け下げ</option>
-                                    <option value="10" @if(old('status') == '10') selected @endif>色無地</option>
-                                    <option value="11" @if(old('status') == '11') selected @endif>小紋</option>
-                                    <option value="12" @if(old('status') == '12') selected @endif>女袴</option>
-                                    <option value="13" @if(old('status') == '13') selected @endif>七五三</option>
-                                    <option value="14" @if(old('status') == '14') selected @endif>浴衣</option>
-                                    <option value="15" @if(old('status') == '15') selected @endif>その他（備考）</option>
+                                <select class="form-control" name="kimono_type_2" id="kimono_type_2" >
+                                    <option value="1" @if(old('kimono_type_2') == '1') selected @endif>白無垢</option>
+                                    <option value="2" @if(old('kimono_type_2') == '2') selected @endif>色打掛</option>
+                                    <option value="3" @if(old('kimono_type_2') == '3') selected @endif>紋付袴</option>
+                                    <option value="4" @if(old('kimono_type_2') == '4') selected @endif>振袖</option>
+                                    <option value="5" @if(old('kimono_type_2') == '5') selected @endif>留袖</option>
+                                    <option value="6" @if(old('kimono_type_2') == '6') selected @endif>色留袖</option>
+                                    <option value="7" @if(old('kimono_type_2') == '7') selected @endif>喪服</option>
+                                    <option value="8" @if(old('kimono_type_2') == '8') selected @endif>訪問着</option>
+                                    <option value="9" @if(old('kimono_type_2') == '9') selected @endif>付け下げ</option>
+                                    <option value="10" @if(old('kimono_type_2') == '10') selected @endif>色無地</option>
+                                    <option value="11" @if(old('kimono_type_2') == '11') selected @endif>小紋</option>
+                                    <option value="12" @if(old('kimono_type_2') == '12') selected @endif>女袴</option>
+                                    <option value="13" @if(old('kimono_type_2') == '13') selected @endif>七五三</option>
+                                    <option value="14" @if(old('kimono_type_2') == '14') selected @endif>浴衣</option>
+                                    <option value="15" @if(old('kimono_type_2') == '15') selected @endif>その他（備考）</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="obi_type" class="col-2 offset-1">帯の種類</label>
+                            <label for="obi_type_2" class="col-2 offset-1">帯の種類</label>
                             <div class="col-2">
-                                <select class="form-control" name="obi_type" id="obi_type" >
-                                    <option value="1" @if(old('obi_type') == '1') selected @endif>名古屋帯</option>
-                                    <option value="2" @if(old('obi_type') == '2') selected @endif>袋帯</option>
-                                    <option value="3" @if(old('obi_type') == '3') selected @endif>その他（備考）</option>
+                                <select class="form-control" name="obi_type_2" id="obi_type_2" >
+                                    <option value="1" @if(old('obi_type_2') == '1') selected @endif>名古屋帯</option>
+                                    <option value="2" @if(old('obi_type_2') == '2') selected @endif>袋帯</option>
+                                    <option value="3" @if(old('obi_type_2') == '3') selected @endif>その他（備考）</option>
                                 </select>
                             </div>
-                            <label for="obi_knot" class="col-2 offset-2">帯結び</label>
+                            <label for="obi_knot_2" class="col-2 offset-2">結び方</label>
                             <div class="col-2">
-                                <select class="form-control" name="obi_knot" id="obi_knot" >
-                                    <option value="1" @if(old('obi_knot') == '1') selected @endif>お太鼓</option>
-                                    <option value="2" @if(old('obi_knot') == '2') selected @endif>二重太鼓</option>
-                                    <option value="3" @if(old('obi_knot') == '3') selected @endif>変わり結び</option>
-                                    <option value="4" @if(old('obi_knot') == '4') selected @endif>その他（備考）</option>
+                                <select class="form-control" name="obi_knot_2" id="obi_knot_2" >
+                                    <option value="1" @if(old('obi_knot_2') == '1') selected @endif>お太鼓</option>
+                                    <option value="2" @if(old('obi_knot_2') == '2') selected @endif>二重太鼓</option>
+                                    <option value="3" @if(old('obi_knot_2') == '3') selected @endif>変わり結び</option>
+                                    <option value="4" @if(old('obi_knot_2') == '4') selected @endif>その他（備考）</option>
                                 </select>
                             </div>
                         </div>
                     </div>
                     <hr>
-                    
+
                     <div class="customer">
                         <p>【着付3人目】</p>
                         <div class="form-group row">
-                            <label for="name" class="col-2 offset-1">氏名</label>
+                            <label for="name_3" class="col-2 offset-1">氏名</label>
                             <div class="col-2">
-                                <input type="text" class="form-control" name="name" id="name" value="{{ old('name') }}">
+                                <input type="text" class="form-control" name="name_3" id="name_3" value="{{ old('name_3') }}">
                             </div>
-                            <label for="furigana" class="col-2 offset-2">ふりがな</label>
+                            <label for="furigana_3" class="col-2 offset-2">ふりがな</label>
                             <div class="col-2">
-                                <input type="text" class="form-control" name="furigana" id="furigana" value="{{ old('furigana') }}">
-                            </div>
-                        </div>
-                        <div class="form-group row">
-                            <label for="age" class="col-2 offset-1">年齢</label>
-                            <div class="col-2">
-                                <input type="number" class="form-control" name="age" id="age" value="{{ old('age') }}">
+                                <input type="text" class="form-control" name="furigana_3" id="furigana_3" value="{{ old('furigana_3') }}">
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="height" class="col-2 offset-1">身長</label>
+                            <label for="age_3" class="col-2 offset-1">年齢</label>
                             <div class="col-2">
-                                <input type="number" class="form-control" name="height" id="height" value="{{ old('height') }}">
+                                <input type="number" class="form-control" name="age_3" id="age_3" value="{{ old('age_3') }}">
                             </div>
-                            <label for="body_type" class="col-2 offset-2">体型</label>
+                        </div>
+                        <div class="form-group row">
+                            <label for="height_3" class="col-2 offset-1">身長</label>
                             <div class="col-2">
-                                <select class="form-control" name="body_type" id="body_type" >
-                                    <option value="1" @if(old('body_type') == '1') selected @endif>ほそめ</option>
-                                    <option value="2" @if(old('body_type') == '2') selected @endif>ふつう</option>
-                                    <option value="3" @if(old('body_type') == '3') selected @endif>ふっくら</option>
+                                <input type="number" class="form-control" name="height_3" id="height_3" value="{{ old('height_3') }}">
+                            </div>
+                            <label for="body_type_3" class="col-2 offset-2">体型</label>
+                            <div class="col-2">
+                                <select class="form-control" name="body_type_3" id="body_type_3" >
+                                    <option value="1" @if(old('body_type_3') == '1') selected @endif>ほそめ</option>
+                                    <option value="2" @if(old('body_type_3') == '2') selected @endif>ふつう</option>
+                                    <option value="3" @if(old('body_type_3') == '3') selected @endif>ふっくら</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="kimono_type" class="col-2 offset-1">着物の種類</label>
+                            <label for="kimono_type_3" class="col-2 offset-1">着物の種類</label>
                             <div class="col-2">
-                                <select class="form-control" name="kimono_type" id="kimono_type" >
-                                    <option value="1" @if(old('status') == '1') selected @endif>白無垢</option>
-                                    <option value="2" @if(old('status') == '2') selected @endif>色打掛</option>
-                                    <option value="3" @if(old('status') == '3') selected @endif>紋付袴</option>
-                                    <option value="4" @if(old('status') == '4') selected @endif>振袖</option>
-                                    <option value="5" @if(old('status') == '5') selected @endif>留袖</option>
-                                    <option value="6" @if(old('status') == '6') selected @endif>色留袖</option>
-                                    <option value="7" @if(old('status') == '7') selected @endif>喪服</option>
-                                    <option value="8" @if(old('status') == '8') selected @endif>訪問着</option>
-                                    <option value="9" @if(old('status') == '9') selected @endif>付け下げ</option>
-                                    <option value="10" @if(old('status') == '10') selected @endif>色無地</option>
-                                    <option value="11" @if(old('status') == '11') selected @endif>小紋</option>
-                                    <option value="12" @if(old('status') == '12') selected @endif>女袴</option>
-                                    <option value="13" @if(old('status') == '13') selected @endif>七五三</option>
-                                    <option value="14" @if(old('status') == '14') selected @endif>浴衣</option>
-                                    <option value="15" @if(old('status') == '15') selected @endif>その他（備考）</option>
+                                <select class="form-control" name="kimono_type_3" id="kimono_type_3" >
+                                    <option value="1" @if(old('kimono_type_3') == '1') selected @endif>白無垢</option>
+                                    <option value="2" @if(old('kimono_type_3') == '2') selected @endif>色打掛</option>
+                                    <option value="3" @if(old('kimono_type_3') == '3') selected @endif>紋付袴</option>
+                                    <option value="4" @if(old('kimono_type_3') == '4') selected @endif>振袖</option>
+                                    <option value="5" @if(old('kimono_type_3') == '5') selected @endif>留袖</option>
+                                    <option value="6" @if(old('kimono_type_3') == '6') selected @endif>色留袖</option>
+                                    <option value="7" @if(old('kimono_type_3') == '7') selected @endif>喪服</option>
+                                    <option value="8" @if(old('kimono_type_3') == '8') selected @endif>訪問着</option>
+                                    <option value="9" @if(old('kimono_type_3') == '9') selected @endif>付け下げ</option>
+                                    <option value="10" @if(old('kimono_type_3') == '10') selected @endif>色無地</option>
+                                    <option value="11" @if(old('kimono_type_3') == '11') selected @endif>小紋</option>
+                                    <option value="12" @if(old('kimono_type_3') == '12') selected @endif>女袴</option>
+                                    <option value="13" @if(old('kimono_type_3') == '13') selected @endif>七五三</option>
+                                    <option value="14" @if(old('kimono_type_3') == '14') selected @endif>浴衣</option>
+                                    <option value="15" @if(old('kimono_type_3') == '15') selected @endif>その他（備考）</option>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group row">
-                            <label for="obi_type" class="col-2 offset-1">帯の種類</label>
+                            <label for="obi_type_3" class="col-2 offset-1">帯の種類</label>
                             <div class="col-2">
-                                <select class="form-control" name="obi_type" id="obi_type" >
-                                    <option value="1" @if(old('obi_type') == '1') selected @endif>名古屋帯</option>
-                                    <option value="2" @if(old('obi_type') == '2') selected @endif>袋帯</option>
-                                    <option value="3" @if(old('obi_type') == '3') selected @endif>その他（備考）</option>
+                                <select class="form-control" name="obi_type_3" id="obi_type_3" >
+                                    <option value="1" @if(old('obi_type_3') == '1') selected @endif>名古屋帯</option>
+                                    <option value="2" @if(old('obi_type_3') == '2') selected @endif>袋帯</option>
+                                    <option value="3" @if(old('obi_type_3') == '3') selected @endif>その他（備考）</option>
                                 </select>
                             </div>
-                            <label for="obi_knot" class="col-2 offset-2">結び方</label>
+                            <label for="obi_knot_3" class="col-2 offset-2">結び方</label>
                             <div class="col-2">
-                                <select class="form-control" name="obi_knot" id="obi_knot" >
-                                    <option value="1" @if(old('obi_knot') == '1') selected @endif>お太鼓</option>
-                                    <option value="2" @if(old('obi_knot') == '2') selected @endif>二重太鼓</option>
-                                    <option value="3" @if(old('obi_knot') == '3') selected @endif>変わり結び</option>
-                                    <option value="4" @if(old('obi_knot') == '4') selected @endif>その他（備考）</option>
+                                <select class="form-control" name="obi_knot_3" id="obi_knot_3" >
+                                    <option value="1" @if(old('obi_knot_3') == '1') selected @endif>お太鼓</option>
+                                    <option value="2" @if(old('obi_knot_3') == '2') selected @endif>二重太鼓</option>
+                                    <option value="3" @if(old('obi_knot_3') == '3') selected @endif>変わり結び</option>
+                                    <option value="4" @if(old('obi_knot_3') == '4') selected @endif>その他（備考）</option>
                                 </select>
                             </div>
                         </div>
