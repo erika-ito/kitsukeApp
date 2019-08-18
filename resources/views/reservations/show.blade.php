@@ -7,7 +7,7 @@
         <div class="h4">予約詳細</div>
         <div class="border bg-white px-5 py-4">
             <!-- 詳細画面 1 -->
-            <div class="reservation-show-1 pt-3">
+            <div id="reservation-show-1" class="pt-3">
                 <div class="row">
                     <label for="id" class="col-2 offset-1">予約ID：</label>
                     <div class="col-2">
@@ -220,7 +220,7 @@
             </div>
 
             <!-- 詳細画面 2 -->
-            <div class="reservation-show-2 pt-3 d-none">
+            <div id="reservation-show-2" class="pt-3 d-none">
                 <div class="row">
                     <label for="purpose" class="col-2 offset-1">着用目的：</label>
                     <div class="col-2">
@@ -292,11 +292,22 @@
         <!-- 送信ボタン -->
         <div class="row">
             <div class="col-2 offset-7 mt-3">
-                <a href="" class="btn btn-primary">着付内容</a>
+                <button type="button" id="reservation_show_btn" class="btn btn-primary">着付内容</button>
             </div>
             <div class="col-2 mt-3">
                 <a href="" class="btn btn-success">編集</a>
             </div>
         </div>
     </div> 
+@endsection
+
+@section('scripts')
+    <script>
+        $(function() {
+            $('#reservation_show_btn').click(function() {
+                $('#reservation-show-1').toggleClass('d-none');
+                $('#reservation-show-2').toggleClass('d-none');
+            });
+        });
+    </script>
 @endsection
