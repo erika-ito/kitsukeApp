@@ -69,8 +69,22 @@ class ReservationController extends Controller
         $connector = new Connector();
         $customer = new Customer();
 
-        // $reservation->fill($request->except('name', 'furigana'));
-        
+        //　予約テーブル登録のカラムを限定
+        // $columns = [
+        //     'status',
+        //     'user',
+        //     'reservation_date',
+        //     'reservation_type',
+        //     'reply',
+        //     'location_type',
+        //     'location_date',
+        //     'finish_time',
+        //     'start_time',
+        //     'count_person',
+        //     'count_master',
+        //     'purpose',
+        // ];
+
         // 連絡者テーブル必須項目
         $match_connector = Connector::where('name', $request->name)->first();
         
@@ -79,25 +93,19 @@ class ReservationController extends Controller
             $connector->name = $request->name;
             $connector->furigana = $request->furigana;
             $connector->save();
-
-            $match_connector = Connector::where('name', $request->name)->first();
         }
-
-        // $connector_id = $match_connector->id;
 
         // 顧客テーブル必須項目
         $match_customer = Customer::where('name', $request->name_1)->first();
         
         if (empty($match_customer)) {
             // 顧客登録がない場合
-            $customer->connector_id = $connector_id;
             $customer->name = $request->name_1;
             $customer->furigana = $request->furigana_1;
-            $customer->save();
+            $match_connector->customers()->save($customer);
         }
 
         // 予約テーブル必須項目
-        // $reservation->connector_id = $connector_id;
         $reservation->status = $request->status;
         $reservation->user = $request->user;
         $reservation->reservation_date = $request->reservation_date;
@@ -117,8 +125,9 @@ class ReservationController extends Controller
         $reservation->master_request_date = $request->master_request_date;
         $reservation->tool_pass_date = $request->tool_pass_date;
         
-        // $reservation->save();
         $match_connector->reservations()->save($reservation);
+
+        // $reservation->fill($request->only($columns));
 
         return redirect()->route('reservations.index');
     }
