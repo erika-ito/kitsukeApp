@@ -238,7 +238,26 @@
                     <br>
                     <hr>
                     
-
+                    <div class="form-group row">
+                        <label for="master_name_1" class="col-2 offset-1">担当講師</label>
+                        <div class="col-2">
+                            <input type="text" class="form-control" name="master_name_1" id="master_name_1" value="{{ old('master_name_1') }}">
+                        </div>
+                        <label for="master_name_2" class="col-2 offset-2"></label>
+                        <div class="col-2">
+                            <input type="text" class="form-control" name="master_name_2" id="master_name_2" value="{{ old('master_name_2') }}">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="master_name_3" class="col-2 offset-1"></label>
+                        <div class="col-2">
+                            <input type="text" class="form-control" name="master_name_3" id="master_name_3" value="{{ old('master_name_3') }}">
+                        </div>
+                        <label for="master_name_4" class="col-2 offset-2"></label>
+                        <div class="col-2">
+                            <input type="text" class="form-control" name="master_name_4" id="master_name_4" value="{{ old('master_name_4') }}">
+                        </div>
+                    </div>
                     <div class="form-group row">
                         <label for="tool_connect_date" class="col-2 offset-1">小物連絡日</label>
                         <div class="col-3">

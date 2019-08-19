@@ -184,7 +184,14 @@
                 <br>
                 <hr>
                 
-
+                <div class="row">
+                    <label for="master_name_1" class="col-2 offset-1">担当講師：</label>
+                    @foreach ($reservation->masters as $master)
+                        <div class="col-2">
+                            {{ $master->name }}
+                        </div>
+                    @endforeach
+               </div>
                 <div class="row">
                     <label for="tool_connect_date" class="col-2 offset-1">小物連絡日：</label>
                     <div class="col-3">
@@ -231,52 +238,52 @@
 
                 <!-- 着付対象者 -->
                 @foreach ($reservation->customers as $customer)
-                <div class="customer">
-                    <p>【着付1人目（必須）】</p>
-                    <div class="row">
-                        <label for="name" class="col-2 offset-1">氏名：</label>
-                        <div class="col-2">
-                            {{ $customer->name }}
+                    <div class="customer">
+                        <p>【着付対象者】</p>
+                        <div class="row">
+                            <label for="name" class="col-2 offset-1">氏名：</label>
+                            <div class="col-2">
+                                {{ $customer->name }}
+                            </div>
+                            <label for="furigana" class="col-2 offset-2">ふりがな：</label>
+                            <div class="col-2">
+                                {{ $customer->furigana }}
+                            </div>
                         </div>
-                        <label for="furigana" class="col-2 offset-2">ふりがな：</label>
-                        <div class="col-2">
-                            {{ $customer->furigana }}
+                        <div class="row">
+                            <label for="age" class="col-2 offset-1">年齢：</label>
+                            <div class="col-2">
+                                {{ $customer->age }}　歳
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="height" class="col-2 offset-1">身長：</label>
+                            <div class="col-2">
+                                {{ $customer->height }}　cm
+                            </div>
+                            <label for="body_type" class="col-2 offset-2">体型：</label>
+                            <div class="col-2">
+                                {{ $customer->body_type }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="kimono_type" class="col-2 offset-1">着物の種類：</label>
+                            <div class="col-2">
+                                {{ $customer->pivot->kimono_type }}
+                            </div>
+                        </div>
+                        <div class="row">
+                            <label for="obi_type" class="col-2 offset-1">帯の種類：</label>
+                            <div class="col-2">
+                                {{ $customer->pivot->obi_type }}
+                            </div>
+                            <label for="obi_knot" class="col-2 offset-2">帯結び：</label>
+                            <div class="col-2">
+                                {{ $customer->pivot->obi_knot }}
+                            </div>
                         </div>
                     </div>
-                    <div class="row">
-                        <label for="age" class="col-2 offset-1">年齢：</label>
-                        <div class="col-2">
-                            {{ $customer->age }}　歳
-                        </div>
-                    </div>
-                    <div class="row">
-                        <label for="height" class="col-2 offset-1">身長：</label>
-                        <div class="col-2">
-                            {{ $customer->height }}　cm
-                        </div>
-                        <label for="body_type" class="col-2 offset-2">体型：</label>
-                        <div class="col-2">
-                            {{ $customer->body_type }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <label for="kimono_type" class="col-2 offset-1">着物の種類：</label>
-                        <div class="col-2">
-                            {{ $customer->pivot->kimono_type }}
-                        </div>
-                    </div>
-                    <div class="row">
-                        <label for="obi_type" class="col-2 offset-1">帯の種類：</label>
-                        <div class="col-2">
-                            {{ $customer->pivot->obi_type }}
-                        </div>
-                        <label for="obi_knot" class="col-2 offset-2">帯結び：</label>
-                        <div class="col-2">
-                            {{ $customer->pivot->obi_knot }}
-                        </div>
-                    </div>
-                </div>
-                <hr>
+                    <hr>
                 @endforeach
                 
 
