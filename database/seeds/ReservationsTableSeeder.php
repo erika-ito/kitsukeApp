@@ -17,6 +17,7 @@ class ReservationsTableSeeder extends Seeder
                 'connector_id' => '1',
                 'status' => '4', //　予約確定
                 'user' => '佐藤',
+                'reservation_date' => '2019/11/1',
                 'reservation_type' => '1',
                 'reply' => '1',
                 'location_type' => '1',
@@ -39,6 +40,7 @@ class ReservationsTableSeeder extends Seeder
                 'connector_id' => '2',
                 'status' => '4', //　予約確定
                 'user' => '佐藤',
+                'reservation_date' => '2019/11/1',
                 'reservation_type' => '1',
                 'reply' => '1',
                 'location_type' => '1',

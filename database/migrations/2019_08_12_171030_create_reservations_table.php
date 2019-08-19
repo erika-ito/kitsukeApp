@@ -19,7 +19,7 @@ class CreateReservationsTable extends Migration
             $table->integer('connector_id')->unsigned();
             $table->integer('status');
             $table->string('user');
-            $table->timestamp('reservation_date')->useCurrent();
+            $table->datetime('reservation_date');
             $table->integer('reservation_type');
             $table->integer('reply');
             $table->integer('location_type');
