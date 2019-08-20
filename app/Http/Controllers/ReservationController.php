@@ -144,12 +144,13 @@ class ReservationController extends Controller
 
         // 中間テーブル項目（担当講師）
         $master_reservation_1 = Master::where('name', $request->master_name_1)->first();
-        $reservation->masters()->attach($master_reservation_1);
+        $reservation->masters()->attach($master_reservation_1->id);
 
         // 中間テーブル項目（着付対象者）
         // 顧客テーブル作成時の$match_customer_1を利用
-        // $customer_reservation = [$match_customer_1, $request->kimono_type_1, $request->obi_type_1, $request->obi_knot_1];
-        $reservation->customers()->attach($match_customer_1);
+        // $customer_reservation = [$match_customer_1->id, $request->kimono_type_1, $request->obi_type_1, $request->obi_knot_1];
+        $reservation->customers()->attach($match_customer_1->id);
+        $reservation->customers()->attach($request->kimono_type_1);
 
         // $customer_reservation->connector_id = $match_connector->id;
         // $customer_reservation->kimono_type = $request->kimono_type_1;
