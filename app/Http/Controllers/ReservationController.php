@@ -128,6 +128,9 @@ class ReservationController extends Controller
             // 顧客登録がない場合
             $customer->name = $request->name_1;
             $customer->furigana = $request->furigana_1;
+            $customer->age = $request->age_1;
+            $customer->height = $request->height_1;
+            $customer->body_type = $request->body_type_1;
             $match_connector->customers()->save($customer);
 
             // 予約にidが必要なため、再度検索
