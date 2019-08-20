@@ -65,7 +65,7 @@ class ReservationController extends Controller
     }
 
     // 新規登録処理
-    public function create(Request $request)
+    public function create(CreateReservationRequest $request)
     {
         $reservation = new Reservation();
         $connector = new Connector();
@@ -139,7 +139,7 @@ class ReservationController extends Controller
             'count_master',
             'purpose',
 
-            // 他項目
+            // 初回任意項目
             'location_name',
             'location_zip_code',
             'location_address',
