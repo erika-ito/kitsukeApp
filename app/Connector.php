@@ -9,6 +9,8 @@ class Connector extends Model
     // タイムスタンプを無効
     public $timestamps = false;
 
+    protected $guarded = ['id'];
+
     // 中間テーブルリレーション
     public function reservations()
     {

@@ -7,7 +7,7 @@ use App\Reservation;
 use App\Connector;
 use App\Customer;
 use App\Master;
-// use App\CustomerReservation;
+use App\CustomerReservation;
 use Illuminate\Http\Request;
 use App\Http\Requests\CreateReservationRequest;
 
@@ -70,10 +70,10 @@ class ReservationController extends Controller
         $reservation = new Reservation();
         $connector = new Connector();
         $customer = new Customer();
-        // $customer_reservation = new CustomerReservation();
+        $customer_reservation = new CustomerReservation();
 
-        //　予約テーブル登録のカラムを限定
-        // $columns = [
+        //　予約テーブルの対象カラムを限定
+        // $reservation_columns = [
         //     'status',
         //     'user',
         //     'reservation_date',
@@ -94,14 +94,31 @@ class ReservationController extends Controller
         
         if (empty($match_connector)) {
             // 連絡者登録がない場合、新規登録する
-            $connector->name = $request->name;
-            $connector->furigana = $request->furigana;
+
+            //　連絡者テーブルの対象カラムを限定
+            $connector_columns = [
+                'name',
+                'furigana',
+                'zip_code',
+                'address',
+                'mark',
+                'home_phone',
+                'cell_phone',
+                'mail',
+                'connect_method',
+                'is_student',
+                'special',
+            ];
+
+            $connector->fill($request->only($connector_columns));
+            $connector->total_count = 1; // 仮
+            $connector->current_use_date = $request->location_date;
             $connector->save();
 
             // 予約にidが必要なため、再度検索
             $match_connector = Connector::where('name', $request->name)
                 ->orwhere('furigana', $request->furigana)->first();
-        }
+        } 
 
         // 顧客テーブル必須項目
         $match_customer_1 = Customer::where('name', $request->name_1)
@@ -144,15 +161,18 @@ class ReservationController extends Controller
 
         // 中間テーブル項目（担当講師）
         $master_reservation_1 = Master::where('name', $request->master_name_1)->first();
-        $reservation->masters()->attach($master_reservation_1->id);
+        if (! empty($master_reservation_1)) {
+            // 担当講師がいる場合、IDを紐づけ
+            $reservation->masters()->attach($master_reservation_1->id);
+        }
 
         // 中間テーブル項目（着付対象者）
         // 顧客テーブル作成時の$match_customer_1を利用
         // $customer_reservation = [$match_customer_1->id, $request->kimono_type_1, $request->obi_type_1, $request->obi_knot_1];
         $reservation->customers()->attach($match_customer_1->id);
-        $reservation->customers()->attach($request->kimono_type_1);
+        // $reservation->customers()->attach($request->kimono_type_1);
 
-        // $customer_reservation->connector_id = $match_connector->id;
+        // $customer_reservation->customer_id = $match_customer_1->id;
         // $customer_reservation->kimono_type = $request->kimono_type_1;
         // $customer_reservation->obi_type = $request->obi_type_1;
         // $customer_reservation->obi_knot = $request->obi_knot_1;
