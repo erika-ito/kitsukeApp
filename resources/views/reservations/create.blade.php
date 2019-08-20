@@ -546,8 +546,15 @@
 
             <!-- 送信ボタン -->
             <div class="row">
+                <!-- フォーム 1のボタン -->
                 <div class="col-2 offset-9 mt-3">
                     <button type="button" id="reservation_form_btn_1" class="btn btn-primary">次へ</button>
+                </div>
+                <!-- フォーム 2のボタン -->
+                <div class="col-2 offset-7 mt-3">
+                    <button type="button" id="reservation_return_btn" class="btn btn-secondary d-none">前へ戻る</button>
+                </div>
+                <div class="col-2 mt-3">
                     <input type="submit" value="登録" id="reservation_form_btn_2" class="btn btn-primary d-none">
                 </div>
             </div>
@@ -558,7 +565,7 @@
 @section('scripts')
     <script>
         $(function() {
-            //　青色ボタンがクリックされたとき
+            //　次へボタンがクリックされたとき
             $('#reservation_form_btn_1').click(function() {
                 //　内容1から2へ表示の切り替え
                 $('#reservation_form_2').removeClass('d-none');
@@ -566,7 +573,30 @@
 
                 // ボタンの表示切り替え
                 $('#reservation_form_btn_2').removeClass('d-none');
+                $('#reservation_return_btn').removeClass('d-none');
                 $(this).addClass('d-none');
+
+                //　画面を一番上までスクロール
+                $("html,body").animate({
+                    scrollTop : 0
+                });
+            });
+
+            //　戻るボタンがクリックされたとき
+            $('#reservation_form_btn_2').click(function() {
+                //　内容2から1へ表示の切り替え
+                $('#reservation_form_1').removeClass('d-none');
+                $('#reservation_form_2').addClass('d-none');
+
+                // ボタンの表示切り替え
+                $('#reservation_form_btn_1').removeClass('d-none');
+                $(this).addClass('d-none');
+                $('#reservation_return_btn').addClass('d-none');
+
+                //　画面を一番上までスクロール
+                $("html,body").animate({
+                    scrollTop : 0
+                });
             });
         });
     </script>
