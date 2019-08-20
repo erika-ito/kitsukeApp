@@ -6,6 +6,10 @@ use Illuminate\Database\Eloquent\Relations\Pivot;
 
 class CustomerReservation extends Pivot
 {
+    // タイムスタンプを無効
+    public $timestamps = false;
+    
+    // テーブルの指定
     protected $table = 'customer_reservation';
     
     // アクセサ
