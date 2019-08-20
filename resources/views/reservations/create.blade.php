@@ -168,7 +168,7 @@
                     <hr>
 
                     <div class="form-group row">
-                        <label for="location_name" class="col-2 offset-1">出張先（自宅以外）</label>
+                        <label for="location_name" class="col-2 offset-1">出張先（自宅外）</label>
                         <div class="col-2">
                             <input type="text" class="form-control" name="location_name" id="location_name" value="{{ old('location_name') }}">
                         </div>
@@ -224,7 +224,7 @@
                     <br>
 
                     <div class="form-group row">
-                        <label for="distance" class="col-2 offset-1">最寄りからの距離</label>
+                        <label for="distance" class="col-2 offset-1">最寄り駅からの距離</label>
                         <div class="col-6">
                             <input type="text" class="form-control" name="distance" id="distance" value="{{ old('distance') }}">                            
                         </div>

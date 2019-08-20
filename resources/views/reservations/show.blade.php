@@ -125,7 +125,7 @@
                 <hr>
 
                 <div class="row">
-                    <label for="location_name" class="col-2 offset-1">出張先（自宅以外）：</label>
+                    <label for="location_name" class="col-2 offset-1">出張先（自宅外）：</label>
                     <div class="col-2">
                         {{ $reservation->location_name }}
                     </div>
@@ -170,7 +170,7 @@
                 <br>
 
                 <div class="row">
-                    <label for="distance" class="col-2 offset-1">最寄りからの距離：</label>
+                    <label for="distance" class="col-2 offset-1">最寄り駅からの距離：</label>
                     <div class="col-6">
                         {{ $reservation->distance }}
                     </div>
