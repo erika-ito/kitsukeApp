@@ -72,22 +72,6 @@ class ReservationController extends Controller
         $customer = new Customer();
         $customer_reservation = new CustomerReservation();
 
-        //　予約テーブルの対象カラムを限定
-        // $reservation_columns = [
-        //     'status',
-        //     'user',
-        //     'reservation_date',
-        //     'reservation_type',
-        //     'reply',
-        //     'location_type',
-        //     'location_date',
-        //     'finish_time',
-        //     'start_time',
-        //     'count_person',
-        //     'count_master',
-        //     'purpose',
-        // ];
-
         // 連絡者テーブル必須項目
         $match_connector = Connector::where('name', $request->name)
             ->orwhere('furigana', $request->furigana)->first();
@@ -138,29 +122,42 @@ class ReservationController extends Controller
                 ->orwhere('furigana', $request->furigana_1)->first();
         }
 
-        // 予約テーブル必須項目
-        $reservation->status = $request->status;
-        $reservation->user = $request->user;
-        $reservation->reservation_date = $request->reservation_date;
-        $reservation->reservation_type = $request->reservation_type;
-        $reservation->reply = $request->reply;
-        $reservation->location_type = $request->location_type;
-        $reservation->location_date = $request->location_date;
-        $reservation->finish_time = $request->finish_time;
-        $reservation->start_time = $request->start_time;
-        $reservation->count_person = $request->count_person;
-        $reservation->count_master = $request->count_master;
-        $reservation->purpose = $request->purpose;
+        // 予約テーブル登録
+        // 予約テーブルの対象カラムを限定
+        $reservation_columns = [
+            // 予約テーブル必須項目
+            'status',
+            'user',
+            'reservation_date',
+            'reservation_type',
+            'reply',
+            'location_type',
+            'location_date',
+            'finish_time',
+            'start_time',
+            'count_person',
+            'count_master',
+            'purpose',
 
-        // 他予約テーブル項目
-        $reservation->tool_connect_date = $request->tool_connect_date;
-        $reservation->tool_confirm_date = $request->tool_confirm_date;
-        $reservation->master_request_date = $request->master_request_date;
-        $reservation->tool_pass_date = $request->tool_pass_date;
-        
+            // 他項目
+            'location_name',
+            'location_zip_code',
+            'location_address',
+            'location_phone',
+            'distance',
+            'tool_buying',
+            'total_price',
+            'tool_connect_date',
+            'tool_confirm_date',
+            'master_request_date',
+            'tool_pass_date',
+            'payment',
+            'thoughts',
+            'notes',
+        ];
+
+        $reservation->fill($request->only($reservation_columns));
         $match_connector->reservations()->save($reservation);
-
-        // $reservation->fill($request->only($columns));
 
         // 中間テーブル項目（担当講師）
         $master_reservation_1 = Master::where('name', $request->master_name_1)->first();
