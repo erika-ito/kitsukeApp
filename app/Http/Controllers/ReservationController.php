@@ -159,6 +159,9 @@ class ReservationController extends Controller
         $reservation->fill($request->only($reservation_columns));
         $match_connector->reservations()->save($reservation);
 
+        // 保存した予約のIDを取得
+        $insert_reservation_id = $reservation->id;
+
         // 中間テーブル項目（担当講師）
         $master_reservation_1 = Master::where('name', $request->master_name_1)->first();
         if (! empty($master_reservation_1)) {
@@ -167,17 +170,13 @@ class ReservationController extends Controller
         }
 
         // 中間テーブル項目（着付対象者）
-        // 顧客テーブル作成時の$match_customer_1を利用
-        // $customer_reservation = [$match_customer_1->id, $request->kimono_type_1, $request->obi_type_1, $request->obi_knot_1];
-        $reservation->customers()->attach($match_customer_1->id);
-        // $reservation->customers()->attach($request->kimono_type_1);
+        $customer_reservation->reservation_id = $insert_reservation_id;
+        $customer_reservation->customer_id = $match_customer_1->id;  // 顧客テーブル作成時の$match_customer_1を利用
+        $customer_reservation->kimono_type = $request->kimono_type_1;
+        $customer_reservation->obi_type = $request->obi_type_1;
+        $customer_reservation->obi_knot = $request->obi_knot_1;
 
-        // $customer_reservation->customer_id = $match_customer_1->id;
-        // $customer_reservation->kimono_type = $request->kimono_type_1;
-        // $customer_reservation->obi_type = $request->obi_type_1;
-        // $customer_reservation->obi_knot = $request->obi_knot_1;
-
-        // $customer_reservation->save();
+        $customer_reservation->save();
 
         return redirect()->route('reservations.index');
     }
