@@ -54,6 +54,7 @@
                         <label for="reservation_type" class="col-2">受付方法</label>
                         <div class="col-2">
                             <select class="form-control" name="reservation_type" id="reservation_type" >
+                                <option value="" >選択してください</option>
                                 <option value="1" @if(old('reservation_type') == '1') selected @endif>電話</option>
                                 <option value="2" @if(old('reservation_type') == '2') selected @endif>メール</option>
                                 <option value="3" @if(old('reservation_type') == '3') selected @endif>対面</option>
@@ -65,6 +66,7 @@
                         <label for="reply" class="col-2">折り返し連絡</label>
                         <div class="col-2">
                             <select class="form-control" name="reply" id="reply" >
+                                <option value="" >選択してください</option>
                                 <option value="1" @if(old('reply') == '1') selected @endif>必要</option>
                                 <option value="2" @if(old('reply') == '2') selected @endif>不要</option>
                             </select>
@@ -75,6 +77,7 @@
                         <label for="location_type" class="col-2">着付場所分類</label>
                         <div class="col-2">
                             <select class="form-control" name="location_type" id="location_type" >
+                                <option value="" >選択してください</option>
                                 <option value="1" @if(old('location_type') == '1') selected @endif>自宅</option>
                                 <option value="2" @if(old('location_type') == '2') selected @endif>青山校</option>
                                 <option value="3" @if(old('location_type') == '3') selected @endif>銀座校</option>
@@ -198,6 +201,7 @@
                         <label for="connect_method" class="col-2 offset-1">小物の連絡方法</label>
                         <div class="col-2">
                             <select class="form-control" name="connect_method" id="connect_method" >
+                                <option value="" >選択してください</option>
                                 <option value="1" @if(old('connect_method') == '1') selected @endif>メール</option>
                                 <option value="2" @if(old('connect_method') == '2') selected @endif>FAX</option>
                                 <option value="3" @if(old('connect_method') == '3') selected @endif>郵送</option>
@@ -205,6 +209,7 @@
                         <label for="tool_buying" class="col-2 offset-2">小物の購入</label>
                         <div class="col-2">
                             <select class="form-control" name="tool_buying" id="tool_buying" >
+                                <option value="" >選択してください</option>
                                 <option value="1" @if(old('tool_buying') == '1') selected @endif>なし</option>
                                 <option value="2" @if(old('tool_buying') == '2') selected @endif>脱脂綿</option>
                                 <option value="3" @if(old('tool_buying') == '3') selected @endif>腰ひも</option>
@@ -216,6 +221,7 @@
                         <label for="is_student" class="col-2 offset-1">当院生徒か</label>
                         <div class="col-2">
                             <select class="form-control" name="is_student" id="is_student" >
+                                <option value="" >選択してください</option>
                                 <option value="1" @if(old('is_student') == '1') selected @endif>外部</option>
                                 <option value="2" @if(old('is_student') == '2') selected @endif>生徒</option>
                             </select>
@@ -342,6 +348,7 @@
                             <label for="kimono_type_1" class="col-2 offset-1">着物の種類</label>
                             <div class="col-2">
                                 <select class="form-control" name="kimono_type_1" id="kimono_type_1" >
+                                    <option value="" >選択してください</option>
                                     <option value="1" @if(old('kimono_type_1') == '1') selected @endif>白無垢</option>
                                     <option value="2" @if(old('kimono_type_1') == '2') selected @endif>色打掛</option>
                                     <option value="3" @if(old('kimono_type_1') == '3') selected @endif>紋付袴</option>
@@ -364,6 +371,7 @@
                             <label for="obi_type_1" class="col-2 offset-1">帯の種類</label>
                             <div class="col-2">
                                 <select class="form-control" name="obi_type_1" id="obi_type_1" >
+                                    <option value="" >選択してください</option>
                                     <option value="1" @if(old('obi_type_1') == '1') selected @endif>名古屋帯</option>
                                     <option value="2" @if(old('obi_type_1') == '2') selected @endif>袋帯</option>
                                     <option value="3" @if(old('obi_type_1') == '3') selected @endif>その他（備考）</option>
@@ -372,6 +380,7 @@
                             <label for="obi_knot_1" class="col-2 offset-2">結び方</label>
                             <div class="col-2">
                                 <select class="form-control" name="obi_knot_1" id="obi_knot_1" >
+                                    <option value="" >選択してください</option>
                                     <option value="1" @if(old('obi_knot_1') == '1') selected @endif>お太鼓</option>
                                     <option value="2" @if(old('obi_knot_1') == '2') selected @endif>二重太鼓</option>
                                     <option value="3" @if(old('obi_knot_1') == '3') selected @endif>変わり結び</option>
@@ -408,6 +417,7 @@
                             <label for="body_type_2" class="col-2 offset-2">体型</label>
                             <div class="col-2">
                                 <select class="form-control" name="body_type_2" id="body_type_2" >
+                                    <option value="" >選択してください</option>
                                     <option value="1" @if(old('body_type_2') == '1') selected @endif>ほそめ</option>
                                     <option value="2" @if(old('body_type_2') == '2') selected @endif>ふつう</option>
                                     <option value="3" @if(old('body_type_2') == '3') selected @endif>ふっくら</option>
@@ -418,6 +428,7 @@
                             <label for="kimono_type_2" class="col-2 offset-1">着物の種類</label>
                             <div class="col-2">
                                 <select class="form-control" name="kimono_type_2" id="kimono_type_2" >
+                                    <option value="" >選択してください</option>
                                     <option value="1" @if(old('kimono_type_2') == '1') selected @endif>白無垢</option>
                                     <option value="2" @if(old('kimono_type_2') == '2') selected @endif>色打掛</option>
                                     <option value="3" @if(old('kimono_type_2') == '3') selected @endif>紋付袴</option>
@@ -440,6 +451,7 @@
                             <label for="obi_type_2" class="col-2 offset-1">帯の種類</label>
                             <div class="col-2">
                                 <select class="form-control" name="obi_type_2" id="obi_type_2" >
+                                    <option value="" >選択してください</option>
                                     <option value="1" @if(old('obi_type_2') == '1') selected @endif>名古屋帯</option>
                                     <option value="2" @if(old('obi_type_2') == '2') selected @endif>袋帯</option>
                                     <option value="3" @if(old('obi_type_2') == '3') selected @endif>その他（備考）</option>
@@ -448,6 +460,7 @@
                             <label for="obi_knot_2" class="col-2 offset-2">結び方</label>
                             <div class="col-2">
                                 <select class="form-control" name="obi_knot_2" id="obi_knot_2" >
+                                    <option value="" >選択してください</option>
                                     <option value="1" @if(old('obi_knot_2') == '1') selected @endif>お太鼓</option>
                                     <option value="2" @if(old('obi_knot_2') == '2') selected @endif>二重太鼓</option>
                                     <option value="3" @if(old('obi_knot_2') == '3') selected @endif>変わり結び</option>
@@ -484,6 +497,7 @@
                             <label for="body_type_3" class="col-2 offset-2">体型</label>
                             <div class="col-2">
                                 <select class="form-control" name="body_type_3" id="body_type_3" >
+                                    <option value="" >選択してください</option>
                                     <option value="1" @if(old('body_type_3') == '1') selected @endif>ほそめ</option>
                                     <option value="2" @if(old('body_type_3') == '2') selected @endif>ふつう</option>
                                     <option value="3" @if(old('body_type_3') == '3') selected @endif>ふっくら</option>
@@ -494,6 +508,7 @@
                             <label for="kimono_type_3" class="col-2 offset-1">着物の種類</label>
                             <div class="col-2">
                                 <select class="form-control" name="kimono_type_3" id="kimono_type_3" >
+                                    <option value="" >選択してください</option>
                                     <option value="1" @if(old('kimono_type_3') == '1') selected @endif>白無垢</option>
                                     <option value="2" @if(old('kimono_type_3') == '2') selected @endif>色打掛</option>
                                     <option value="3" @if(old('kimono_type_3') == '3') selected @endif>紋付袴</option>
@@ -516,6 +531,7 @@
                             <label for="obi_type_3" class="col-2 offset-1">帯の種類</label>
                             <div class="col-2">
                                 <select class="form-control" name="obi_type_3" id="obi_type_3" >
+                                    <option value="" >選択してください</option>
                                     <option value="1" @if(old('obi_type_3') == '1') selected @endif>名古屋帯</option>
                                     <option value="2" @if(old('obi_type_3') == '2') selected @endif>袋帯</option>
                                     <option value="3" @if(old('obi_type_3') == '3') selected @endif>その他（備考）</option>
@@ -524,6 +540,7 @@
                             <label for="obi_knot_3" class="col-2 offset-2">結び方</label>
                             <div class="col-2">
                                 <select class="form-control" name="obi_knot_3" id="obi_knot_3" >
+                                    <option value="" >選択してください</option>
                                     <option value="1" @if(old('obi_knot_3') == '1') selected @endif>お太鼓</option>
                                     <option value="2" @if(old('obi_knot_3') == '2') selected @endif>二重太鼓</option>
                                     <option value="3" @if(old('obi_knot_3') == '3') selected @endif>変わり結び</option>
@@ -583,7 +600,7 @@
             });
 
             //　戻るボタンがクリックされたとき
-            $('#reservation_form_btn_2').click(function() {
+            $('#reservation_return_btn').click(function() {
                 //　内容2から1へ表示の切り替え
                 $('#reservation_form_1').removeClass('d-none');
                 $('#reservation_form_2').addClass('d-none');
@@ -591,7 +608,7 @@
                 // ボタンの表示切り替え
                 $('#reservation_form_btn_1').removeClass('d-none');
                 $(this).addClass('d-none');
-                $('#reservation_return_btn').addClass('d-none');
+                $('#reservation_form_btn_2').addClass('d-none');
 
                 //　画面を一番上までスクロール
                 $("html,body").animate({

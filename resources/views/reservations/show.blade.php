@@ -333,6 +333,11 @@
                 } else {
                     $(this).text('予約概要');
                 }
+
+                //　画面を一番上までスクロール
+                $("html,body").animate({
+                    scrollTop : 0
+                });
             });
         });
     </script>
