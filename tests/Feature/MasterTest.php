@@ -4,6 +4,7 @@ namespace Tests\Feature;
 
 use Tests\TestCase;
 use App\Master;
+use Carbon\Carbon;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
@@ -21,34 +22,59 @@ class MasterTest extends TestCase
     // 検索一致の場合
     public function testMatch()
     {
-        $response = $this->get('/kitsuke/masters?keyword=いし');
+        $keyword = urlencode('いし');
 
-        $response->assertViewHas('masters', function($masters) {
-            
-            // $master_names = ['石橋', '石井'];
-            return $masters->contains('name', '石橋');
-        });
+        $expected = [
+            [
+                'rank' => '5',
+                'name' => '石橋',
+                'furigana' => 'いしばし',
+                'zip_code' => '111-1111',
+                'address' => '東京都新宿区111-111',
+                'home_phone' => '03-0000-0000',
+                'mail' => 'abc@gmail.com',
+                // 'created_at' => Carbon::now(),
+                // 'updated_at' => Carbon::now(),
+            ],
+            [
+                'rank' => '5',
+                'name' => '石井',
+                'furigana' => 'いしい',
+                'zip_code' => '111-1111',
+                'address' => '東京都新宿区111-111',
+                'home_phone' => '03-0000-0000',
+                'mail' => 'abc@gmail.com',
+                // 'created_at' => Carbon::now(),
+                // 'updated_at' => Carbon::now(),
+            ],
+        ];
+        
+        $response = $this->get('/kitsuke/masters?keyword=$keyword');
+
+        $response->assertStatus(200);
+        $response->assertViewIs('masters.index');
+        $response->assertViewHas('masters', $expected);
     }
 
     // 検索不一致の場合
-    public function testNotMatch()
-    {
-        $response = $this->get('/kitsuke/masters?keyword=あべ');
+    // public function testNotMatch()
+    // {
+    //     $response = $this->get('/kitsuke/masters?keyword=あべ');
 
-        $response->assertViewHas('masters', function($masters) {
-            return $masters->isEmpty();
-        });
-    }
+    //     $response->assertViewHas('masters', function($masters) {
+    //         return $masters->isEmpty();
+    //     });
+    // }
 
     // 検索キーワードがない場合
-    public function testNoKeyword()
-    {
-        $response = $this->get('/kitsuke/masters');
+    // public function testNoKeyword()
+    // {
+    //     $response = $this->get('/kitsuke/masters');
 
-        $response->assertViewHas('masters', function($masters) {
-            return $masters->contains('name', '伊藤');
-        });
-    }
+    //     $response->assertViewHas('masters', function($masters) {
+    //         return $masters->contains('name', '伊藤');
+    //     });
+    // }
 
     // public function testPractice()
     // {
