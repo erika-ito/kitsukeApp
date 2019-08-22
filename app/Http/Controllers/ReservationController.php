@@ -69,8 +69,6 @@ class ReservationController extends Controller
     {
         $reservation = new Reservation();
         $connector = new Connector();
-        $customer = new Customer();
-        $customer_reservation = new CustomerReservation();
 
         // 連絡者テーブル必須項目
         $match_connector = Connector::where('name', $request->name)
@@ -102,24 +100,49 @@ class ReservationController extends Controller
             // 予約にidが必要なため、再度検索
             $match_connector = Connector::where('name', $request->name)
                 ->orwhere('furigana', $request->furigana)->first();
-        } 
+        }
 
-        // 顧客テーブル必須項目
-        $match_customer_1 = Customer::where('name', $request->name_1)
-            ->orwhere('furigana', $request->furigana_1)->first();
+        // 顧客テーブルの登録・更新
+        // 顧客データの個数をカウント
+        $customer_names = [
+            $request->input('name_1'),
+            $request->input('name_2'),
+            $request->input('name_3'),
+        ];
+        // $customer_counts = count($request->only($customer_names));
+        $customer_counts = count($customer_names);
+        dd($customer_counts);
 
-        if (empty($match_customer_1)) {
-            // 顧客登録がない場合
-            $customer->name = $request->name_1;
-            $customer->furigana = $request->furigana_1;
-            $customer->age = $request->age_1;
-            $customer->height = $request->height_1;
-            $customer->body_type = $request->body_type_1;
-            $match_connector->customers()->save($customer);
+        // 顧客人数分繰り返し
+        for ($i = 1; $i <= $customer_counts; $i++) {
+            ${'match_customer_'.$i} = Customer::where('name', $request->input('name_'.$i))
+                ->orwhere('furigana', $request->input('furigana_'.$i))->first();
+            
+            if (empty(${'match_customer_'.$i})) {
+                // 顧客データがない場合は新規登録
+                $customer = new Customer();
 
-            // 予約にidが必要なため、再度検索
-            $match_customer_1 = Customer::where('name', $request->name_1)
-                ->orwhere('furigana', $request->furigana_1)->first();
+                $customer->name = $request->input('name_'.$i);
+                $customer->furigana = $request->input('furigana_'.$i);
+                $customer->age = $request->input('age_'.$i);
+                $customer->height = $request->input('height_'.$i);
+                $customer->body_type = $request->input('body_type_'.$i);
+
+                $match_connector->customers()->save($customer);
+            } else {
+                // 顧客データがある場合は更新する
+                ${'match_customer_'.$i}->name = $request->input('name_'.$i);
+                ${'match_customer_'.$i}->furigana = $request->input('furigana_'.$i);
+                ${'match_customer_'.$i}->age = $request->input('age_'.$i);
+                ${'match_customer_'.$i}->height = $request->input('height_'.$i);
+                ${'match_customer_'.$i}->body_type = $request->input('body_type_'.$i);
+
+                $match_connector->customers()->save(${'match_customer_'.$i});
+            }
+
+            // 中間テーブル（着付対象者）登録にcustomer_idが必要なため、再検索
+            ${'match_customer_'.$i} = Customer::where('name', $request->input('name_'.$i))
+                ->orwhere('furigana', $request->input('furigana_'.$i))->first();
         }
 
         // 予約テーブル登録
@@ -170,13 +193,17 @@ class ReservationController extends Controller
         }
 
         // 中間テーブル項目（着付対象者）
-        $customer_reservation->reservation_id = $insert_reservation_id;
-        $customer_reservation->customer_id = $match_customer_1->id;  // 顧客テーブル作成時の$match_customer_1を利用
-        $customer_reservation->kimono_type = $request->kimono_type_1;
-        $customer_reservation->obi_type = $request->obi_type_1;
-        $customer_reservation->obi_knot = $request->obi_knot_1;
+        for ($i = 1; $i <= 4; $i++) {
+            $customer_reservation = new CustomerReservation();
 
-        $customer_reservation->save();
+            $customer_reservation->reservation_id = $insert_reservation_id;
+            $customer_reservation->customer_id = ${'match_customer_'.$i}->id;  // 顧客テーブル作成時の${'match_customer_'.$i}を利用
+            $customer_reservation->kimono_type = $request->input('kimono_type_'.$i);
+            $customer_reservation->obi_type = $request->input('obi_type_'.$i);
+            $customer_reservation->obi_knot = $request->input('obi_knot_'.$i);
+    
+            $customer_reservation->save();    
+        }
 
         return redirect()->route('reservations.index');
     }
