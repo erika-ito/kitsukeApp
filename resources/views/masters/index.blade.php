@@ -25,7 +25,7 @@
             <!-- 講師一覧表 -->
             <table class="table">
                 <thead>
-                    <tr class="table-info text-center row">
+                    <tr class="table-info d-flex">
                         <th scope="col" class="col-1">優先度</th>
                         <th scope="col" class="col-2">氏名</th>
                         <th scope="col" class="col-1">郵便番号</th>
@@ -38,7 +38,7 @@
                 </thead>
                 <tbody class="bg-light">
                     @foreach ($masters as $master)
-                        <tr class="row">
+                        <tr class="d-flex">
                             <td class="col-1">{{ $master->rank }}</td>
                             <td class="col-2">{{ $master->name }}</td>
                             <td class="col-1">{{ $master->zip_code }}</td>
