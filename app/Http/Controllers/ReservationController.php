@@ -68,7 +68,6 @@ class ReservationController extends Controller
     public function create(CreateReservationRequest $request)
     {
         $reservation = new Reservation();
-        $connector = new Connector();
 
         // 連絡者テーブル必須項目
         $match_connector = Connector::where('name', $request->name)
@@ -76,7 +75,6 @@ class ReservationController extends Controller
         
         if (empty($match_connector)) {
             // 連絡者登録がない場合、新規登録する
-
             //　連絡者テーブルの対象カラムを限定
             $connector_columns = [
                 'name',
@@ -92,14 +90,20 @@ class ReservationController extends Controller
                 'special',
             ];
 
+            $connector = new Connector();
             $connector->fill($request->only($connector_columns));
-            $connector->total_count = 1; // 仮
+            $connector->total_count = 1; // 初回
             $connector->current_use_date = $request->location_date;
             $connector->save();
 
-            // 予約にidが必要なため、再度検索
+            // 予約にリレーションを使用するため、再度検索
             $match_connector = Connector::where('name', $request->name)
                 ->orwhere('furigana', $request->furigana)->first();
+        } else {
+            // 連絡者登録がある場合、利用回数と直近利用日を更新する
+            $match_connector->total_count = 1 + $match_connector->reservations()->count(); // 前回までの利用回数に+1
+            $match_connector->current_use_date = $request->location_date;
+            $match_connector->save();
         }
 
         // 顧客テーブルの登録・更新
@@ -188,12 +192,18 @@ class ReservationController extends Controller
 
         // 中間テーブル（担当講師）への保存
         // 担当講師データの個数をカウント
+        $master_names = "";
         for ($i = 1; $i <= 4; $i++) {
             if ($request->filled('master_'.$i)) {
                 $master_names[] = 'master_'.$i;
             }
         }
-        $master_counts = count($master_names);
+
+        if (is_array($master_names)) {
+            $master_counts = count($master_names);
+        } else {
+            $master_counts = 0;
+        }
 
         // 担当講師がいる場合、IDを紐づけ
         if ($master_counts >= 1) {
