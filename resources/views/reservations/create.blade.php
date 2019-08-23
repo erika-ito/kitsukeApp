@@ -245,23 +245,23 @@
                     <hr>
                     
                     <div class="form-group row">
-                        <label for="master_name_1" class="col-2 offset-1">担当講師</label>
+                        <label for="master_1" class="col-2 offset-1">担当講師</label>
                         <div class="col-2">
-                            <input type="text" class="form-control" name="master_name_1" id="master_name_1" value="{{ old('master_name_1') }}">
+                            <input type="text" class="form-control" name="master_1" id="master_1" value="{{ old('master_1') }}">
                         </div>
-                        <label for="master_name_2" class="col-2 offset-2"></label>
+                        <label for="master_2" class="col-2 offset-2"></label>
                         <div class="col-2">
-                            <input type="text" class="form-control" name="master_name_2" id="master_name_2" value="{{ old('master_name_2') }}">
+                            <input type="text" class="form-control" name="master_2" id="master_2" value="{{ old('master_2') }}">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="master_name_3" class="col-2 offset-1"></label>
+                        <label for="master_3" class="col-2 offset-1"></label>
                         <div class="col-2">
-                            <input type="text" class="form-control" name="master_name_3" id="master_name_3" value="{{ old('master_name_3') }}">
+                            <input type="text" class="form-control" name="master_3" id="master_3" value="{{ old('master_3') }}">
                         </div>
-                        <label for="master_name_4" class="col-2 offset-2"></label>
+                        <label for="master_4" class="col-2 offset-2"></label>
                         <div class="col-2">
-                            <input type="text" class="form-control" name="master_name_4" id="master_name_4" value="{{ old('master_name_4') }}">
+                            <input type="text" class="form-control" name="master_4" id="master_4" value="{{ old('master_4') }}">
                         </div>
                     </div>
                     <div class="form-group row">

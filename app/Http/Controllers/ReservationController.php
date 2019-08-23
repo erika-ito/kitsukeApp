@@ -186,14 +186,24 @@ class ReservationController extends Controller
         // 保存した予約のIDを取得
         $insert_reservation_id = $reservation->id;
 
-        // 中間テーブル項目（担当講師）
-        $master_reservation_1 = Master::where('name', $request->master_name_1)->first();
-        if (! empty($master_reservation_1)) {
-            // 担当講師がいる場合、IDを紐づけ
-            $reservation->masters()->attach($master_reservation_1->id);
+        // 中間テーブル（担当講師）への保存
+        // 担当講師データの個数をカウント
+        for ($i = 1; $i <= 4; $i++) {
+            if ($request->filled('master_'.$i)) {
+                $master_names[] = 'master_'.$i;
+            }
+        }
+        $master_counts = count($master_names);
+
+        // 担当講師がいる場合、IDを紐づけ
+        if ($master_counts >= 1) {
+            for ($i = 1; $i <= $master_counts; $i++) {
+                ${'master_reservation_'.$i} = Master::where('name', $request->input('master_'.$i))->first();
+                $reservation->masters()->attach(${'master_reservation_'.$i}->id);
+            }
         }
 
-        // 中間テーブル項目（着付対象者）
+        // 中間テーブル（着付対象者）への保存
         for ($i = 1; $i <= $customer_counts; $i++) {
             $customer_reservation = new CustomerReservation();
 
