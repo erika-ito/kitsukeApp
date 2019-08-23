@@ -338,6 +338,7 @@
                             <label for="body_type_1" class="col-2 offset-2">体型</label>
                             <div class="col-2">
                                 <select class="form-control" name="body_type_1" id="body_type_1" >
+                                    <option value="" >選択してください</option>
                                     <option value="1" @if(old('body_type_1') == '1') selected @endif>ほそめ</option>
                                     <option value="2" @if(old('body_type_1') == '2') selected @endif>ふつう</option>
                                     <option value="3" @if(old('body_type_1') == '3') selected @endif>ふっくら</option>

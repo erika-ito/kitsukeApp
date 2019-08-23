@@ -104,21 +104,19 @@ class ReservationController extends Controller
 
         // 顧客テーブルの登録・更新
         // 顧客データの個数をカウント
-        $customer_names = [
-            $request->input('name_1'),
-            $request->input('name_2'),
-            $request->input('name_3'),
-        ];
-        // $customer_counts = count($request->only($customer_names));
+        for ($i = 1; $i <= 3; $i++) {
+            if ($request->filled('name_'.$i)) {
+                $customer_names[] = 'name_'.$i;
+            }
+        }
         $customer_counts = count($customer_names);
-        dd($customer_counts);
 
         // 顧客人数分繰り返し
         for ($i = 1; $i <= $customer_counts; $i++) {
-            ${'match_customer_'.$i} = Customer::where('name', $request->input('name_'.$i))
+            $match_customer = Customer::where('name', $request->input('name_'.$i))
                 ->orwhere('furigana', $request->input('furigana_'.$i))->first();
             
-            if (empty(${'match_customer_'.$i})) {
+            if (empty($match_customer)) {
                 // 顧客データがない場合は新規登録
                 $customer = new Customer();
 
@@ -129,20 +127,23 @@ class ReservationController extends Controller
                 $customer->body_type = $request->input('body_type_'.$i);
 
                 $match_connector->customers()->save($customer);
+
+                // 中間テーブル（着付対象者）登録に必要なため、customer_idを保存
+                ${'match_customer_'.$i.'_id'} = $customer->id;
+
             } else {
                 // 顧客データがある場合は更新する
-                ${'match_customer_'.$i}->name = $request->input('name_'.$i);
-                ${'match_customer_'.$i}->furigana = $request->input('furigana_'.$i);
-                ${'match_customer_'.$i}->age = $request->input('age_'.$i);
-                ${'match_customer_'.$i}->height = $request->input('height_'.$i);
-                ${'match_customer_'.$i}->body_type = $request->input('body_type_'.$i);
+                $match_customer->name = $request->input('name_'.$i);
+                $match_customer->furigana = $request->input('furigana_'.$i);
+                $match_customer->age = $request->input('age_'.$i);
+                $match_customer->height = $request->input('height_'.$i);
+                $match_customer->body_type = $request->input('body_type_'.$i);
 
-                $match_connector->customers()->save(${'match_customer_'.$i});
+                $match_connector->customers()->save($match_customer);
+
+                // 中間テーブル（着付対象者）登録に必要なため、customer_idを保存
+                ${'match_customer_'.$i.'_id'} = $match_customer->id;
             }
-
-            // 中間テーブル（着付対象者）登録にcustomer_idが必要なため、再検索
-            ${'match_customer_'.$i} = Customer::where('name', $request->input('name_'.$i))
-                ->orwhere('furigana', $request->input('furigana_'.$i))->first();
         }
 
         // 予約テーブル登録
@@ -193,11 +194,11 @@ class ReservationController extends Controller
         }
 
         // 中間テーブル項目（着付対象者）
-        for ($i = 1; $i <= 4; $i++) {
+        for ($i = 1; $i <= $customer_counts; $i++) {
             $customer_reservation = new CustomerReservation();
 
             $customer_reservation->reservation_id = $insert_reservation_id;
-            $customer_reservation->customer_id = ${'match_customer_'.$i}->id;  // 顧客テーブル作成時の${'match_customer_'.$i}を利用
+            $customer_reservation->customer_id = ${'match_customer_'.$i.'_id'};  // 顧客テーブル作成時の${'match_customer_'.$i.'_id'}を利用
             $customer_reservation->kimono_type = $request->input('kimono_type_'.$i);
             $customer_reservation->obi_type = $request->input('obi_type_'.$i);
             $customer_reservation->obi_knot = $request->input('obi_knot_'.$i);
