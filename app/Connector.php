@@ -23,6 +23,18 @@ class Connector extends Model
         return $this->hasMany('App\Customer');
     }
 
+    // ローカルスコープ
+    public function scopeKeyword ($query, $keyword)
+    {
+        // キーワードがあるとき
+        if (! empty($keyword))
+        {
+            return $query
+                    ->where('name', 'like', '%'.$keyword.'%')
+                    ->orwhere('furigana', 'like', '%'.$keyword.'%');
+        }
+    }
+    
     // アクセサ
     // 小物の連絡方法
     public function getConnectMethodAttribute()
