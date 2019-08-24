@@ -38,3 +38,12 @@ Route::group(['prefix' => 'kitsuke/masters'], function() {
     Route::post('/create', 'MasterController@create');
 
 });
+
+// 連絡者
+Route::group(['prefix' => 'kitsuke/connectors'], function() {
+    // 一覧
+    Route::get('/', 'ConnectorController@index')->name('connectors.index');
+
+    // 詳細
+    Route::get('/{id}', 'ConnectorController@show')->name('connectors.show');
+});
