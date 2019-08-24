@@ -25,28 +25,28 @@
             <!-- 講師一覧表 -->
             <table class="table">
                 <thead>
-                    <tr class="table-info text-center">
-                        <th scope="col">優先度</th>
-                        <th scope="col">氏名</th>
-                        <th scope="col">郵便番号</th>
-                        <th scope="col">住所</th>
-                        <th scope="col">自宅</th>
-                        <th scope="col">携帯</th>
-                        <th scope="col">メールアドレス</th>
-                        <th scope="col"></th>
+                    <tr class="table-info d-flex">
+                        <th scope="col" class="col-1">優先度</th>
+                        <th scope="col" class="col-2">氏名</th>
+                        <th scope="col" class="col-1">郵便番号</th>
+                        <th scope="col" class="col-3">住所</th>
+                        <th scope="col" class="col-1">自宅</th>
+                        <th scope="col" class="col-1">携帯</th>
+                        <th scope="col" class="col-2">メールアドレス</th>
+                        <th scope="col" class="col-1"></th>
                     </tr>
                 </thead>
                 <tbody class="bg-light">
                     @foreach ($masters as $master)
-                        <tr>
-                            <td>{{ $master->rank }}</td>
-                            <td>{{ $master->name }}</td>
-                            <td>{{ $master->zip_code }}</td>
-                            <td>{{ $master->address }}</td>
-                            <td>{{ $master->home_phone }}</td>
-                            <td>{{ $master->cell_phone }}</td>
-                            <td>{{ $master->mail }}</td>
-                            <td>
+                        <tr class="d-flex">
+                            <td class="col-1">{{ $master->rank }}</td>
+                            <td class="col-2">{{ $master->name }}</td>
+                            <td class="col-1">{{ $master->zip_code }}</td>
+                            <td class="col-3">{{ $master->address }}</td>
+                            <td class="col-1">{{ $master->home_phone }}</td>
+                            <td class="col-1">{{ $master->cell_phone }}</td>
+                            <td class="col-2">{{ $master->mail }}</td>
+                            <td class="col-1">
                                 <a href="" class="btn btn-success">編集</a>
                             </td>
                         </tr>
