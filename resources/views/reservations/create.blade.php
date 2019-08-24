@@ -205,7 +205,8 @@
                                 <option value="1" @if(old('connect_method') == '1') selected @endif>メール</option>
                                 <option value="2" @if(old('connect_method') == '2') selected @endif>FAX</option>
                                 <option value="3" @if(old('connect_method') == '3') selected @endif>郵送</option>
-                            </select>                            </div>
+                            </select>
+                        </div>
                         <label for="tool_buying" class="col-2 offset-2">小物の購入</label>
                         <div class="col-2">
                             <select class="form-control" name="tool_buying" id="tool_buying" >

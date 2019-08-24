@@ -36,4 +36,23 @@ class ConnectorController extends Controller
             'keyword' => $keyword,
         ]);
     }
+
+    // 詳細表示
+    public function show(int $id)
+    {
+        $connector = Connector::find($id);
+        
+        return view('connectors.show', [
+            'connector' => $connector,
+            'id' => $id,
+        ]);
+    }
+    
+
+    // 編集フォーム表示
+    public function showEditForm()
+    {
+        return view('connectors.edit');
+    }
+    
 }
