@@ -48,4 +48,6 @@ main {
 .btn-re-reservation {
     background-color:darkorange;
     color:white;
+    padding-left:.50rem;
+    padding-right:.50rem;
 }
