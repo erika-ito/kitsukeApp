@@ -1,6 +1,6 @@
 <?php
 
-use Carbon\Carbon;
+use App\Master;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -13,6 +13,6 @@ class MastersTableSeeder extends Seeder
      */
     public function run()
     {
-        factory(App\Master::class, 10)->create();
+        factory(Master::class, 10)->create();
     }
 }
