@@ -43,3 +43,9 @@ main {
 .form-control::placeholder {
     color:lightgrey;
 }
+
+/* 連絡者一覧 */
+.btn-re-reservation {
+    background-color:darkorange;
+    color:white;
+}
