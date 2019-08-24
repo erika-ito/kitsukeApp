@@ -40,7 +40,7 @@
                             <td class="col-2">{{ $connector->name }}</td>
                             <td class="col-3">{{ $connector->address }}</td>
                             <td class="col-1">{{ $connector->cell_phone }}</td>
-                            <td class="col-2">{{ $connector->mail }}</td>
+                            <td class="col-2 overflow">{{ $connector->mail }}</td>
                             <td class="col-1">
                                 <a href="" class="btn btn-success">詳細</a>
                             </td>

@@ -39,6 +39,12 @@ main {
     background-color:ghostwhite;
 }
 
+/* 一覧画面のテーブル
+　メールアドレスのはみ出し防止 */
+.overflow {
+    overflow-wrap: break-word;
+}
+
 /* 登録フォーム */
 .form-control::placeholder {
     color:lightgrey;

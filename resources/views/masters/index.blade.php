@@ -45,7 +45,7 @@
                             <td class="col-3">{{ $master->address }}</td>
                             <td class="col-1">{{ $master->home_phone }}</td>
                             <td class="col-1">{{ $master->cell_phone }}</td>
-                            <td class="col-2">{{ $master->mail }}</td>
+                            <td class="col-2 overflow">{{ $master->mail }}</td>
                             <td class="col-1">
                                 <a href="" class="btn btn-success">編集</a>
                             </td>
