@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMastersTable extends Migration
+class CreateConnectorsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,20 +13,24 @@ class CreateMastersTable extends Migration
      */
     public function up()
     {
-        Schema::create('masters', function (Blueprint $table) {
-            // 必須項目
+        Schema::create('connectors', function (Blueprint $table) {
+            // 初回入力　必須項目
             $table->increments('id');
-            $table->integer('rank');
             $table->string('name');
             $table->string('furigana');
-            $table->string('zip_code');
-            $table->string('address');
 
             // null可
+            $table->string('zip_code')->nullable();
+            $table->string('address')->nullable();
+            $table->string('mark')->nullable();
             $table->string('home_phone')->nullable();
             $table->string('cell_phone')->nullable();
             $table->string('mail')->nullable();
-            $table->timestamps();
+            $table->integer('connect_method')->nullable();
+            $table->integer('is_student')->nullable();
+            $table->integer('total_count')->nullable();
+            $table->date('current_use_date')->nullable();
+            $table->text('special')->nullable();
         });
     }
 
@@ -37,6 +41,6 @@ class CreateMastersTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('masters');
+        Schema::dropIfExists('connectors');
     }
 }
