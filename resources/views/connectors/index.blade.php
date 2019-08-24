@@ -21,37 +21,39 @@
             <!-- 連絡者一覧表 -->
             <table class="table">
                 <thead>
-                    <tr class="table-info">
-                        <th scope="col">利用回数</th>
-                        <th scope="col">直近利用日</th>
-                        <th scope="col">氏名</th>
-                        <th scope="col">住所</th>
-                        <th scope="col">連絡先</th>
-                        <th scope="col">メールアドレス</th>
-                        <th scope="col"></th>
-                        <th scope="col"></th>
+                    <tr class="table-info d-flex">
+                        <th scope="col" class="col-1">利用回数</th>
+                        <th scope="col" class="col-1">直近利用日</th>
+                        <th scope="col" class="col-2">氏名</th>
+                        <th scope="col" class="col-3">住所</th>
+                        <th scope="col" class="col-1">連絡先</th>
+                        <th scope="col" class="col-2">メールアドレス</th>
+                        <th scope="col" class="col-1"></th>
+                        <th scope="col" class="col-1"></th>
                     </tr>
                 </thead>
                 <tbody class="bg-light">
-
-                    <tr>
-                        <td>20</td>
-                        <td>2018/8/1</td>
-                        <td>伊藤絵里香</td>
-                        <td>東京都新宿区</td>
-                        <td>090-0000-0000</td>
-                        <td>abc@gmail.com</td>
-                        <td>
-                            <a href="" class="btn btn-success">詳細</a>
-                        </td>
-                        <td>
-                            <a href="" class="btn btn-re-reservation">再予約</a>
-                        </td>
-                    </tr>
+                    @foreach ($connectors as $connector)
+                        <tr class="d-flex">
+                            <td class="col-1">{{ $connector->total_count }}</td>
+                            <td class="col-1">{{ $connector->formatted_current_use_date }}</td>
+                            <td class="col-2">{{ $connector->name }}</td>
+                            <td class="col-3">{{ $connector->address }}</td>
+                            <td class="col-1">{{ $connector->cell_phone }}</td>
+                            <td class="col-2">{{ $connector->mail }}</td>
+                            <td class="col-1">
+                                <a href="" class="btn btn-success">詳細</a>
+                            </td>
+                            <td class="col-1">
+                                <a href="" class="btn btn-re-reservation">再予約</a>
+                            </td>
+                        </tr>
+                    @endforeach
                 </tbody>
             </table>
             <!-- ページネーション -->
             <div class="d-flex justify-content-center mt-2">
+                {{ $connectors->links() }}
             </div>
         </div>
     </div>

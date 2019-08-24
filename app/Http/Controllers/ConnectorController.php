@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Connector;
 use Illuminate\Http\Request;
 
 class ConnectorController extends Controller
@@ -12,6 +13,9 @@ class ConnectorController extends Controller
         // $keyword = $request->keyword;
 
         // $query = Connector::query();
+        $connectors = Connector::orderBy('total_count','desc')
+            ->orderBy('name','asc')
+            ->paginate(5);
 
         // キーワードがある場合
         // if (! empty($keyword))
@@ -25,7 +29,7 @@ class ConnectorController extends Controller
         //     ->orderBy('furigana','asc')->paginate(5);
         
         return view('connectors.index', [
-            // 'connectors' => $connectors,
+            'connectors' => $connectors,
             // 'keyword' => $keyword,
         ]);
     }

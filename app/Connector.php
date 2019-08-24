@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 class Connector extends Model
@@ -23,7 +24,7 @@ class Connector extends Model
     }
 
     // アクセサ
-    // 小物の購入
+    // 小物の連絡方法
     public function getConnectMethodAttribute()
     {
         switch($this->attributes['connect_method']){
@@ -50,6 +51,16 @@ class Connector extends Model
             
             case 2:
                 return '生徒';
+        }
+    }
+
+    // 日付のフォーマットを変更
+    public function getFormattedCurrentUseDateAttribute()
+    {
+        // 日付が入力されたときのみ、フォーマット適用（エラー防止）
+        if ($this->attributes['current_use_date']) {
+            return Carbon::createFromFormat('Y-m-d', $this->attributes['current_use_date'])
+                ->format('Y/m/d');
         }
     }
 }
