@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Connector;
 use Illuminate\Http\Request;
+use App\Http\Requests\ConnectorRequest;
 
 class ConnectorController extends Controller
 {
@@ -50,11 +51,25 @@ class ConnectorController extends Controller
         ]);
     }
     
-
     // 編集フォーム表示
-    public function showEditForm()
+    public function showEditForm(int $id)
     {
-        return view('connectors.edit');
+        $connector = Connector::find($id);
+
+        return view('connectors.edit', [
+            'connector' => $connector,
+        ]);
     }
-    
+
+    // 編集処理
+    public function edit(int $id, ConnectorRequest $request)
+    {
+        $connector = Connector::find($id);
+        $connector->fill($request->all());
+        $connector->save();
+
+        return redirect()->route('connectors.show', [
+            'id' => $id,
+        ]);
+    }
 }

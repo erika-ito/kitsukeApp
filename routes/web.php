@@ -50,5 +50,7 @@ Route::group(['prefix' => 'kitsuke/connectors'], function() {
     // 詳細
     Route::get('/{id}', 'ConnectorController@show')->name('connectors.show');
 
-    
+    // 編集
+    Route::get('/{id}/edit', 'ConnectorController@showEditForm')->name('connectors.edit');
+    Route::post('/{id}/edit', 'ConnectorController@edit');
 });

@@ -6,7 +6,7 @@
     <div class="container py-4">
         <div class="w-75 mx-auto">
             <div class="h4">連絡者詳細</div>
-            <div class="connector-edit-wrapper border bg-white px-5 py-4">
+            <div class="border bg-white px-5 py-4">
                 <div class="row">
                     <label for="id" class="col-3 offset-1">連絡者ID：</label>
                     <div class="col-3 offset-1">
@@ -81,7 +81,7 @@
                 </div>
             </div>
             <div class="text-right mt-3 mr-5">
-                <input type="submit" value="編集" class="btn btn-success">
+                <a href="{{ route('connectors.edit', ['id' => $connector->id]) }}" class="btn btn-success">編集</a>
             </div>
         </div>
     </div> 
