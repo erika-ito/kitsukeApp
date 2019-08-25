@@ -44,8 +44,8 @@ Route::group(['prefix' => 'kitsuke/connectors'], function() {
     // 一覧
     Route::get('/', 'ConnectorController@index')->name('connectors.index');
 
-    // 仮
-    Route::get('/edit', 'ConnectorController@showEditForm')->name('connectors.edit');
+    // 再予約画面の表示
+    Route::get('/{id}/re_reservation', 'ReservationController@showCreateForm')->name('connectors.re_reservation');
     
     // 詳細
     Route::get('/{id}', 'ConnectorController@show')->name('connectors.show');

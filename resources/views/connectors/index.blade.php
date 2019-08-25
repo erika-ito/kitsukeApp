@@ -42,10 +42,10 @@
                             <td class="col-1">{{ $connector->cell_phone }}</td>
                             <td class="col-2 overflow">{{ $connector->mail }}</td>
                             <td class="col-1">
-                                <a href="" class="btn btn-success">詳細</a>
+                                <a href="{{ route('connectors.show', ['id' => $connector->id]) }}" class="btn btn-success">詳細</a>
                             </td>
                             <td class="col-1">
-                                <a href="" class="btn btn-re-reservation">再予約</a>
+                                <a href="{{ route('connectors.re_reservation', ['id' => $connector->id]) }}" class="btn btn-re-reservation">再予約</a>
                             </td>
                         </tr>
                     @endforeach
