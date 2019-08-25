@@ -26,7 +26,7 @@
                         <a class="nav-link" href="{{ route('masters.index') }}">講師</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">連絡者</a>
+                        <a class="nav-link" href="{{ route('connectors.index') }}">連絡者</a>
                     </li>
                 </ul>
             </div>

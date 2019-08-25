@@ -54,13 +54,20 @@ class ReservationController extends Controller
     }
 
     // 新規登録フォーム表示
-    public function showCreateForm()
+    public function showCreateForm(int $connector_id)
     {
+        $connector = "";
+        
+        if (! empty($connector_id)) {
+            $connector = Connector::find($connector_id);
+        }
+        
         $today = Carbon::today();
         $formatted_today = $today->format('Y-m-d');
         
         return view('reservations.create',[
             'today' => $formatted_today,
+            'connector' => $connector,
         ]);
     }
 
@@ -87,7 +94,6 @@ class ReservationController extends Controller
                 'mail',
                 'connect_method',
                 'is_student',
-                'special',
             ];
 
             $connector = new Connector();

@@ -17,4 +17,17 @@ class Master extends Model
     {
         return $this->belongsToMany('App\Reservation');
     }
+
+    // ローカルスコープ
+    public function scopeKeyword ($query, $keyword)
+    {
+        // キーワードがあるとき
+        if (! empty($keyword))
+        {
+            return $query
+                    ->where('name', 'like', '%'.$keyword.'%')
+                    ->orwhere('furigana', 'like', '%'.$keyword.'%');
+        }
+    }
+    
 }

@@ -6,9 +6,9 @@
     <div class="container py-4">
         <form action="{{ route('masters.create') }}" method="post">
             @csrf
-            <div class="h4 ml-5">講師登録フォーム</div>
-            <div class="d-flex justify-content-center">
-                <div class="master-create-wrapper border bg-white w-75 px-5 py-4">
+            <div class="w-75 mx-auto">
+                <div class="h4">講師登録フォーム</div>
+                <div class="master-create-wrapper border bg-white px-5 py-4">
                     <!-- <div class="h4 mb-5">講師登録フォーム</div> -->
                     @if($errors->any())
                         <div class="alert alert-danger">
@@ -80,13 +80,10 @@
                             </div>
                         </div>
                 </div>
-            </div>
-            <div class="row">
-                <div class="col-2 offset-8 mt-3">
-                    <!-- <button type="submit" class="btn btn-primary">登録</button>     -->
+                <div class="text-right mt-3 mr-5">
                     <input type="submit" value="登録" class="btn btn-primary">
                 </div>
             </div>
         </form>
-    </div> 
+    </div>
 @endsection

@@ -154,7 +154,7 @@
                 <div class="row">
                     <label for="connect_method" class="col-2 offset-1">小物の連絡方法：</label>
                     <div class="col-2">
-                        {{ $reservation->connector->connect_method }}
+                        {{ $reservation->connector->formatted_connect_method }}
                     </div>
                     <label for="tool_buying" class="col-2 offset-2">小物の購入：</label>
                     <div class="col-2">
@@ -164,7 +164,7 @@
                 <div class="row">
                     <label for="is_student" class="col-2 offset-1">当院生徒か：</label>
                     <div class="col-2">
-                        {{ $reservation->connector->is_student }}
+                        {{ $reservation->connector->formatted_is_student }}
                     </div>
                 </div>
                 <br>

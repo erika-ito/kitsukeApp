@@ -13,19 +13,13 @@ class MasterController extends Controller
     {
         $keyword = $request->keyword;
 
-        $query = Master::query();
+       // 検索、並び替え、ページネーション
+        $masters = Master::keyword($keyword)
+            ->orderBy('rank','desc')
+            ->orderBy('furigana','asc')
+            ->paginate(5);
 
-        // キーワードがある場合
-        if (! empty($keyword))
-        {
-            $query->where('name', 'like', '%'.$keyword.'%')
-                ->orwhere('furigana', 'like', '%'.$keyword.'%');
-        }
-
-        // ページネーション
-        $masters = $query->orderBy('rank','desc')
-            ->orderBy('furigana','asc')->paginate(5);
-        
+        // 講師一覧へ
         return view('masters.index', [
             'masters' => $masters,
             'keyword' => $keyword,
