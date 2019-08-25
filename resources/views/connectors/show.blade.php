@@ -64,13 +64,13 @@
                 <div class="row">
                     <label for="connect_method" class="col-3 offset-1">小物の連絡方法：</label>
                     <div class="col-3 offset-1">
-                        {{ $connector->connect_method }}
+                        {{ $connector->formatted_connect_method }}
                     </div>
                 </div>
                 <div class="row">
                     <label for="is_student" class="col-3 offset-1">当院生徒か：</label>
                     <div class="col-3 offset-1">
-                        {{ $connector->is_student }}
+                        {{ $connector->formatted_is_student }}
                     </div>
                 </div>
                 <div class="row">

@@ -37,7 +37,7 @@ class Connector extends Model
     
     // アクセサ
     // 小物の連絡方法
-    public function getConnectMethodAttribute()
+    public function getFormattedConnectMethodAttribute()
     {
         switch($this->attributes['connect_method']){
             case 1:
@@ -55,7 +55,7 @@ class Connector extends Model
     }
 
     // 当院生徒か
-    public function getIsStudentAttribute()
+    public function getFormattedIsStudentAttribute()
     {
         switch($this->attributes['is_student']){
             case 1:
