@@ -16,6 +16,7 @@ class ReservationController extends Controller
     // 一覧表示（検索あり）
     public function index(Request $request)
     {
+        $nav_number = 1;
         $keyword = str_replace('/', '-', $request->keyword);
 
         //　一覧表示のカラムを限定
@@ -38,6 +39,7 @@ class ReservationController extends Controller
         // 予約一覧へ
         return view('reservations.index', [
             'reservations' => $reservations,
+            'nav_number' => $nav_number,
             'keyword' => $keyword,
         ]);
     }

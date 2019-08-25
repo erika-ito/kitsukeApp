@@ -10,6 +10,7 @@ class ConnectorController extends Controller
     // 一覧表示（検索あり）
     public function index(Request $request)
     {
+        $nav_number = 3;
         $keyword = $request->keyword;
 
         //　一覧表示のカラムを限定
@@ -33,6 +34,7 @@ class ConnectorController extends Controller
         // 連絡者一覧へ
         return view('connectors.index', [
             'connectors' => $connectors,
+            'nav_number' => $nav_number,
             'keyword' => $keyword,
         ]);
     }
