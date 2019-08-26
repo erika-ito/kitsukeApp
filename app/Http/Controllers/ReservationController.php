@@ -236,4 +236,33 @@ class ReservationController extends Controller
 
         return redirect()->route('reservations.index');
     }
+
+    // 編集フォーム表示
+    public function showEditForm(int $id)
+    {
+        $reservation = Reservation::find($id);
+        $connector = $reservation->connector()->first();
+
+        $masters = $reservation->masters()->get();
+
+        // 担当講師データの個数をカウント
+        // $master_counts = $masters->count();
+        // dd($master_counts);
+
+        // for ($i = 1; $i <= $master_counts; $i++) {
+        //     ${'master_'$i} = 
+        // }
+
+        // if (is_array($master_names)) {
+        //     $master_counts = count($master_names);
+        // } else {
+        //     $master_counts = 0;
+        // }
+        
+
+        return view('reservations.edit', [
+            'reservation' => $reservation,
+            'connector' => $connector,
+        ]);
+    }    
 }
