@@ -39,7 +39,7 @@
                 <tbody class="bg-light">
                     @foreach ($reservations as $reservation)
                         <tr>
-                            <td>{{ $reservation->status }}</td>
+                            <td>{{ $reservation->formatted_status }}</td>
                             <td>{{ $reservation->formatted_location_date }}</td>
                             <td>
                                 {{ $reservation->formatted_start_time }}
