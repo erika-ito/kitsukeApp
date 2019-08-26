@@ -37,6 +37,9 @@ Route::group(['prefix' => 'kitsuke/masters'], function() {
     Route::get('/create', 'MasterController@showCreateForm')->name('masters.create');
     Route::post('/create', 'MasterController@create');
 
+    // 編集
+    Route::get('/{id}/edit', 'MasterController@showEditForm')->name('masters.edit');
+    Route::post('/{id}/edit', 'MasterController@edit');
 });
 
 // 連絡者

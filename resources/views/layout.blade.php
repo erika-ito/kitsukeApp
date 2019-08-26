@@ -19,15 +19,13 @@
             
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
                 <ul class="navbar-nav mr-auto w-50 nav-justified">
-                    <li class="nav-item {{ $nav_number == 1 ? 'active' : '' }}">
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('reservations.index') }}">予約</span></a>
                     </li>
-                    <li class="nav-item {{ $nav_number == 2 ? 'active' : '' }}">
-                    <!-- <li class="nav-item"> -->
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('masters.index') }}">講師</a>
                     </li>
-                    <li class="nav-item {{ $nav_number == 3 ? 'active' : '' }}">
-                    <!-- <li class="nav-item"> -->
+                    <li class="nav-item">
                         <a class="nav-link" href="{{ route('connectors.index') }}">連絡者</a>
                     </li>
                 </ul>
