@@ -245,38 +245,25 @@ class ReservationController extends Controller
 
         $masters = $reservation->masters()->get();
 
-        // $master_1 = "";
-        // $master_2 = "";
-        // $master_3 = "";
-        // $master_4 = "";
+        $master_1 = "";
+        $master_2 = "";
+        $master_3 = "";
+        $master_4 = "";
 
-        // $i = 1;
-        // foreach ($masters as $master) {
-        //     ${'master_'.$i} = $master;
-        //     $i++;
-        // }
-        // dd($master_2);
-        // $masters->each(function($item, $key) {
-        //     ${'master_'$key} = $item;
-        //     dd(${'master_'$key});
-        // });
-
-        // 担当講師データの個数をカウント
-        // $master_counts = $masters->count();
-        // dd($master_counts);
-
-        // for ($i = 1; $i <= $master_counts; $i++) {
-        //     ${'master_'$i} = 
-        // }        
+        $i = 1;
+        foreach ($masters as $master) {
+            ${'master_'.$i} = $master;
+            $i++;
+        }
 
         return view('reservations.edit', [
             'reservation' => $reservation,
             'connector' => $connector,
-            'masters' => $masters,
-            // 'master_1' => $master_1,
-            // 'master_2' => $master_2,
-            // 'master_3' => $master_3,
-            // 'master_4' => $master_4,
+            // 'masters' => $masters,
+            'master_1' => $master_1,
+            'master_2' => $master_2,
+            'master_3' => $master_3,
+            'master_4' => $master_4,
         ]);
     }    
 }
