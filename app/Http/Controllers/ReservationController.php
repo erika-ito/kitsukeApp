@@ -107,7 +107,7 @@ class ReservationController extends Controller
                 ->orwhere('furigana', $request->furigana)->first();
         } else {
             // 連絡者登録がある場合、利用回数と直近利用日を更新する
-            $match_connector->total_count = 1 + $match_connector->reservations()->count(); // 前回までの利用回数に+1
+            $match_connector->total_count += 1; // 利用回数に+1
             $match_connector->current_use_date = $request->location_date;
             $match_connector->save();
         }
