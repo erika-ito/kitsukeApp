@@ -243,6 +243,7 @@ class ReservationController extends Controller
         $reservation = Reservation::find($id);
         $connector = $reservation->connector()->first();
 
+        // 担当講師を取得
         $masters = $reservation->masters()->get();
 
         $master_1 = "";
@@ -256,14 +257,29 @@ class ReservationController extends Controller
             $i++;
         }
 
+        // 着付対象者を取得
+        $customers = $reservation->customers()->get();
+
+        $customer_1 = "";
+        $customer_2 = "";
+        $customer_3 = "";
+
+        $i = 1;
+        foreach ($customers as $customer) {
+            ${'customer_'.$i} = $customer;
+            $i++;
+        }
+
         return view('reservations.edit', [
             'reservation' => $reservation,
             'connector' => $connector,
-            // 'masters' => $masters,
             'master_1' => $master_1,
             'master_2' => $master_2,
             'master_3' => $master_3,
             'master_4' => $master_4,
+            'customer_1' => $customer_1,
+            'customer_2' => $customer_2,
+            'customer_3' => $customer_3,
         ]);
     }    
 }
