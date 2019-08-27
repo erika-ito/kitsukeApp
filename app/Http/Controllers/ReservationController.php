@@ -96,15 +96,12 @@ class ReservationController extends Controller
                 'is_student',
             ];
 
-            $connector = new Connector();
-            $connector->fill($request->only($connector_columns));
-            $connector->total_count = 1; // 初回
-            $connector->current_use_date = $request->location_date;
-            $connector->save();
+            $match_connector = new Connector();
+            $match_connector->fill($request->only($connector_columns));
+            $match_connector->total_count = 1; // 初回
+            $match_connector->current_use_date = $request->location_date;
+            $match_connector->save();
 
-            // 予約にリレーションを使用するため、再度検索
-            $match_connector = Connector::where('name', $request->name)
-                ->orwhere('furigana', $request->furigana)->first();
         } else {
             // 連絡者登録がある場合、利用回数と直近利用日を更新する
             $match_connector->total_count += 1; // 利用回数に+1
