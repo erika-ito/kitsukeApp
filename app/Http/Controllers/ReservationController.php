@@ -54,7 +54,7 @@ class ReservationController extends Controller
     }
 
     // 新規登録フォーム表示
-    public function showCreateForm(int $connector_id)
+    public function showCreateForm(int $connector_id = null)
     {
         $connector = "";
         
