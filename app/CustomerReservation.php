@@ -14,7 +14,7 @@ class CustomerReservation extends Pivot
     
     // アクセサ
     // 着物の種類
-    public function getKimonoTypeAttribute()
+    public function getFormattedKimonoTypeAttribute()
     {
         switch($this->attributes['kimono_type']){
             case 1:
@@ -65,7 +65,7 @@ class CustomerReservation extends Pivot
     }
 
     // 帯の種類
-    public function getObiTypeAttribute()
+    public function getFormattedObiTypeAttribute()
     {
         switch($this->attributes['obi_type']){
             case 1:
@@ -80,7 +80,7 @@ class CustomerReservation extends Pivot
     }
 
     // 帯結び
-    public function getObiKnotAttribute()
+    public function getFormattedObiKnotAttribute()
     {
         switch($this->attributes['obi_knot']){
             case 1:

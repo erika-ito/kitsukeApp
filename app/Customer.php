@@ -25,7 +25,7 @@ class Customer extends Model
 
     // アクセサ
     // 体型
-    public function getBodyTypeAttribute()
+    public function getFormattedBodyTypeAttribute()
     {
         switch($this->attributes['body_type']){
             case 1:

@@ -263,23 +263,23 @@
                             </div>
                             <label for="body_type" class="col-2 offset-2">体型：</label>
                             <div class="col-2">
-                                {{ $customer->body_type }}
+                                {{ $customer->formatted_body_type }}
                             </div>
                         </div>
                         <div class="row">
                             <label for="kimono_type" class="col-2 offset-1">着物の種類：</label>
                             <div class="col-2">
-                                {{ $customer->pivot->kimono_type }}
+                                {{ $customer->pivot->formatted_kimono_type }}
                             </div>
                         </div>
                         <div class="row">
                             <label for="obi_type" class="col-2 offset-1">帯の種類：</label>
                             <div class="col-2">
-                                {{ $customer->pivot->obi_type }}
+                                {{ $customer->pivot->formatted_obi_type }}
                             </div>
                             <label for="obi_knot" class="col-2 offset-2">帯結び：</label>
                             <div class="col-2">
-                                {{ $customer->pivot->obi_knot }}
+                                {{ $customer->pivot->formatted_obi_knot }}
                             </div>
                         </div>
                     </div>
