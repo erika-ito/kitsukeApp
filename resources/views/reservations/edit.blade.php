@@ -248,11 +248,11 @@
                     <div class="form-group row">
                         <label for="master_1" class="col-2 offset-1">担当講師</label>
                         <div class="col-2">
-                            <input type="text" class="form-control" name="master_1" id="master_1" value="{{ old('master_1') }}">
+                            <input type="text" class="form-control" name="master_1" id="master_1" value="{{ old('master_1', $masters[0]->name) }}">
                         </div>
                         <label for="master_2" class="col-2 offset-2"></label>
                         <div class="col-2">
-                            <input type="text" class="form-control" name="master_2" id="master_2" value="{{ old('master_2') }}">
+                            <input type="text" class="form-control" name="master_2" id="master_2" value="{{ old('master_2', $masters[1]->name) }}">
                         </div>
                     </div>
                     <div class="form-group row">
