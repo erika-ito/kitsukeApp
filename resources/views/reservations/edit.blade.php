@@ -511,21 +511,21 @@
                             <div class="col-2">
                                 <select class="form-control" name="kimono_type_3" id="kimono_type_3" >
                                     <option value="" >選択してください</option>
-                                    <option value="1" @if(old('kimono_type_3',optional($customer_3)->pivot->kimono_type) == '1') selected @endif>白無垢</option>
-                                    <option value="2" @if(old('kimono_type_3',optional($customer_3)->pivot->kimono_type) == '2') selected @endif>色打掛</option>
-                                    <option value="3" @if(old('kimono_type_3',optional($customer_3)->pivot->kimono_type) == '3') selected @endif>紋付袴</option>
-                                    <option value="4" @if(old('kimono_type_3',optional($customer_3)->pivot->kimono_type) == '4') selected @endif>振袖</option>
-                                    <option value="5" @if(old('kimono_type_3',optional($customer_3)->pivot->kimono_type) == '5') selected @endif>留袖</option>
-                                    <option value="6" @if(old('kimono_type_3',optional($customer_3)->pivot->kimono_type) == '6') selected @endif>色留袖</option>
-                                    <option value="7" @if(old('kimono_type_3',optional($customer_3)->pivot->kimono_type) == '7') selected @endif>喪服</option>
-                                    <option value="8" @if(old('kimono_type_3',optional($customer_3)->pivot->kimono_type) == '8') selected @endif>訪問着</option>
-                                    <option value="9" @if(old('kimono_type_3',optional($customer_3)->pivot->kimono_type) == '9') selected @endif>付け下げ</option>
-                                    <option value="10" @if(old('kimono_type_3',optional($customer_3)->pivot->kimono_type) == '10') selected @endif>色無地</option>
-                                    <option value="11" @if(old('kimono_type_3',optional($customer_3)->pivot->kimono_type) == '11') selected @endif>小紋</option>
-                                    <option value="12" @if(old('kimono_type_3',optional($customer_3)->pivot->kimono_type) == '12') selected @endif>女袴</option>
-                                    <option value="13" @if(old('kimono_type_3',optional($customer_3)->pivot->kimono_type) == '13') selected @endif>七五三</option>
-                                    <option value="14" @if(old('kimono_type_3',optional($customer_3)->pivot->kimono_type) == '14') selected @endif>浴衣</option>
-                                    <option value="15" @if(old('kimono_type_3',optional($customer_3)->pivot->kimono_type) == '15') selected @endif>その他（備考）</option>
+                                    <option value="1" @if(old('kimono_type_3') == '1') selected @endif>白無垢</option>
+                                    <option value="2" @if(old('kimono_type_3') == '2') selected @endif>色打掛</option>
+                                    <option value="3" @if(old('kimono_type_3') == '3') selected @endif>紋付袴</option>
+                                    <option value="4" @if(old('kimono_type_3') == '4') selected @endif>振袖</option>
+                                    <option value="5" @if(old('kimono_type_3') == '5') selected @endif>留袖</option>
+                                    <option value="6" @if(old('kimono_type_3') == '6') selected @endif>色留袖</option>
+                                    <option value="7" @if(old('kimono_type_3') == '7') selected @endif>喪服</option>
+                                    <option value="8" @if(old('kimono_type_3') == '8') selected @endif>訪問着</option>
+                                    <option value="9" @if(old('kimono_type_3') == '9') selected @endif>付け下げ</option>
+                                    <option value="10" @if(old('kimono_type_3') == '10') selected @endif>色無地</option>
+                                    <option value="11" @if(old('kimono_type_3') == '11') selected @endif>小紋</option>
+                                    <option value="12" @if(old('kimono_type_3') == '12') selected @endif>女袴</option>
+                                    <option value="13" @if(old('kimono_type_3') == '13') selected @endif>七五三</option>
+                                    <option value="14" @if(old('kimono_type_3') == '14') selected @endif>浴衣</option>
+                                    <option value="15" @if(old('kimono_type_3') == '15') selected @endif>その他（備考）</option>
                                 </select>
                             </div>
                         </div>
@@ -534,19 +534,19 @@
                             <div class="col-2">
                                 <select class="form-control" name="obi_type_3" id="obi_type_3" >
                                     <option value="" >選択してください</option>
-                                    <option value="1" @if(old('obi_type_3',optional($customer_3)->pivot->obi_type) == '1') selected @endif>名古屋帯</option>
-                                    <option value="2" @if(old('obi_type_3',optional($customer_3)->pivot->obi_type) == '2') selected @endif>袋帯</option>
-                                    <option value="3" @if(old('obi_type_3',optional($customer_3)->pivot->obi_type) == '3') selected @endif>その他（備考）</option>
+                                    <option value="1" @if(old('obi_type_3') == '1') selected @endif>名古屋帯</option>
+                                    <option value="2" @if(old('obi_type_3') == '2') selected @endif>袋帯</option>
+                                    <option value="3" @if(old('obi_type_3') == '3') selected @endif>その他（備考）</option>
                                 </select>
                             </div>
                             <label for="obi_knot_3" class="col-2 offset-2">結び方</label>
                             <div class="col-2">
                                 <select class="form-control" name="obi_knot_3" id="obi_knot_3" >
                                     <option value="" >選択してください</option>
-                                    <option value="1" @if(old('obi_knot_3',optional($customer_3)->pivot->obi_knot) == '1') selected @endif>お太鼓</option>
-                                    <option value="2" @if(old('obi_knot_3',optional($customer_3)->pivot->obi_knot) == '2') selected @endif>二重太鼓</option>
-                                    <option value="3" @if(old('obi_knot_3',optional($customer_3)->pivot->obi_knot) == '3') selected @endif>変わり結び</option>
-                                    <option value="4" @if(old('obi_knot_3',optional($customer_3)->pivot->obi_knot) == '4') selected @endif>その他（備考）</option>
+                                    <option value="1" @if(old('obi_knot_3') == '1') selected @endif>お太鼓</option>
+                                    <option value="2" @if(old('obi_knot_3') == '2') selected @endif>二重太鼓</option>
+                                    <option value="3" @if(old('obi_knot_3') == '3') selected @endif>変わり結び</option>
+                                    <option value="4" @if(old('obi_knot_3') == '4') selected @endif>その他（備考）</option>
                                 </select>
                             </div>
                         </div>

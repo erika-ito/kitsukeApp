@@ -55,7 +55,7 @@
                             </td>
                             <td>
                                 @foreach ($reservation->customers as $customer)
-                                    <p>{{ $customer->pivot->kimono_type }}</p>
+                                    <p>{{ $customer->pivot->formatted_kimono_type }}</p>
                                 @endforeach
                             </td>
                             <td>
