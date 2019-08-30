@@ -54,7 +54,7 @@ class CreateReservationRequest extends FormRequest
             'reservation_type' => 'required | integer',
             'reply' => 'required | integer',
             'location_type' => 'required | integer',
-            'location_date' => 'required | date | after_or_equal:reservation_type',
+            'location_date' => 'required | date | after_or_equal:reservation_date',
             'finish_time' => 'required',
             'start_time' => 'required',
             'count_person' => 'required | numeric',
@@ -66,10 +66,10 @@ class CreateReservationRequest extends FormRequest
             'location_phone' => 'alpha_dash | nullable',
             'tool_buying' => 'integer | nullable',
             'total_price' => 'numeric | nullable',
-            'tool_connect_date' => 'date | after_or_equal:reservation_type | nullable',
-            'tool_confirm_date' => 'date | after_or_equal:reservation_type | nullable',
-            'master_request_date' => 'date | after_or_equal:reservation_type | nullable',
-            'tool_pass_date' => 'date | after_or_equal:reservation_type | nullable',
+            'tool_connect_date' => 'date | after_or_equal:reservation_date | nullable',
+            'tool_confirm_date' => 'date | after_or_equal:reservation_date | nullable',
+            'master_request_date' => 'date | after_or_equal:reservation_date | nullable',
+            'tool_pass_date' => 'date | after_or_equal:reservation_date | nullable',
             'payment' => 'numeric | nullable',
         ];
     }
