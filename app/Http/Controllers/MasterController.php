@@ -13,21 +13,11 @@ class MasterController extends Controller
     {
         $keyword = $request->keyword;
 
-        // キーワードがある場合
-        $masters = Master::when($keyword, function($query, $keyword) {
-                    return $query
-                            ->where('name', 'like', '%'.$keyword.'%')
-                            ->orwhere('furigana', 'like', '%'.$keyword.'%');
-                    })
-                    ->orderBy('rank','desc')
-                    ->orderBy('furigana','asc')
-                    ->paginate(5);
-
-       // 検索、並び替え、ページネーション
-        // $masters = Master::keyword($keyword)
-        //     ->orderBy('rank','desc')
-        //     ->orderBy('furigana','asc')
-        //     ->paginate(5);
+       検索、並び替え、ページネーション
+        $masters = Master::keyword($keyword)
+            ->orderBy('rank','desc')
+            ->orderBy('furigana','asc')
+            ->paginate(5);
 
         // 講師一覧へ
         return view('masters.index', [
