@@ -36,14 +36,13 @@ class Reservation extends Model
     public function scopeKeyword ($query, $keyword)
     {
         // キーワードがあるとき
-        if (! empty($keyword))
-        {
+        $query->when($keyword, function($query, $keyword) {
             return $query
-                    ->join('connectors', 'connectors.id', 'reservations.connector_id')
-                    ->where('name', 'like', '%'.$keyword.'%')
-                    ->orwhere('furigana', 'like', '%'.$keyword.'%')
-                    ->orwhere('location_date', '=', $keyword);
-        }
+                ->join('connectors', 'connectors.id', 'reservations.connector_id')
+                ->where('name', 'like', '%'.$keyword.'%')
+                ->orwhere('furigana', 'like', '%'.$keyword.'%')
+                ->orwhere('location_date', '=', $keyword);
+        });
     }
 
     // アクセサ

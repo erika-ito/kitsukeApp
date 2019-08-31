@@ -27,12 +27,11 @@ class Connector extends Model
     public function scopeKeyword ($query, $keyword)
     {
         // キーワードがあるとき
-        if (! empty($keyword))
-        {
+        $query->when($keyword, function($query, $keyword) {
             return $query
-                    ->where('name', 'like', '%'.$keyword.'%')
-                    ->orwhere('furigana', 'like', '%'.$keyword.'%');
-        }
+                ->where('name', 'like', '%'.$keyword.'%')
+                ->orwhere('furigana', 'like', '%'.$keyword.'%');
+        });
     }
     
     // アクセサ
