@@ -13,7 +13,7 @@ class MasterController extends Controller
     {
         $keyword = $request->keyword;
 
-       検索、並び替え、ページネーション
+        // 検索、並び替え、ページネーション
         $masters = Master::keyword($keyword)
             ->orderBy('rank','desc')
             ->orderBy('furigana','asc')
