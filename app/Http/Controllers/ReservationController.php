@@ -136,17 +136,6 @@ class ReservationController extends Controller
 
             $match_connector->customers()->save($match_customer);
 
-            //  else {
-            //     顧客データがある場合は更新する
-            //     $match_customer->name = $request->input('name_'.$i);
-            //     $match_customer->furigana = $request->input('furigana_'.$i);
-            //     $match_customer->age = $request->input('age_'.$i);
-            //     $match_customer->height = $request->input('height_'.$i);
-            //     $match_customer->body_type = $request->input('body_type_'.$i);
-
-            //     $match_connector->customers()->save($match_customer);
-            // }
-
             // 中間テーブル（着付対象者）登録に必要なため、customer_idを保存
             ${'match_customer_'.$i.'_id'} = $match_customer->id;
         }
