@@ -113,12 +113,12 @@
                         <div class="col-1"><span class="badge badge-danger">必須</span></div>
                         <label for="name" class="col-2">連絡者氏名</label>
                         <div class="col-2">
-                            <input type="text" class="form-control" name="name" id="name" value="{{ old('name', $connector->name) }}">
+                            <input type="text" class="form-control" name="name" id="name" value="{{ old('name', optional($connector)->name) }}">
                         </div>
                         <div class="col-1 offset-1"><span class="badge badge-danger">必須</span></div>
                         <label for="furigana" class="col-2">ふりがな</label>
                         <div class="col-2">
-                            <input type="text" class="form-control" name="furigana" id="furigana" value="{{ old('furigana', $connector->furigana) }}">
+                            <input type="text" class="form-control" name="furigana" id="furigana" value="{{ old('furigana', optional($connector)->furigana) }}">
                         </div>
                     </div>
                     <div class="form-group row">
@@ -136,35 +136,35 @@
                     <div class="form-group row">
                         <label for="cell_phone" class="col-2 offset-1">電話番号（携帯）</label>
                         <div class="col-2">
-                            <input type="text" class="form-control" name="cell_phone" id="cell_phone" value="{{ old('cell_phone', $connector->cell_phone) }}" placeholder="000-0000-0000">
+                            <input type="text" class="form-control" name="cell_phone" id="cell_phone" value="{{ old('cell_phone', optional($connector)->cell_phone) }}" placeholder="000-0000-0000">
                         </div>
                         <label for="home_phone" class="col-2 offset-2">電話番号（自宅）</label>
                         <div class="col-2">
-                            <input type="text" class="form-control" name="home_phone" id="home_phone" value="{{ old('home_phone', $connector->home_phone) }}" placeholder="00-0000-0000">
+                            <input type="text" class="form-control" name="home_phone" id="home_phone" value="{{ old('home_phone', optional($connector)->home_phone) }}" placeholder="00-0000-0000">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="mail" class="col-2 offset-1">メールアドレス</label>
                         <div class="col-6">
-                            <input type="email" class="form-control" name="mail" id="mail" value="{{ old('mail', $connector->mail) }}" >
+                            <input type="email" class="form-control" name="mail" id="mail" value="{{ old('mail', optional($connector)->mail) }}" >
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="zip_code" class="col-2 offset-1">郵便番号</label>
                         <div class="col-2">
-                            <input type="text" class="form-control" name="zip_code" id="zip_code" value="{{ old('zip_code', $connector->zip_code) }}" >                            
+                            <input type="text" class="form-control" name="zip_code" id="zip_code" value="{{ old('zip_code', optional($connector)->zip_code) }}" >                            
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="address" class="col-2 offset-1">住所</label>
                         <div class="col-6">
-                            <input type="text" class="form-control" name="address" id="address" value="{{ old('address', $connector->address) }}">                            
+                            <input type="text" class="form-control" name="address" id="address" value="{{ old('address', optional($connector)->address) }}">                            
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="mark" class="col-2 offset-1">到着までの目印</label>
                         <div class="col-6">
-                            <input type="text" class="form-control" name="mark" id="mark" value="{{ old('mark', $connector->mark) }}">                            
+                            <input type="text" class="form-control" name="mark" id="mark" value="{{ old('mark', optional($connector)->mark) }}">                            
                         </div>
                     </div>
                     <br>
@@ -202,9 +202,9 @@
                         <div class="col-2">
                             <select class="form-control" name="connect_method" id="connect_method" >
                                 <option value="" >選択してください</option>
-                                <option value="1" @if(old('connect_method',$connector->connect_method) == '1') selected @endif>メール</option>
-                                <option value="2" @if(old('connect_method',$connector->connect_method) == '2') selected @endif>FAX</option>
-                                <option value="3" @if(old('connect_method',$connector->connect_method) == '3') selected @endif>郵送</option>
+                                <option value="1" @if(old('connect_method',optional($connector)->connect_method) == '1') selected @endif>メール</option>
+                                <option value="2" @if(old('connect_method',optional($connector)->connect_method) == '2') selected @endif>FAX</option>
+                                <option value="3" @if(old('connect_method',optional($connector)->connect_method) == '3') selected @endif>郵送</option>
                             </select>
                         </div>
                         <label for="tool_buying" class="col-2 offset-2">小物の購入</label>
@@ -223,8 +223,8 @@
                         <div class="col-2">
                             <select class="form-control" name="is_student" id="is_student" >
                                 <option value="" >選択してください</option>
-                                <option value="1" @if(old('is_student',$connector->is_student) == '1') selected @endif>外部</option>
-                                <option value="2" @if(old('is_student',$connector->is_student) == '2') selected @endif>生徒</option>
+                                <option value="1" @if(old('is_student',optional($connector)->is_student) == '1') selected @endif>外部</option>
+                                <option value="2" @if(old('is_student',optional($connector)->is_student) == '2') selected @endif>生徒</option>
                             </select>
                         </div>
                     </div>

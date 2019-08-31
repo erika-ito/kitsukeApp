@@ -54,7 +54,7 @@ class ReservationController extends Controller
     }
 
     // 新規登録フォーム表示
-    public function showCreateForm(int $connector_id)
+    public function showCreateForm(int $connector_id = null)
     {
         $connector = "";
         
@@ -96,18 +96,15 @@ class ReservationController extends Controller
                 'is_student',
             ];
 
-            $connector = new Connector();
-            $connector->fill($request->only($connector_columns));
-            $connector->total_count = 1; // 初回
-            $connector->current_use_date = $request->location_date;
-            $connector->save();
+            $match_connector = new Connector();
+            $match_connector->fill($request->only($connector_columns));
+            $match_connector->total_count = 1; // 初回
+            $match_connector->current_use_date = $request->location_date;
+            $match_connector->save();
 
-            // 予約にリレーションを使用するため、再度検索
-            $match_connector = Connector::where('name', $request->name)
-                ->orwhere('furigana', $request->furigana)->first();
         } else {
             // 連絡者登録がある場合、利用回数と直近利用日を更新する
-            $match_connector->total_count = 1 + $match_connector->reservations()->count(); // 前回までの利用回数に+1
+            $match_connector->total_count += 1; // 利用回数に+1
             $match_connector->current_use_date = $request->location_date;
             $match_connector->save();
         }
@@ -128,32 +125,30 @@ class ReservationController extends Controller
             
             if (empty($match_customer)) {
                 // 顧客データがない場合は新規登録
-                $customer = new Customer();
-
-                $customer->name = $request->input('name_'.$i);
-                $customer->furigana = $request->input('furigana_'.$i);
-                $customer->age = $request->input('age_'.$i);
-                $customer->height = $request->input('height_'.$i);
-                $customer->body_type = $request->input('body_type_'.$i);
-
-                $match_connector->customers()->save($customer);
-
-                // 中間テーブル（着付対象者）登録に必要なため、customer_idを保存
-                ${'match_customer_'.$i.'_id'} = $customer->id;
-
-            } else {
-                // 顧客データがある場合は更新する
-                $match_customer->name = $request->input('name_'.$i);
-                $match_customer->furigana = $request->input('furigana_'.$i);
-                $match_customer->age = $request->input('age_'.$i);
-                $match_customer->height = $request->input('height_'.$i);
-                $match_customer->body_type = $request->input('body_type_'.$i);
-
-                $match_connector->customers()->save($match_customer);
-
-                // 中間テーブル（着付対象者）登録に必要なため、customer_idを保存
-                ${'match_customer_'.$i.'_id'} = $match_customer->id;
+                $match_customer = new Customer();
             }
+            // データの登録・更新
+            $match_customer->name = $request->input('name_'.$i);
+            $match_customer->furigana = $request->input('furigana_'.$i);
+            $match_customer->age = $request->input('age_'.$i);
+            $match_customer->height = $request->input('height_'.$i);
+            $match_customer->body_type = $request->input('body_type_'.$i);
+
+            $match_connector->customers()->save($match_customer);
+
+            //  else {
+            //     顧客データがある場合は更新する
+            //     $match_customer->name = $request->input('name_'.$i);
+            //     $match_customer->furigana = $request->input('furigana_'.$i);
+            //     $match_customer->age = $request->input('age_'.$i);
+            //     $match_customer->height = $request->input('height_'.$i);
+            //     $match_customer->body_type = $request->input('body_type_'.$i);
+
+            //     $match_connector->customers()->save($match_customer);
+            // }
+
+            // 中間テーブル（着付対象者）登録に必要なため、customer_idを保存
+            ${'match_customer_'.$i.'_id'} = $match_customer->id;
         }
 
         // 予約テーブル登録
