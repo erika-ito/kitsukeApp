@@ -13,6 +13,10 @@ class Reservation extends Model
     // 属性保護
     protected $guarded = ['id'];
 
+    protected $dates = [
+        'reservation_date'
+    ];
+
     // リレーション 
     public function connector()
     {

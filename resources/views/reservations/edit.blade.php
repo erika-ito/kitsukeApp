@@ -48,7 +48,7 @@
                         <div class="col-1"><span class="badge badge-danger">必須</span></div>
                         <label for="reservation_date" class="col-2">受付日</label>
                         <div class="col-3">
-                            {{ $reservation->formatted_reservation_date }}
+                            <input type="date" class="form-control" name="reservation_date" id="reservation_date" value="{{ old('reservation_date', $reservation->reservation_date->format('Y-m-d')) }}">
                         </div>
                         <div class="col-1"><span class="badge badge-danger">必須</span></div>
                         <label for="reservation_type" class="col-2">受付方法</label>
