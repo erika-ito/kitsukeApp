@@ -78,8 +78,7 @@ class ReservationController extends Controller
 
         // 連絡者テーブルの登録・更新
         // 連絡者の検索
-        $match_connector = Connector::where('name', $request->name)
-            ->orwhere('furigana', $request->furigana)->first();
+        $match_connector = Connector::matchConnectorName($request)->first();
         
         if (empty($match_connector)) {
             // 連絡者登録がない場合、新規登録する
@@ -121,8 +120,7 @@ class ReservationController extends Controller
 
         // 顧客人数分繰り返し
         for ($i = 1; $i <= $customer_counts; $i++) {
-            $match_customer = Customer::where('name', $request->input('name_'.$i))
-                ->orwhere('furigana', $request->input('furigana_'.$i))->first();
+            $match_customer = Customer::matchCustomerName($request, $i)->first();
             
             if (empty($match_customer)) {
                 // 顧客データがない場合は新規登録
@@ -199,7 +197,7 @@ class ReservationController extends Controller
         // 担当講師がいる場合、予約IDを紐づけ
         if ($master_counts >= 1) {
             for ($i = 1; $i <= $master_counts; $i++) {
-                ${'master_reservation_'.$i} = Master::where('name', $request->input('master_'.$i))->first();
+                ${'master_reservation_'.$i} = Master::matchMasterName($request, $i)->first();
                 $reservation->masters()->attach(${'master_reservation_'.$i}->id);
             }
         }
@@ -273,8 +271,7 @@ class ReservationController extends Controller
 
         // 連絡者テーブルの更新
         // 連絡者の検索
-        $match_connector = Connector::where('name', $request->name)
-            ->orwhere('furigana', $request->furigana)->first();
+        $match_connector = Connector::matchConnectorName($request)->first();
         
         //　連絡者テーブルの対象カラムを限定
         $connector_columns = [
@@ -304,8 +301,7 @@ class ReservationController extends Controller
 
         // 顧客人数分繰り返し
         for ($i = 1; $i <= $customer_counts; $i++) {
-            $match_customer = Customer::where('name', $request->input('name_'.$i))
-                ->orwhere('furigana', $request->input('furigana_'.$i))->first();
+            $match_customer = Customer::matchCustomerName($request, $i)->first();
             
             if (empty($match_customer)) {
                 // 顧客データがない場合は新規登録
@@ -382,7 +378,7 @@ class ReservationController extends Controller
         // 担当講師がいる場合、予約IDを紐づけ
         if ($master_counts >= 1) {
             for ($i = 1; $i <= $master_counts; $i++) {
-                ${'master_reservation_'.$i} = Master::where('name', $request->input('master_'.$i))->first();
+                ${'master_reservation_'.$i} = Master::matchMasterName($request, $i)->first();
                 $reservation->masters()->sync(${'master_reservation_'.$i}->id);
             }
         }
