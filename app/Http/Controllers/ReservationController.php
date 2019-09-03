@@ -320,7 +320,7 @@ class ReservationController extends Controller
             ${'match_customer_'.$i.'_id'} = $match_customer->id;
         }
 
-        // 予約テーブル登録
+        // 予約テーブルの編集
         // 予約テーブルの対象カラムを限定
         $reservation_columns = [
             // 予約テーブル必須項目
