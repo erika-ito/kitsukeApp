@@ -164,4 +164,36 @@ class MasterTest extends TestCase
             return true;
         });
     }
+
+    // 新規登録が成功した場合、講師一覧画面へリダイレクトすること
+    public function testCreateMasterSuccess()
+    {
+        // パラメータ
+        $params = [
+            'rank' => '5',
+            'name' => '佐藤絵里香',
+            'furigana' => 'さとうえりか',
+            'zip_code' => '111-1111',
+            'address' => '東京都新宿区111-111',
+            'home_phone' => '03-0000-0000',
+            'mail' => 'abc@gmail.com',
+        ];
+
+        $response = $this->post(route('masters.create'), $params);
+
+        // 検証
+        $response->assertStatus(302);
+        $response->assertRedirect(route('masters.index'));
+        $this->assertDatabaseHas('masters', [
+            // 'id' => '4',
+            'rank' => '5',
+            'name' => '佐藤絵里香',
+            'furigana' => 'さとうえりか',
+            'zip_code' => '111-1111',
+            'address' => '東京都新宿区111-111',
+            'home_phone' => '03-0000-0000',
+            'cell_phone' => null,
+            'mail' => 'abc@gmail.com',
+        ]);
+    }
 }
