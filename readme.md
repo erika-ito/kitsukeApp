@@ -17,7 +17,7 @@ $ php artisan migrate:refresh --seed
 ```
 
 ## How to run Task Application
- `$ php artisan serve ` 
+ `$ php artisan serve `  
 http://localhost/kitsuke/reservations
 にアクセスすると、 予約一覧画面が表示されます。 
 
