@@ -226,9 +226,7 @@ class ReservationController extends Controller
         $connector = $reservation->connector()->first();
 
         // 担当講師を取得
-        $masters = $reservation->masters()
-                    ->orderBy('id', 'asc')
-                    ->get();
+        $masters = $reservation->masters()->get();
 
         $master_1 = null;
         $master_2 = null;
@@ -242,9 +240,7 @@ class ReservationController extends Controller
         }
 
         // 着付対象者を取得
-        $customers = $reservation->customers()
-                    ->orderBy('id', 'asc')
-                    ->get();
+        $customers = $reservation->customers()->get();
 
         $customer_1 = null;
         $customer_2 = null;

@@ -26,12 +26,14 @@ class Reservation extends Model
     // 中間テーブルリレーション
     public function masters()
     {
-        return $this->belongsToMany('App\Master');
+        return $this->belongsToMany('App\Master')
+                    ->orderBy('id', 'asc');
     }
 
     public function customers()
     {
         return $this->belongsToMany('App\Customer')
+                    ->orderBy('id', 'asc');
                     ->using('App\CustomerReservation')
                     ->withPivot('kimono_type', 'obi_type', 'obi_knot');
     }
