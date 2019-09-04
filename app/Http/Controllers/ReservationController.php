@@ -383,9 +383,13 @@ class ReservationController extends Controller
 
         // 担当講師がいる場合、予約IDを紐づけ
         if ($master_counts >= 1) {
+            // 予約IDに紐づいた講師データを一度削除
+            $reservation->masters()->detach();
+
+            // 予約IDと講師データを再度紐づけ
             for ($i = 1; $i <= $master_counts; $i++) {
                 ${'master_reservation_'.$i} = Master::matchMasterName($request, $i)->first();
-                $reservation->masters()->sync(${'master_reservation_'.$i}->id);
+                $reservation->masters()->attach(${'master_reservation_'.$i}->id);
             }
         }
 
