@@ -196,4 +196,26 @@ class MasterTest extends TestCase
             'mail' => 'abc@gmail.com',
         ]);
     }
+
+    // 新規登録で必須項目がない場合、元のページにリダイレクトされること
+    public function testNotRequired ()
+    {
+        // パラメータ
+        $params = [
+            'rank' => null,
+            'name' => null,
+            'furigana' => null,
+            'zip_code' => null,
+            'address' => null,
+            'home_phone' => '03-0000-0000',
+            'mail' => 'abc@gmail.com',
+        ];
+
+        $response = $this->post(route('masters.create'), $params);
+
+        // 検証
+        // $response->assertStatus(422);
+        $response->assertStatus(302);
+        $response->assertRedirect(route('masters.create'));
+    }
 }
