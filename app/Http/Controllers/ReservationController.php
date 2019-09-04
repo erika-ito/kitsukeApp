@@ -56,7 +56,7 @@ class ReservationController extends Controller
     // 新規登録フォーム表示
     public function showCreateForm(int $connector_id = null)
     {
-        $connector = "";
+        $connector = null;
         
         if (! empty($connector_id)) {
             $connector = Connector::find($connector_id);
@@ -111,6 +111,7 @@ class ReservationController extends Controller
 
         // 顧客テーブルの登録・更新
         // 顧客データの個数をカウント
+        $customer_names = [];
         for ($i = 1; $i <= 3; $i++) {
             if ($request->filled('name_'.$i)) {
                 $customer_names[] = 'name_'.$i;
@@ -181,7 +182,7 @@ class ReservationController extends Controller
 
         // 中間テーブル（担当講師）への保存
         // 担当講師データの個数をカウント
-        $master_names = "";
+        $master_names = [];
         for ($i = 1; $i <= 4; $i++) {
             if ($request->filled('master_'.$i)) {
                 $master_names[] = 'master_'.$i;
@@ -227,10 +228,10 @@ class ReservationController extends Controller
         // 担当講師を取得
         $masters = $reservation->masters()->get();
 
-        $master_1 = "";
-        $master_2 = "";
-        $master_3 = "";
-        $master_4 = "";
+        $master_1 = null;
+        $master_2 = null;
+        $master_3 = null;
+        $master_4 = null;
 
         $i = 1;
         foreach ($masters as $master) {
@@ -241,9 +242,9 @@ class ReservationController extends Controller
         // 着付対象者を取得
         $customers = $reservation->customers()->get();
 
-        $customer_1 = "";
-        $customer_2 = "";
-        $customer_3 = "";
+        $customer_1 = null;
+        $customer_2 = null;
+        $customer_3 = null;
 
         $i = 1;
         foreach ($customers as $customer) {
@@ -292,6 +293,7 @@ class ReservationController extends Controller
 
         // 顧客テーブルの登録・更新
         // 顧客データの個数をカウント
+        $customer_names = [];
         for ($i = 1; $i <= 3; $i++) {
             if ($request->filled('name_'.$i)) {
                 $customer_names[] = 'name_'.$i;
