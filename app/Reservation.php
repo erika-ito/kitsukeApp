@@ -33,7 +33,7 @@ class Reservation extends Model
     public function customers()
     {
         return $this->belongsToMany('App\Customer')
-                    ->orderBy('id', 'asc');
+                    ->orderBy('id', 'asc')
                     ->using('App\CustomerReservation')
                     ->withPivot('kimono_type', 'obi_type', 'obi_knot');
     }

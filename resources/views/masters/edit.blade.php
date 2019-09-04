@@ -20,7 +20,7 @@
                     @endif
 
                     <div class="form-group row">
-                        <label for="id" class="col-3 offset-1">連絡者ID：</label>
+                        <label for="id" class="col-3 offset-1">講師ID：</label>
                         <div class="col-3 offset-1">
                             {{ $master->id }}
                         </div>
