@@ -38,7 +38,7 @@ $ cd Homestead
 $ bash init.sh
 $ vim Homestead.yaml
 ```
- `ip: "192.168.10.10"`部分を`ip: "192.168.20.10"` へ、
+ `folders: map: ~/code`部分を `folders: map: ~/app` へ、  
  `sites: to: /home/vagrant/code/public`部分を  
  `sites: to: /home/vagrant/code/KitsukeApp/public` へ書き換える。
 
@@ -70,7 +70,7 @@ $ php artisan migrate:refresh --seed
 アプリケーションキーの作成、マイグレーション・シーダーの実行などを行う。
 
 ## How to run Task Application
-仮想マシンを起動した状態でhttp://192.168.20.10/kitsuke/reservations
+仮想マシンを起動した状態でhttp://192.168.10.10/kitsuke/reservations
 にアクセスすると、 予約一覧画面が表示されます。 
 
 
