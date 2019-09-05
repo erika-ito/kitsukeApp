@@ -19,6 +19,7 @@ class Master extends Model
     }
 
     // ローカルスコープ
+    // キーワード検索
     public function scopeKeyword ($query, $keyword)
     {
         // キーワードがあるとき
@@ -27,5 +28,25 @@ class Master extends Model
                 ->where('name', 'like', '%'.$keyword.'%')
                 ->orwhere('furigana', 'like', '%'.$keyword.'%');
         });
+    }
+
+    // 氏名検索
+    public function scopeMatchMasterName ($query, $request, $i)
+    {
+        return $query
+            ->where('name', $request->input('master_'.$i));
+    }   
+    
+    // アクセサ
+    // 優先度
+    public function getFormattedRankAttribute()
+    {
+        switch($this->attributes['rank']){
+            case 0:
+                return '出張不可';
+            
+            default:
+                return $this->attributes['rank'];
+        }
     }
 }

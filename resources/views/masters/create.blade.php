@@ -24,6 +24,7 @@
                             <label for="rank" class="col-3">優先度</label>
                             <div class="col-3 offset-1">
                                 <select class="form-control" name="rank" id="rank" >
+                                    <option value="" >選択してください</option>
                                     <option value="5" @if(old('rank') == '5') selected @endif>5</option>
                                     <option value="4" @if(old('rank') == '4') selected @endif>4</option>
                                     <option value="3" @if(old('rank') == '3') selected @endif>3</option>

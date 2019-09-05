@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class CreateReservationRequest extends FormRequest
+class ReservationRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -31,14 +31,11 @@ class CreateReservationRequest extends FormRequest
 
             // 初回任意
             'zip_code' => 'alpha_dash | nullable',
-            // 'address',
-            // 'mark',
             'home_phone' => 'alpha_dash | nullable',
             'cell_phone' => 'alpha_dash | nullable',
             'mail' => 'email | nullable',
             'connect_method' => 'integer | nullable',
             'is_student' => 'integer | nullable',
-            // 'special',
 
             // 顧客テーブル項目
             // 必須
@@ -57,7 +54,7 @@ class CreateReservationRequest extends FormRequest
             'reservation_type' => 'required | integer',
             'reply' => 'required | integer',
             'location_type' => 'required | integer',
-            'location_date' => 'required | date | after_or_equal:reservation_type',
+            'location_date' => 'required | date | after_or_equal:reservation_date',
             'finish_time' => 'required',
             'start_time' => 'required',
             'count_person' => 'required | numeric',
@@ -65,20 +62,15 @@ class CreateReservationRequest extends FormRequest
             'purpose' => 'required',
 
             // 初回任意
-            // 'location_name',
             'location_zip_code' => 'alpha_dash | nullable',
-            // 'location_address',
             'location_phone' => 'alpha_dash | nullable',
-            // 'distance',
             'tool_buying' => 'integer | nullable',
             'total_price' => 'numeric | nullable',
-            'tool_connect_date' => 'date | after_or_equal:reservation_type | nullable',
-            'tool_confirm_date' => 'date | after_or_equal:reservation_type | nullable',
-            'master_request_date' => 'date | after_or_equal:reservation_type | nullable',
-            'tool_pass_date' => 'date | after_or_equal:reservation_type | nullable',
+            'tool_connect_date' => 'date | after_or_equal:reservation_date | nullable',
+            'tool_confirm_date' => 'date | after_or_equal:reservation_date | nullable',
+            'master_request_date' => 'date | after_or_equal:reservation_date | nullable',
+            'tool_pass_date' => 'date | after_or_equal:reservation_date | nullable',
             'payment' => 'numeric | nullable',
-            // 'thoughts',
-            // 'notes',
         ];
     }
 
@@ -89,14 +81,11 @@ class CreateReservationRequest extends FormRequest
             'name' => '連絡者氏名',
             'furigana' => 'ふりがな',
             'zip_code' => '郵便番号',
-            // 'address'=> '住所',
-            // 'mark'=> '到着までの目印',
             'home_phone' => '電話番号（自宅）',
             'cell_phone' => '電話番号（携帯）',
             'mail' => 'メールアドレス',
             'connect_method' => '小物の連絡方法',
             'is_student' => '当院生徒か',
-            // 'special'=> '特記事項',
 
             // 顧客テーブル項目
             'name' => '氏名',
@@ -118,11 +107,8 @@ class CreateReservationRequest extends FormRequest
             'count_person' => '着付人数',
             'count_master' => '講師人数',
             'purpose' => '着用目的',
-            // 'location_name'=> '出張先（自宅外）',
             'location_zip_code' => '出張先郵便番号',
-            // 'location_address'=> '出張先住所',
             'location_phone' => '出張先電話番号',
-            // 'distance'=> '最寄り駅からの距離',
             'tool_buying' => '小物の購入',
             'total_price' => '合計金額',
             'tool_connect_date' => '小物連絡日',
@@ -130,8 +116,6 @@ class CreateReservationRequest extends FormRequest
             'master_request_date' => '講師依頼日',
             'tool_pass_date' => 'セット渡し日',
             'payment' => '給与合計',
-            // 'thoughts'=> '感想',
-            // 'notes'=> '備考',
         ];
     }
 }

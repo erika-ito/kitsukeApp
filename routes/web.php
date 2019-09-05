@@ -26,6 +26,10 @@ Route::group(['prefix' => 'kitsuke/reservations'], function() {
 
     // 詳細
     Route::get('/{id}', 'ReservationController@show')->name('reservations.show');
+
+    // 編集
+    Route::get('/{id}/edit', 'ReservationController@showEditForm')->name('reservations.edit');
+    Route::post('/{id}/edit', 'ReservationController@edit');
 });
 
 // 講師
@@ -37,6 +41,9 @@ Route::group(['prefix' => 'kitsuke/masters'], function() {
     Route::get('/create', 'MasterController@showCreateForm')->name('masters.create');
     Route::post('/create', 'MasterController@create');
 
+    // 編集
+    Route::get('/{id}/edit', 'MasterController@showEditForm')->name('masters.edit');
+    Route::post('/{id}/edit', 'MasterController@edit');
 });
 
 // 連絡者
@@ -50,5 +57,7 @@ Route::group(['prefix' => 'kitsuke/connectors'], function() {
     // 詳細
     Route::get('/{id}', 'ConnectorController@show')->name('connectors.show');
 
-    
+    // 編集
+    Route::get('/{id}/edit', 'ConnectorController@showEditForm')->name('connectors.edit');
+    Route::post('/{id}/edit', 'ConnectorController@edit');
 });

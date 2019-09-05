@@ -39,7 +39,7 @@
                 <tbody class="bg-light">
                     @foreach ($masters as $master)
                         <tr class="d-flex">
-                            <td class="col-1">{{ $master->rank }}</td>
+                            <td class="col-1">{{ $master->formatted_rank }}</td>
                             <td class="col-2">{{ $master->name }}</td>
                             <td class="col-1">{{ $master->zip_code }}</td>
                             <td class="col-3">{{ $master->address }}</td>
@@ -47,7 +47,7 @@
                             <td class="col-1">{{ $master->cell_phone }}</td>
                             <td class="col-2 overflow">{{ $master->mail }}</td>
                             <td class="col-1">
-                                <a href="" class="btn btn-success">編集</a>
+                                <a href="{{ route('masters.edit', ['id' => $master->id]) }}" class="btn btn-success">編集</a>
                             </td>
                         </tr>
                     @endforeach

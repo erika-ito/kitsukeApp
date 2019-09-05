@@ -23,9 +23,18 @@ class Customer extends Model
         return $this->belongsToMany('App\Reservation');
     }
 
+    // ローカルスコープ
+    // 氏名検索
+    public function scopeMatchCustomerName ($query, $request, $i)
+    {
+        return $query
+            ->where('name', $request->input('name_'.$i))
+            ->orwhere('furigana', $request->input('furigana_'.$i));
+    }   
+
     // アクセサ
     // 体型
-    public function getBodyTypeAttribute()
+    public function getFormattedBodyTypeAttribute()
     {
         switch($this->attributes['body_type']){
             case 1:

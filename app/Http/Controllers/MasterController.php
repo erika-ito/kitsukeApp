@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Master;
 use Illuminate\Http\Request;
-use App\Http\Requests\CreateMasterRequest;
+use App\Http\Requests\MasterRequest;
 
 class MasterController extends Controller
 {
@@ -13,7 +13,7 @@ class MasterController extends Controller
     {
         $keyword = $request->keyword;
 
-       // 検索、並び替え、ページネーション
+        // 検索、並び替え、ページネーション
         $masters = Master::keyword($keyword)
             ->orderBy('rank','desc')
             ->orderBy('furigana','asc')
@@ -33,7 +33,7 @@ class MasterController extends Controller
     }
 
     // 新規登録処理
-    public function create(CreateMasterRequest $request)
+    public function create(MasterRequest $request)
     {
         $master = new Master();
         $master->fill($request->all());
@@ -42,4 +42,23 @@ class MasterController extends Controller
         return redirect()->route('masters.index');
     }
 
+    // 編集フォーム表示
+    public function showEditForm(int $id)
+    {
+        $master = Master::find($id);
+
+        return view('masters.edit', [
+            'master' => $master,
+        ]);
+    }
+
+    // 編集処理
+    public function edit(int $id, MasterRequest $request)
+    {
+        $master = Master::find($id);
+        $master->fill($request->all());
+        $master->save();
+
+        return redirect()->route('masters.index');
+    }
 }

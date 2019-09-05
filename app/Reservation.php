@@ -13,6 +13,10 @@ class Reservation extends Model
     // 属性保護
     protected $guarded = ['id'];
 
+    protected $dates = [
+        'reservation_date'
+    ];
+
     // リレーション 
     public function connector()
     {
@@ -22,12 +26,14 @@ class Reservation extends Model
     // 中間テーブルリレーション
     public function masters()
     {
-        return $this->belongsToMany('App\Master');
+        return $this->belongsToMany('App\Master')
+                    ->orderBy('id', 'asc');
     }
 
     public function customers()
     {
         return $this->belongsToMany('App\Customer')
+                    ->orderBy('id', 'asc')
                     ->using('App\CustomerReservation')
                     ->withPivot('kimono_type', 'obi_type', 'obi_knot');
     }
@@ -120,7 +126,7 @@ class Reservation extends Model
     }
 
     // 予約状況
-    public function getStatusAttribute()
+    public function getFormattedStatusAttribute()
     {
         switch($this->attributes['status']){
             case 1:
@@ -147,7 +153,7 @@ class Reservation extends Model
     }
 
     // 受付方法
-    public function getReservationTypeAttribute()
+    public function getFormattedReservationTypeAttribute()
     {
         switch($this->attributes['reservation_type']){
             case 1:
@@ -162,7 +168,7 @@ class Reservation extends Model
     }
 
     // 折り返し連絡
-    public function getReplyAttribute()
+    public function getFormattedReplyAttribute()
     {
         switch($this->attributes['reply']){
             case 1:
@@ -174,7 +180,7 @@ class Reservation extends Model
     }
 
     // 着付場所分類
-    public function getLocationTypeAttribute()
+    public function getFormattedLocationTypeAttribute()
     {
         switch($this->attributes['location_type']){
             case 1:
@@ -198,7 +204,7 @@ class Reservation extends Model
     }
 
     // 小物の購入
-    public function getToolBuyingAttribute()
+    public function getFormattedToolBuyingAttribute()
     {
         switch($this->attributes['tool_buying']){
             case 1:

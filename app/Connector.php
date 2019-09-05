@@ -24,6 +24,7 @@ class Connector extends Model
     }
 
     // ローカルスコープ
+    // キーワード検索
     public function scopeKeyword ($query, $keyword)
     {
         // キーワードがあるとき
@@ -32,6 +33,14 @@ class Connector extends Model
                 ->where('name', 'like', '%'.$keyword.'%')
                 ->orwhere('furigana', 'like', '%'.$keyword.'%');
         });
+    }
+
+    // 氏名検索
+    public function scopeMatchConnectorName ($query, $request)
+    {
+        return $query
+            ->where('name', $request->name)
+            ->orwhere('furigana', $request->furigana);
     }
     
     // アクセサ

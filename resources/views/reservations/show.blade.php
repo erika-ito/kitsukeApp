@@ -17,7 +17,7 @@
                 <div class="row">
                     <label for="status" class="col-2 offset-1">予約状況：</label>
                     <div class="col-2">
-                        {{ $reservation->status }}
+                        {{ $reservation->formatted_status }}
                     </div>
                 </div>
                 <div class="row">
@@ -33,19 +33,19 @@
                     </div>
                     <label for="reservation_type" class="col-2 offset-1">受付方法：</label>
                     <div class="col-2">
-                        {{ $reservation->reservation_type }}
+                        {{ $reservation->formatted_reservation_type }}
                     </div>
                 </div>
                 <div class="row">
                     <label for="reply" class="col-2 offset-1">折り返し連絡：</label>
                     <div class="col-2">
-                        {{ $reservation->reply }}
+                        {{ $reservation->formatted_reply }}
                     </div>
                 </div>
                 <div class="row">
                     <label for="location_type" class="col-2 offset-1">着付場所分類：</label>
                     <div class="col-2">
-                        {{ $reservation->location_type }}
+                        {{ $reservation->formatted_location_type }}
                     </div>
                 </div>
                 <div class="row">
@@ -158,7 +158,7 @@
                     </div>
                     <label for="tool_buying" class="col-2 offset-2">小物の購入：</label>
                     <div class="col-2">
-                        {{ $reservation->tool_buying }}
+                        {{ $reservation->formatted_tool_buying }}
                     </div>
                 </div>
                 <div class="row">
@@ -231,7 +231,7 @@
                 <div class="row">
                     <label for="purpose" class="col-2 offset-1">着用目的：</label>
                     <div class="col-2">
-                        結婚式
+                        {{ $reservation->purpose }}
                     </div>
                 </div>
                 <hr>
@@ -263,23 +263,23 @@
                             </div>
                             <label for="body_type" class="col-2 offset-2">体型：</label>
                             <div class="col-2">
-                                {{ $customer->body_type }}
+                                {{ $customer->formatted_body_type }}
                             </div>
                         </div>
                         <div class="row">
                             <label for="kimono_type" class="col-2 offset-1">着物の種類：</label>
                             <div class="col-2">
-                                {{ $customer->pivot->kimono_type }}
+                                {{ $customer->pivot->formatted_kimono_type }}
                             </div>
                         </div>
                         <div class="row">
                             <label for="obi_type" class="col-2 offset-1">帯の種類：</label>
                             <div class="col-2">
-                                {{ $customer->pivot->obi_type }}
+                                {{ $customer->pivot->formatted_obi_type }}
                             </div>
                             <label for="obi_knot" class="col-2 offset-2">帯結び：</label>
                             <div class="col-2">
-                                {{ $customer->pivot->obi_knot }}
+                                {{ $customer->pivot->formatted_obi_knot }}
                             </div>
                         </div>
                     </div>
@@ -311,7 +311,7 @@
                 </button>
             </div>
             <div class="col-2 mt-3">
-                <a href="" class="btn btn-success">編集</a>
+                <a href="{{ route('reservations.edit', ['id' => $reservation->id]) }}" class="btn btn-success">編集</a>
             </div>
         </div>
     </div> 
