@@ -212,8 +212,8 @@ class MasterTest extends TestCase
         $response = $this->post(route('masters.create'), $params);
 
         // 検証
-        // $response->assertStatus(422);
-        $response->assertStatus(302);
+        $response->assertStatus(422);
+        // $response->assertStatus(302);
         $response->assertRedirect(route('masters.create'));
     }
 }

@@ -6,6 +6,8 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class MasterRequest extends FormRequest
 {
+    // protected $redirectRoute = 'masters.create';
+    
     /**
      * Determine if the user is authorized to make this request.
      *
