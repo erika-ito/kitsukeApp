@@ -10,6 +10,7 @@ use App\Master;
 use App\CustomerReservation;
 use Illuminate\Http\Request;
 use App\Http\Requests\ReservationRequest;
+use App\Facades\ReservationFacade;
 
 class ReservationController extends Controller
 {
