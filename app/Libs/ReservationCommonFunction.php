@@ -7,7 +7,7 @@ use App\Reservation;
 class ReservationCommonFunction
 {
     // 顧客テーブルの登録・更新
-    public static function saveReservation($request, $reservation, $match_connector)
+    public static function save($request, $reservation, $match_connector)
     {
         // 予約テーブルの対象カラムを限定
         $reservation_columns = [

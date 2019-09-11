@@ -7,7 +7,7 @@ use App\Customer;
 class CustomerCommonFunction
 {
     // 顧客テーブルの登録・更新
-    public static function saveCustomer($request, $i, $match_connector)
+    public static function save($request, $i, $match_connector)
     {
         $match_customer = Customer::matchCustomerName($request, $i)->first();
         
