@@ -3,14 +3,15 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use App\Reservation;
 use App\Connector;
 use App\Customer;
 use App\Master;
+use App\Reservation;
 use App\CustomerReservation;
 use Illuminate\Http\Request;
 use App\Http\Requests\ReservationRequest;
 use App\Facades\ReservationFacade;
+use App\Libs\CustomerCommonFunction;
 
 class ReservationController extends Controller
 {
@@ -75,6 +76,8 @@ class ReservationController extends Controller
     // 新規登録処理
     public function create(ReservationRequest $request)
     {
+        // $facade = new ReservationFacade();
+        // $facade->save($request->getParams());
         $reservation = new Reservation();
 
         // 連絡者テーブルの登録・更新
@@ -120,25 +123,10 @@ class ReservationController extends Controller
         }
         $customer_counts = count($customer_names);
 
-        // 顧客人数分繰り返し
+        // 人数分の顧客データを保存
         for ($i = 1; $i <= $customer_counts; $i++) {
-            $match_customer = Customer::matchCustomerName($request, $i)->first();
-            
-            if (empty($match_customer)) {
-                // 顧客データがない場合は新規登録
-                $match_customer = new Customer();
-            }
-            // データの登録・更新
-            $match_customer->name = $request->input('name_'.$i);
-            $match_customer->furigana = $request->input('furigana_'.$i);
-            $match_customer->age = $request->input('age_'.$i);
-            $match_customer->height = $request->input('height_'.$i);
-            $match_customer->body_type = $request->input('body_type_'.$i);
-
-            $match_connector->customers()->save($match_customer);
-
-            // 中間テーブル（着付対象者）登録に必要なため、customer_idを保存
-            ${'match_customer_'.$i.'_id'} = $match_customer->id;
+            // 中間テーブル（着付対象者）登録に必要なため、customer_idを格納
+            ${'match_customer_'.$i.'_id'} = CustomerCommonFunction::saveCustomer($request, $i, $match_connector);
         }
 
         // 予約テーブル登録
@@ -302,25 +290,10 @@ class ReservationController extends Controller
         }
         $customer_counts = count($customer_names);
 
-        // 顧客人数分繰り返し
+        // 人数分の顧客データを更新
         for ($i = 1; $i <= $customer_counts; $i++) {
-            $match_customer = Customer::matchCustomerName($request, $i)->first();
-            
-            if (empty($match_customer)) {
-                // 顧客データがない場合は新規登録
-                $match_customer = new Customer();
-            }
-            // データの登録・更新
-            $match_customer->name = $request->input('name_'.$i);
-            $match_customer->furigana = $request->input('furigana_'.$i);
-            $match_customer->age = $request->input('age_'.$i);
-            $match_customer->height = $request->input('height_'.$i);
-            $match_customer->body_type = $request->input('body_type_'.$i);
-
-            $match_connector->customers()->save($match_customer);
-
-            // 中間テーブル（着付対象者）登録に必要なため、customer_idを保存
-            ${'match_customer_'.$i.'_id'} = $match_customer->id;
+            // 中間テーブル（着付対象者）登録に必要なため、customer_idを格納
+            ${'match_customer_'.$i.'_id'} = CustomerCommonFunction::saveCustomer($request, $i, $match_connector);
         }
 
         // 予約テーブルの編集
