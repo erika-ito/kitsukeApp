@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests\ReservationRequest;
 use App\Facades\ReservationFacade;
 use App\Libs\CustomerCommonFunction;
+use App\Libs\ReservationCommonFunction;
 
 class ReservationController extends Controller
 {
@@ -130,44 +131,8 @@ class ReservationController extends Controller
         }
 
         // 予約テーブル登録
-        // 予約テーブルの対象カラムを限定
-        $reservation_columns = [
-            // 予約テーブル必須項目
-            'status',
-            'user',
-            'reservation_date',
-            'reservation_type',
-            'reply',
-            'location_type',
-            'location_date',
-            'finish_time',
-            'start_time',
-            'count_person',
-            'count_master',
-            'purpose',
-
-            // 初回任意項目
-            'location_name',
-            'location_zip_code',
-            'location_address',
-            'location_phone',
-            'distance',
-            'tool_buying',
-            'total_price',
-            'tool_connect_date',
-            'tool_confirm_date',
-            'master_request_date',
-            'tool_pass_date',
-            'payment',
-            'thoughts',
-            'notes',
-        ];
-
-        $reservation->fill($request->only($reservation_columns));
-        $match_connector->reservations()->save($reservation);
-
-        // 保存した予約のIDを取得
-        $insert_reservation_id = $reservation->id;
+        // 中間テーブル登録に必要なため、reservation_idを格納
+        $insert_reservation_id = ReservationCommonFunction::saveReservation($request, $reservation, $match_connector);
 
         // 中間テーブル（担当講師）への保存
         // 担当講師データの個数をカウント
@@ -297,44 +262,8 @@ class ReservationController extends Controller
         }
 
         // 予約テーブルの編集
-        // 予約テーブルの対象カラムを限定
-        $reservation_columns = [
-            // 予約テーブル必須項目
-            'status',
-            'user',
-            'reservation_date',
-            'reservation_type',
-            'reply',
-            'location_type',
-            'location_date',
-            'finish_time',
-            'start_time',
-            'count_person',
-            'count_master',
-            'purpose',
-
-            // 初回任意項目
-            'location_name',
-            'location_zip_code',
-            'location_address',
-            'location_phone',
-            'distance',
-            'tool_buying',
-            'total_price',
-            'tool_connect_date',
-            'tool_confirm_date',
-            'master_request_date',
-            'tool_pass_date',
-            'payment',
-            'thoughts',
-            'notes',
-        ];
-
-        $reservation->fill($request->only($reservation_columns));
-        $match_connector->reservations()->save($reservation);
-
-        // 保存した予約のIDを取得
-        $insert_reservation_id = $reservation->id;
+        // 中間テーブル登録に必要なため、reservation_idを格納
+        $insert_reservation_id = ReservationCommonFunction::saveReservation($request, $reservation, $match_connector);
 
         // 中間テーブル（担当講師）への保存・更新
         // 担当講師データの個数をカウント
