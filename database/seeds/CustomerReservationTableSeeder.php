@@ -1,5 +1,7 @@
 <?php
 
+use App\Customer;
+use App\Reservation;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -12,21 +14,19 @@ class CustomerReservationTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('customer_reservation')->insert([
-            [
-                'reservation_id' => '1',
-                'customer_id' => '1',
-                'kimono_type' => '8',
-                'obi_type' => '1',
-                'obi_knot' => '1',
-            ],
-            [
-                'reservation_id' => '2',
-                'customer_id' => '2',
-                'kimono_type' => '8',
-                'obi_type' => '1',
-                'obi_knot' => '1',
-            ],
-        ]);
+        $faker = Faker\Factory::create();
+
+        // 予約の総数
+        $reservation_count = Reservation::all()->count();
+
+        for ($i = 1; $i <= $reservation_count; $i++) {
+            DB::table('customer_reservation')->insert([
+                'reservation_id' => $i,
+                'customer_id' => Customer::all()->random()->id,
+                'kimono_type' => $faker->numberBetween(4, 10), // 振袖から色無地まで
+                'obi_type' => $faker->numberBetween(1, 3),
+                'obi_knot' => $faker->numberBetween(1, 4),
+            ]);
+        }
     }
 }

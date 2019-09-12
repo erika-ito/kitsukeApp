@@ -7,8 +7,8 @@ use Faker\Generator as Faker;
 
 $factory->define(Connector::class, function (Faker $faker) {
     return [
-        'name' => $faker->name,
-        'furigana' => mb_convert_kana($faker->kanaName, 'c'),
+        'name' => $faker->lastName.$faker->firstNameFeMale,
+        'furigana' => mb_convert_kana($faker->lastKanaName.$faker->firstKanaNameFemale, 'c'),
         'zip_code' => $faker->postcode1.'-'.$faker->postcode2,
         'address' => substr($faker->address, 9),
         'mark' => $faker->realText(15),

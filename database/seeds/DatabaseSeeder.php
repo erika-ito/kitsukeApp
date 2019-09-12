@@ -12,8 +12,7 @@ class DatabaseSeeder extends Seeder
     public function run()
     {
         $this->call(MastersTableSeeder::class);
-        $this->call(ConnectorsTableSeeder::class);
-        $this->call(CustomersTableSeeder::class);
+        $this->call(CustomersTableSeeder::class); // 連絡者データも顧客ファクトリー内で作成
         $this->call(ReservationsTableSeeder::class);
 
         // 中間テーブル

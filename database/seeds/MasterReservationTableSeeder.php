@@ -1,5 +1,7 @@
 <?php
 
+use App\Master;
+use App\Reservation;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -12,15 +14,14 @@ class MasterReservationTableSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('master_reservation')->insert([
-            [
-                'reservation_id' => '1',
-                'master_id' => '1',
-            ],
-            [
-                'reservation_id' => '2',
-                'master_id' => '1',
-            ],
-        ]);
+        // 予約の総数
+        $reservation_count = Reservation::all()->count();
+
+        for ($i = 1; $i <= $reservation_count; $i++) {
+            DB::table('master_reservation')->insert([
+                'reservation_id' => $i,
+                'master_id' => Master::all()->random()->id,
+            ]);
+        }
     }
 }
