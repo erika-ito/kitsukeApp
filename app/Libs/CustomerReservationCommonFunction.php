@@ -7,7 +7,7 @@ use App\CustomerReservation;
 class CustomerReservationCommonFunction
 {
     // 顧客テーブルの登録・更新
-    public static function save($request, $i, $insert_reservation_id, ${'match_customer_'.$i.'_id'})
+    public static function save($request, $i, $insert_reservation_id, $match_customer_1_id, $match_customer_2_id = null, $match_customer_3_id = null)
     {
         // 中間テーブル（着付対象者）への保存
         $customer_reservation = new CustomerReservation();
@@ -20,5 +20,4 @@ class CustomerReservationCommonFunction
 
         $customer_reservation->save();
     }
-
 }
