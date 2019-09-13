@@ -117,9 +117,10 @@ class ReservationController extends Controller
         $customer_counts = count($customer_names);
 
         // 人数分の顧客データを保存
+        $customer_id_list = [];
         for ($i = 1; $i <= $customer_counts; $i++) {
-            // 中間テーブル（着付対象者）登録に必要なため、customer_idを格納
-            ${'match_customer_'.$i.'_id'} = CustomerCommonFunction::save($request, $i, $match_connector);
+            // 中間テーブル（着付対象者）登録に必要なため、customer_idを配列に格納
+            $customer_id_list[] = CustomerCommonFunction::save($request, $i, $match_connector);
         }
         
         // 予約テーブル登録
@@ -150,18 +151,7 @@ class ReservationController extends Controller
         }
         
         // 中間テーブル（着付対象者）への保存
-        for ($i = 1; $i <= $customer_counts; $i++) {
-            CustomerReservationCommonFunction::save($request, $i, $insert_reservation_id, $match_customer_1_id, $match_customer_2_id, $match_customer_3_id);
-            // $customer_reservation = new CustomerReservation();
-
-            // $customer_reservation->reservation_id = $insert_reservation_id;
-            // $customer_reservation->customer_id = ${'match_customer_'.$i.'_id'};  // 顧客テーブル作成時の${'match_customer_'.$i.'_id'}を利用
-            // $customer_reservation->kimono_type = $request->input('kimono_type_'.$i);
-            // $customer_reservation->obi_type = $request->input('obi_type_'.$i);
-            // $customer_reservation->obi_knot = $request->input('obi_knot_'.$i);
-    
-            // $customer_reservation->save();    
-        }
+        CustomerReservationCommonFunction::save($request, $customer_counts, $insert_reservation_id, $customer_id_list);
 
         return redirect()->route('reservations.index');
     }
@@ -235,10 +225,10 @@ class ReservationController extends Controller
         $customer_counts = count($customer_names);
 
         // 人数分の顧客データを更新
-        $match_customer_id = [];
+        $customer_id_list = [];
         for ($i = 1; $i <= $customer_counts; $i++) {
             // 中間テーブル（着付対象者）登録に必要なため、customer_idを配列に格納
-            $match_customer_id[] = CustomerCommonFunction::save($request, $i, $match_connector);
+            $customer_id_list[] = CustomerCommonFunction::save($request, $i, $match_connector);
         }
 
         // 予約テーブルの編集
@@ -277,19 +267,7 @@ class ReservationController extends Controller
         $reservation->customers()->detach();
 
         // 予約IDと顧客データを再度紐づけ
-        CustomerReservationCommonFunction::save($request, $customer_counts, $insert_reservation_id, $match_customer_id);
-        // for ($i = 1; $i <= $customer_counts; $i++) {
-            // CustomerReservationCommonFunction::save($request, $customer_counts, $insert_reservation_id, $match_customer_id);
-            // $customer_reservation = new CustomerReservation();
-
-            // $customer_reservation->reservation_id = $insert_reservation_id;
-            // $customer_reservation->customer_id = ${'match_customer_'.$i.'_id'};  // 顧客テーブル作成時の${'match_customer_'.$i.'_id'}を利用
-            // $customer_reservation->kimono_type = $request->input('kimono_type_'.$i);
-            // $customer_reservation->obi_type = $request->input('obi_type_'.$i);
-            // $customer_reservation->obi_knot = $request->input('obi_knot_'.$i);
-    
-            // $customer_reservation->save();    
-        // }
+        CustomerReservationCommonFunction::save($request, $customer_counts, $insert_reservation_id, $customer_id_list);
 
         return redirect()->route('reservations.show', [
             'reservation' => $reservation,
