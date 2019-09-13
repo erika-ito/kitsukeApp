@@ -42,35 +42,36 @@ class Reservation {
 
         // 顧客テーブルの登録・更新
         // 顧客データの個数をカウント
-        $customer_names = [];
+        $customer_name_list = [];
         for ($i = 1; $i <= 3; $i++) {
             if ($request->filled('name_'.$i)) {
-                $customer_names[] = 'name_'.$i;
+                $customer_name_list[] = 'name_'.$i;
             }
         }
-        $customer_counts = count($customer_names);
+        $customer_counts = count($customer_name_list);
 
         // 人数分の顧客データを保存
+        $customer_id_list = [];
         for ($i = 1; $i <= $customer_counts; $i++) {
-            // 中間テーブル（着付対象者）登録に必要なため、customer_idを格納
-            ${'match_customer_'.$i.'_id'} = CustomerCommonFunction::save($request, $i, $match_connector);
+            // 中間テーブル（着付対象者）登録に必要なため、customer_idを配列に格納
+            $customer_id_list[] = CustomerCommonFunction::save($request, $i, $match_connector);
         }
-
+        
         // 予約テーブル登録
         // 中間テーブル登録に必要なため、reservation_idを格納
         $insert_reservation_id = ReservationCommonFunction::save($request, $reservation, $match_connector);
 
         // 中間テーブル（担当講師）への保存
         // 担当講師データの個数をカウント
-        $master_names = [];
+        $master_name_list = [];
         for ($i = 1; $i <= 4; $i++) {
             if ($request->filled('master_'.$i)) {
-                $master_names[] = 'master_'.$i;
+                $master_name_list[] = 'master_'.$i;
             }
         }
 
-        if (is_array($master_names)) {
-            $master_counts = count($master_names);
+        if (is_array($master_name_list)) {
+            $master_counts = count($master_name_list);
         } else {
             $master_counts = 0;
         }
@@ -82,19 +83,8 @@ class Reservation {
                 $reservation->masters()->attach(${'master_reservation_'.$i}->id);
             }
         }
-
+        
         // 中間テーブル（着付対象者）への保存
-        for ($i = 1; $i <= $customer_counts; $i++) {
-            // CustomerReservationCommonFunction::save($request, $i, $insert_reservation_id);
-            $customer_reservation = new CustomerReservation();
-
-            $customer_reservation->reservation_id = $insert_reservation_id;
-            $customer_reservation->customer_id = ${'match_customer_'.$i.'_id'};  // 顧客テーブル作成時の${'match_customer_'.$i.'_id'}を利用
-            $customer_reservation->kimono_type = $request->input('kimono_type_'.$i);
-            $customer_reservation->obi_type = $request->input('obi_type_'.$i);
-            $customer_reservation->obi_knot = $request->input('obi_knot_'.$i);
-    
-            $customer_reservation->save();    
-        }
+        CustomerReservationCommonFunction::save($request, $customer_counts, $insert_reservation_id, $customer_id_list);
     }
 }

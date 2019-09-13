@@ -79,8 +79,6 @@ class ReservationController extends Controller
     // 新規登録処理
     public function create(ReservationRequest $request)
     {
-        // $facade = new ReservationFacade();
-        // $facade->save($request->getParams());
         $reservation = new Reservation();
 
         // 連絡者テーブルの登録・更新
