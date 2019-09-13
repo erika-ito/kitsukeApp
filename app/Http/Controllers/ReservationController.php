@@ -108,13 +108,13 @@ class ReservationController extends Controller
 
         // 顧客テーブルの登録・更新
         // 顧客データの個数をカウント
-        $customer_names = [];
+        $customer_name_list = [];
         for ($i = 1; $i <= 3; $i++) {
             if ($request->filled('name_'.$i)) {
-                $customer_names[] = 'name_'.$i;
+                $customer_name_list[] = 'name_'.$i;
             }
         }
-        $customer_counts = count($customer_names);
+        $customer_counts = count($customer_name_list);
 
         // 人数分の顧客データを保存
         $customer_id_list = [];
@@ -129,15 +129,15 @@ class ReservationController extends Controller
 
         // 中間テーブル（担当講師）への保存
         // 担当講師データの個数をカウント
-        $master_names = [];
+        $master_name_list = [];
         for ($i = 1; $i <= 4; $i++) {
             if ($request->filled('master_'.$i)) {
-                $master_names[] = 'master_'.$i;
+                $master_name_list[] = 'master_'.$i;
             }
         }
 
-        if (is_array($master_names)) {
-            $master_counts = count($master_names);
+        if (is_array($master_name_list)) {
+            $master_counts = count($master_name_list);
         } else {
             $master_counts = 0;
         }
@@ -216,13 +216,13 @@ class ReservationController extends Controller
 
         // 顧客テーブルの登録・更新
         // 顧客データの個数をカウント
-        $customer_names = [];
+        $customer_name_list = [];
         for ($i = 1; $i <= 3; $i++) {
             if ($request->filled('name_'.$i)) {
-                $customer_names[] = 'name_'.$i;
+                $customer_name_list[] = 'name_'.$i;
             }
         }
-        $customer_counts = count($customer_names);
+        $customer_counts = count($customer_name_list);
 
         // 人数分の顧客データを更新
         $customer_id_list = [];
@@ -237,15 +237,15 @@ class ReservationController extends Controller
 
         // 中間テーブル（担当講師）への保存・更新
         // 担当講師データの個数をカウント
-        $master_names = [];
+        $master_name_list = [];
         for ($i = 1; $i <= 4; $i++) {
             if ($request->filled('master_'.$i)) {
-                $master_names[] = 'master_'.$i;
+                $master_name_list[] = 'master_'.$i;
             }
         }
 
-        if (is_array($master_names)) {
-            $master_counts = count($master_names);
+        if (is_array($master_name_list)) {
+            $master_counts = count($master_name_list);
         } else {
             $master_counts = 0;
         }
