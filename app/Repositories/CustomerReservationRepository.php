@@ -4,7 +4,7 @@ namespace App\Libs;
 
 use App\CustomerReservation;
 
-class CustomerReservationCommonFunction
+class CustomerReservationRepository
 {
     // 中間テーブル（着付対象者）への保存
     public static function save($request, $customer_counts, $insert_reservation_id, $customer_id_list)

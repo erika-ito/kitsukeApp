@@ -4,7 +4,7 @@ namespace App\Libs;
 
 use App\Customer;
 
-class CustomerCommonFunction
+class CustomerRepository
 {
     // 顧客テーブルの登録・更新
     public static function save($request, $i, $match_connector)

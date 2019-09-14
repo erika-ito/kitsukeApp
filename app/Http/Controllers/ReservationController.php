@@ -11,10 +11,10 @@ use App\CustomerReservation;
 use Illuminate\Http\Request;
 use App\Http\Requests\ReservationRequest;
 use App\Facades\ReservationFacade;
-use App\Libs\ConnectorCommonFunction;
-use App\Libs\CustomerCommonFunction;
-use App\Libs\ReservationCommonFunction;
-use App\Libs\CustomerReservationCommonFunction;
+use App\Repositories\ConnectorRepository;
+use App\Repositories\CustomerRepository;
+use App\Repositories\ReservationRepository;
+use App\Repositories\CustomerReservationRepository;
 
 class ReservationController extends Controller
 {
@@ -90,7 +90,7 @@ class ReservationController extends Controller
             $match_connector = new Connector();
 
             //　利用回数、直近利用日以外のカラム
-            ConnectorCommonFunction::fill($request, $match_connector);
+            ConnectorRepository::fill($request, $match_connector);
             //　利用回数、直近利用日
             $match_connector->total_count = 1; // 初回
             $match_connector->current_use_date = $request->location_date;
@@ -118,12 +118,12 @@ class ReservationController extends Controller
         $customer_id_list = [];
         for ($i = 1; $i <= $customer_counts; $i++) {
             // 中間テーブル（着付対象者）登録に必要なため、customer_idを配列に格納
-            $customer_id_list[] = CustomerCommonFunction::save($request, $i, $match_connector);
+            $customer_id_list[] = CustomerRepository::save($request, $i, $match_connector);
         }
         
         // 予約テーブル登録
         // 中間テーブル登録に必要なため、reservation_idを格納
-        $insert_reservation_id = ReservationCommonFunction::save($request, $reservation, $match_connector);
+        $insert_reservation_id = ReservationRepository::save($request, $reservation, $match_connector);
 
         // 中間テーブル（担当講師）への保存
         // 担当講師データの個数をカウント
@@ -148,7 +148,7 @@ class ReservationController extends Controller
         }
         
         // 中間テーブル（着付対象者）への保存
-        CustomerReservationCommonFunction::save($request, $customer_counts, $insert_reservation_id, $customer_id_list);
+        CustomerReservationRepository::save($request, $customer_counts, $insert_reservation_id, $customer_id_list);
 
         return redirect()->route('reservations.index');
     }
@@ -208,7 +208,7 @@ class ReservationController extends Controller
         // 連絡者の検索
         $match_connector = Connector::matchConnectorName($request)->first();
         //　利用回数、直近利用日以外のカラムを更新
-        ConnectorCommonFunction::fill($request, $match_connector);
+        ConnectorRepository::fill($request, $match_connector);
         $match_connector->save();
 
         // 顧客テーブルの登録・更新
@@ -225,12 +225,12 @@ class ReservationController extends Controller
         $customer_id_list = [];
         for ($i = 1; $i <= $customer_counts; $i++) {
             // 中間テーブル（着付対象者）登録に必要なため、customer_idを配列に格納
-            $customer_id_list[] = CustomerCommonFunction::save($request, $i, $match_connector);
+            $customer_id_list[] = CustomerRepository::save($request, $i, $match_connector);
         }
 
         // 予約テーブルの編集
         // 中間テーブル登録に必要なため、reservation_idを格納
-        $insert_reservation_id = ReservationCommonFunction::save($request, $reservation, $match_connector);
+        $insert_reservation_id = ReservationRepository::save($request, $reservation, $match_connector);
 
         // 中間テーブル（担当講師）への保存・更新
         // 担当講師データの個数をカウント
@@ -263,7 +263,7 @@ class ReservationController extends Controller
         $reservation->customers()->detach();
 
         // 予約IDと顧客データを再度紐づけ
-        CustomerReservationCommonFunction::save($request, $customer_counts, $insert_reservation_id, $customer_id_list);
+        CustomerReservationRepository::save($request, $customer_counts, $insert_reservation_id, $customer_id_list);
 
         return redirect()->route('reservations.show', [
             'reservation' => $reservation,

@@ -2,9 +2,7 @@
 
 namespace App\Libs;
 
-use App\Reservation;
-
-class ReservationCommonFunction
+class ReservationRepository
 {
     // 顧客テーブルの登録・更新
     public static function save($request, $reservation, $match_connector)
