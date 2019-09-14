@@ -10,8 +10,38 @@ class Reservation extends Model
     // タイムスタンプを無効
     public $timestamps = false;
 
-    // 属性保護
-    protected $guarded = ['id'];
+    // データ挿入カラムを限定
+    protected $fillable = [
+        // 予約テーブル必須項目
+        'status',
+        'user',
+        'reservation_date',
+        'reservation_type',
+        'reply',
+        'location_type',
+        'location_date',
+        'finish_time',
+        'start_time',
+        'count_person',
+        'count_master',
+        'purpose',
+
+        // 初回任意項目
+        'location_name',
+        'location_zip_code',
+        'location_address',
+        'location_phone',
+        'distance',
+        'tool_buying',
+        'total_price',
+        'tool_connect_date',
+        'tool_confirm_date',
+        'master_request_date',
+        'tool_pass_date',
+        'payment',
+        'thoughts',
+        'notes',
+    ];
 
     protected $dates = [
         'reservation_date'
