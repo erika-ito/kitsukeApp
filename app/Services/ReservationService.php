@@ -3,16 +3,14 @@
 namespace App\Services;
 
 use App\Connector;
-use App\Customer;
 use App\Master;
 use App\Reservation;
-use App\CustomerReservation;
 use App\Libs\ConnectorCommonFunction;
 use App\Libs\CustomerCommonFunction;
 use App\Libs\ReservationCommonFunction;
 use App\Libs\CustomerReservationCommonFunction;
 
-class Reservation {
+class ReservationService {
     public function save($request)
     {
         $reservation = new Reservation();

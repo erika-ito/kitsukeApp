@@ -15,7 +15,7 @@ class ReservationServiceProvider extends ServiceProvider
     {
         $this->app->bind(
             'reservation',
-            'App\Services\Reservation'
+            'App\Services\ReservationService'
         );
     }
 
