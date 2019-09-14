@@ -10,7 +10,19 @@ class Connector extends Model
     // タイムスタンプを無効
     public $timestamps = false;
 
-    protected $guarded = ['id'];
+    // データ挿入カラムを限定
+    protected $fillable = [
+        'name',
+        'furigana',
+        'zip_code',
+        'address',
+        'mark',
+        'home_phone',
+        'cell_phone',
+        'mail',
+        'connect_method',
+        'is_student',
+    ];
 
     // 中間テーブルリレーション
     public function reservations()
