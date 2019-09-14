@@ -134,10 +134,9 @@ class ReservationController extends Controller
             }
         }
 
+        $master_counts = 0;
         if (is_array($master_name_list)) {
             $master_counts = count($master_name_list);
-        } else {
-            $master_counts = 0;
         }
 
         // 担当講師がいる場合、予約IDを紐づけ
@@ -242,10 +241,9 @@ class ReservationController extends Controller
             }
         }
 
+        $master_counts = 0;
         if (is_array($master_name_list)) {
             $master_counts = count($master_name_list);
-        } else {
-            $master_counts = 0;
         }
 
         // 担当講師がいる場合、予約IDを紐づけ
