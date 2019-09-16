@@ -81,28 +81,8 @@ class ReservationController extends Controller
     {
         $reservation = new Reservation();
 
-        // 連絡者テーブルの登録・更新
-        // 連絡者の検索
-        $match_connector = Connector::matchConnectorName($request)->first();
-        
-        if (empty($match_connector)) {
-            // 連絡者登録がない場合、新規登録する
-            $match_connector = new Connector();
-
-            //　利用回数、直近利用日以外のカラム
-            ConnectorRepository::fill($request, $match_connector);
-            //　利用回数、直近利用日
-            $match_connector->total_count = 1; // 初回
-            $match_connector->current_use_date = $request->location_date;
-            
-            $match_connector->save();
-
-        } else {
-            // 連絡者登録がある場合、利用回数と直近利用日を更新する
-            $match_connector->total_count += 1; // 利用回数に+1
-            $match_connector->current_use_date = $request->location_date;
-            $match_connector->save();
-        }
+        // 連絡者テーブルの検索、登録・更新
+        $match_connector = ConnectorRepository::new($request);
 
         // 顧客テーブルの登録・更新
         // 顧客データの個数をカウント
@@ -204,12 +184,8 @@ class ReservationController extends Controller
     {
         $reservation = Reservation::find($id);
 
-        // 連絡者テーブルの更新
-        // 連絡者の検索
-        $match_connector = Connector::matchConnectorName($request)->first();
-        //　利用回数、直近利用日以外のカラムを更新
-        ConnectorRepository::fill($request, $match_connector);
-        $match_connector->save();
+        // 連絡者テーブルの検索、更新
+        $match_connector = ConnectorRepository::edit($request);
 
         // 顧客テーブルの登録・更新
         // 顧客データの個数をカウント
@@ -270,5 +246,4 @@ class ReservationController extends Controller
             'id' => $id,
         ]);
     }
-    
 }
