@@ -7,7 +7,7 @@ use App\Connector;
 class ConnectorRepository
 {
     // 連絡者テーブルの登録・更新
-    public static function new($request)
+    public function new($request)
     {
         // 連絡者テーブルの検索
         $match_connector = Connector::matchConnectorName($request)->first();
@@ -31,7 +31,7 @@ class ConnectorRepository
         return $match_connector;
     }
 
-    public static function edit($request)
+    public function edit($request)
     {
         // 連絡者テーブルの検索
         $match_connector = Connector::matchConnectorName($request)->first();

@@ -82,7 +82,9 @@ class ReservationController extends Controller
         $reservation = new Reservation();
 
         // 連絡者テーブルの検索、登録・更新
-        $match_connector = ConnectorRepository::new($request);
+        $connector_repository = new ConnectorRepository();
+        // 他テーブルに紐づけるため、連絡者を格納
+        $match_connector = $connector_repository->new($request);
 
         // 顧客テーブルの登録・更新
         // 顧客データの個数をカウント
@@ -97,14 +99,16 @@ class ReservationController extends Controller
         // 人数分の顧客データを保存
         $customer_id_list = [];
         for ($i = 1; $i <= $customer_counts; $i++) {
+            $customer_repository = new CustomerRepository();
             // 中間テーブル（着付対象者）登録に必要なため、customer_idを配列に格納
-            $customer_id_list[] = CustomerRepository::save($request, $i, $match_connector);
+            $customer_id_list[] = $customer_repository->save($request, $i, $match_connector);
         }
         
         // 予約テーブル登録
+        $reservation_repository = new ReservationRepository();
         // 中間テーブル登録に必要なため、reservation_idを格納
-        $insert_reservation_id = ReservationRepository::save($request, $reservation, $match_connector);
-
+        $insert_reservation_id = $reservation_repository->save($request, $reservation, $match_connector);
+        
         // 中間テーブル（担当講師）への保存
         // 担当講師データの個数をカウント
         $master_name_list = [];
@@ -128,7 +132,8 @@ class ReservationController extends Controller
         }
         
         // 中間テーブル（着付対象者）への保存
-        CustomerReservationRepository::save($request, $insert_reservation_id, $customer_id_list);
+        $customer_reservation_repository = new CustomerReservationRepository();
+        $customer_reservation_repository->save($request, $insert_reservation_id, $customer_id_list);
 
         return redirect()->route('reservations.index');
     }

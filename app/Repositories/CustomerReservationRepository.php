@@ -7,7 +7,7 @@ use App\CustomerReservation;
 class CustomerReservationRepository
 {
     // 中間テーブル（着付対象者）への保存
-    public static function save($request, $insert_reservation_id, $customer_id_list)
+    public function save($request, $insert_reservation_id, $customer_id_list)
     {
         $customer_counts = count($customer_id_list);
         for ($i = 1; $i <= $customer_counts; $i++) {

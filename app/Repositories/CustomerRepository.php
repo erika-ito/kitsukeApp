@@ -7,7 +7,7 @@ use App\Customer;
 class CustomerRepository
 {
     // 顧客テーブルの登録・更新
-    public static function save($request, $i, $match_connector)
+    public function save($request, $i, $match_connector)
     {
         $match_customer = Customer::matchCustomerName($request, $i)->first();
         
@@ -27,5 +27,4 @@ class CustomerRepository
         // 中間テーブル（着付対象者）登録に必要なため、customer_idを返す
         return $match_customer->id;
     }
-
 }
