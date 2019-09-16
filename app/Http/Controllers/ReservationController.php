@@ -148,7 +148,7 @@ class ReservationController extends Controller
         }
         
         // 中間テーブル（着付対象者）への保存
-        CustomerReservationRepository::save($request, $customer_counts, $insert_reservation_id, $customer_id_list);
+        CustomerReservationRepository::save($request, $insert_reservation_id, $customer_id_list);
 
         return redirect()->route('reservations.index');
     }
@@ -263,7 +263,7 @@ class ReservationController extends Controller
         $reservation->customers()->detach();
 
         // 予約IDと顧客データを再度紐づけ
-        CustomerReservationRepository::save($request, $customer_counts, $insert_reservation_id, $customer_id_list);
+        CustomerReservationRepository::save($request, $insert_reservation_id, $customer_id_list);
 
         return redirect()->route('reservations.show', [
             'reservation' => $reservation,
