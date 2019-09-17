@@ -84,7 +84,7 @@ class ReservationController extends Controller
         // 連絡者テーブルの検索、登録・更新
         $connector_repository = new ConnectorRepository();
         // 他テーブルに紐づけるため、連絡者を格納
-        $match_connector = $connector_repository->new($request);
+        $match_connector = $connector_repository->create($request);
 
         // 顧客テーブルの登録・更新
         // 顧客データの個数をカウント
