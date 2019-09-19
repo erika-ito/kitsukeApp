@@ -11,14 +11,28 @@ use App\Repositories\ReservationRepository;
 use App\Repositories\CustomerReservationRepository;
 
 class ReservationService {
-    public function save(ReservationRequest $request, ConnectorRepository $connector_repository,
-        CustomerRepository $customer_repository, ReservationRepository $reservation_repository, CustomerReservationRepository $customer_reservation_repository)
+
+    private $connector_repository;
+    private $customer_repository;
+    private $reservation_repository;
+    private $customer_reservation_repository;
+
+    public function __construct(ConnectorRepository $connector_repository, CustomerRepository $customer_repository,
+        ReservationRepository $reservation_repository, CustomerReservationRepository $customer_reservation_repository)
+    {
+        $this->connector_repository = $connector_repository;
+        $this->customer_repository = $customer_repository;
+        $this->reservation_repository = $reservation_repository;
+        $this->customer_reservation_repository = $customer_reservation_repository;
+    }
+
+    public function save(ReservationRequest $request)
     {
         $reservation = new Reservation();
 
         // 連絡者テーブルの検索、登録・更新
         // 他テーブルに紐づけるため、連絡者を格納
-        $match_connector = $connector_repository->create($request);
+        $match_connector = $this->connector_repository->create($request);
 
         // 顧客テーブルの登録・更新
         // 顧客データの個数をカウント
@@ -34,12 +48,12 @@ class ReservationService {
         $customer_id_list = [];
         for ($i = 1; $i <= $customer_counts; $i++) {
             // 中間テーブル（着付対象者）登録に必要なため、customer_idを配列に格納
-            $customer_id_list[] = $customer_repository->save($request, $i, $match_connector);
+            $customer_id_list[] = $this->customer_repository->save($request, $i, $match_connector);
         }
         
         // 予約テーブル登録
         // 中間テーブル登録に必要なため、reservation_idを格納
-        $insert_reservation_id = $reservation_repository->save($request, $reservation, $match_connector);
+        $insert_reservation_id = $this->reservation_repository->save($request, $reservation, $match_connector);
         
         // 中間テーブル（担当講師）への保存
         // 担当講師データの個数をカウント
@@ -64,6 +78,6 @@ class ReservationService {
         }
         
         // 中間テーブル（着付対象者）への保存
-        $customer_reservation_repository->save($request, $insert_reservation_id, $customer_id_list);
+        $this->customer_reservation_repository->save($request, $insert_reservation_id, $customer_id_list);
     }
 }
