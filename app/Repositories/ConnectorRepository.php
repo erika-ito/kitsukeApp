@@ -6,8 +6,18 @@ use App\Connector;
 
 class ConnectorRepository
 {
-    // 連絡者テーブルの登録・更新
-    public function create($request)
+    // 共通処理
+    public function save($match_connector, $request): Connector
+    {
+        //　利用回数、直近利用日以外のカラムを更新
+        $match_connector->fill($request->all())->save();
+
+        //　他テーブルの登録に必要なため、インスタンスを返す
+        return $match_connector;
+    }
+    
+    // 予約登録時の連絡者の登録・更新
+    public function create($request): Connector
     {
         // 連絡者テーブルの検索
         $match_connector = Connector::matchConnectorName($request)->first();
@@ -23,23 +33,15 @@ class ConnectorRepository
         
         //　直近利用日
         $match_connector->current_use_date = $request->location_date;
-        //　利用回数、直近利用日以外のカラム
-        $match_connector->fill($request->all());
-        $match_connector->save();
 
-        //　他テーブルの登録に必要なため、インスタンスを返す
-        return $match_connector;
+        return $this->save($match_connector, $request);
     }
 
-    public function edit($request)
+    // 予約更新時の連絡者の更新
+    public function edit($request): Connector
     {
         // 連絡者テーブルの検索
         $match_connector = Connector::matchConnectorName($request)->first();
-        
-        //　利用回数、直近利用日以外のカラムを更新
-        $match_connector->fill($request->all())->save();
-
-        //　他テーブルの登録に必要なため、インスタンスを返す
-        return $match_connector;
+        return $this->save($match_connector, $request);
     }
 }
