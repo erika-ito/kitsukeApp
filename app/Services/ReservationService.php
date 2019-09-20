@@ -68,15 +68,14 @@ class ReservationService {
             $customer_id_list = $this->saveCustomer($request, $match_connector);
             // 予約テーブル登録
             $insert_reservation_id = $this->saveReservation($request, $reservation, $match_connector);
-        
+            
             // 担当講師（中間テーブル）の登録
-            $master_counts = $this->countMaster($request);
-            // 担当講師がいる場合、予約IDを紐づけ
-            if ($master_counts >= 1) {
-                // 予約IDに紐づいた講師データを一度削除
-                $reservation->masters()->detach();
+            // 予約IDに紐づいた講師データを一度削除
+            $reservation->masters()->detach();
 
-                // 予約IDと講師データを再度紐づけ
+            $master_counts = $this->countMaster($request);
+            // 担当講師がいる場合、予約IDと講師データを再度紐づけ
+            if ($master_counts >= 1) {
                 for ($i = 1; $i <= $master_counts; $i++) {
                     ${'master_reservation_'.$i} = Master::matchMasterName($request, $i)->first();
                     $reservation->masters()->attach(${'master_reservation_'.$i}->id);
@@ -136,7 +135,7 @@ class ReservationService {
                 $master_name_list[] = 'master_'.$i;
             }
         }
-
+        
         $master_counts = 0;
         if (is_array($master_name_list)) {
             $master_counts = count($master_name_list);
