@@ -39,7 +39,8 @@ return [
     'dimensions'           => ':attributeの図形サイズが正しくありません。',
     'distinct'             => ':attributeには異なった値を指定してください。',
     'email'                => ':attributeには、有効なメールアドレスを指定してください。',
-    'exists'               => '選択された:attributeは正しくありません。',
+    // 'exists'               => '選択された:attributeは正しくありません。',
+    'exists'               => '入力した:attributeは登録されていない講師です。',
     'file'                 => ':attributeにはファイルを指定してください。',
     'filled'               => ':attributeに値を指定してください。',
     'gt'                   => [

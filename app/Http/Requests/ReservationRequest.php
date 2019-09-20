@@ -38,13 +38,21 @@ class ReservationRequest extends FormRequest
             'is_student' => 'integer | nullable',
 
             // 顧客テーブル項目
-            // 必須
-            'name' => 'required',
-            'furigana' => 'required',
+            // 必須（一人目のみ）
+            'name_1' => 'required',
+            'furigana_1' => 'required',
             // 初回任意
-            'age' => 'numeric | nullable',
-            'height' => 'numeric | nullable',
-            'body_type' => 'integer | nullable', 
+            'age_1' => 'numeric | nullable',
+            'height_1' => 'numeric | nullable',
+            'body_type_1' => 'integer | nullable', 
+
+            'age_2' => 'numeric | nullable',
+            'height_2' => 'numeric | nullable',
+            'body_type_2' => 'integer | nullable',
+
+            'age_3' => 'numeric | nullable',
+            'height_3' => 'numeric | nullable',
+            'body_type_3' => 'integer | nullable',
 
             // 予約テーブル項目
             // 必須
@@ -71,6 +79,12 @@ class ReservationRequest extends FormRequest
             'master_request_date' => 'date | after_or_equal:reservation_date | nullable',
             'tool_pass_date' => 'date | after_or_equal:reservation_date | nullable',
             'payment' => 'numeric | nullable',
+        
+            // 担当講師テーブル項目
+            'master_1' => 'nullable | exists:masters,name',
+            'master_2' => 'nullable | exists:masters,name',
+            'master_3' => 'nullable | exists:masters,name',
+            'master_4' => 'nullable | exists:masters,name',
         ];
     }
 
@@ -88,11 +102,23 @@ class ReservationRequest extends FormRequest
             'is_student' => '当院生徒か',
 
             // 顧客テーブル項目
-            'name' => '氏名',
-            'furigana' => 'ふりがな',
-            'age' => '年齢',
-            'height' => '身長',
-            'body_type' => '体型',
+            'name_1' => '氏名（着付1人目）',
+            'furigana_1' => 'ふりがな（着付1人目）',
+            'age_1' => '年齢（着付1人目）',
+            'height_1' => '身長（着付1人目）',
+            'body_type_1' => '体型（着付1人目）',
+
+            'name_2' => '氏名（着付2人目）',
+            'furigana_2' => 'ふりがな（着付2人目）',
+            'age_2' => '年齢（着付2人目）',
+            'height_2' => '身長（着付2人目）',
+            'body_type_2' => '体型（着付2人目）',
+
+            'name_3' => '氏名（着付3人目）',
+            'furigana_3' => 'ふりがな（着付3人目）',
+            'age_3' => '年齢（着付3人目）',
+            'height_3' => '身長（着付3人目）',
+            'body_type_3' => '体型（着付3人目）',
 
             // 予約テーブル項目
             'status' => '予約状況',
@@ -116,6 +142,12 @@ class ReservationRequest extends FormRequest
             'master_request_date' => '講師依頼日',
             'tool_pass_date' => 'セット渡し日',
             'payment' => '給与合計',
+
+            // 担当講師テーブル項目
+            'master_1' => '担当講師名（1人目）',
+            'master_2' => '担当講師名（2人目）',
+            'master_3' => '担当講師名（3人目）',
+            'master_4' => '担当講師名（4人目）',
         ];
     }
 }
