@@ -246,23 +246,23 @@
                     <hr>
                     
                     <div class="form-group row">
-                        <label for="master_1" class="col-2 offset-1">担当講師</label>
+                        <label for="master_1" class="col-2 offset-1">担当講師名</label>
                         <div class="col-2">
-                            <input type="text" class="form-control" name="master_1" id="master_1" value="{{ old('master_1', optional($master_1)->name) }}">
+                            <input type="text" class="form-control" name="master_1" id="master_1" value="{{ old('master_1', optional($master_1)->name) }}" placeholder="1人目">
                         </div>
                         <label for="master_2" class="col-2 offset-2"></label>
                         <div class="col-2">
-                            <input type="text" class="form-control" name="master_2" id="master_2" value="{{ old('master_2', optional($master_2)->name) }}">
+                            <input type="text" class="form-control" name="master_2" id="master_2" value="{{ old('master_2', optional($master_2)->name) }}" placeholder="2人目">
                         </div>
                     </div>
                     <div class="form-group row">
                         <label for="master_3" class="col-2 offset-1"></label>
                         <div class="col-2">
-                            <input type="text" class="form-control" name="master_3" id="master_3" value="{{ old('master_3', optional($master_3)->name) }}">
+                            <input type="text" class="form-control" name="master_3" id="master_3" value="{{ old('master_3', optional($master_3)->name) }}" placeholder="3人目">
                         </div>
                         <label for="master_4" class="col-2 offset-2"></label>
                         <div class="col-2">
-                            <input type="text" class="form-control" name="master_4" id="master_4" value="{{ old('master_4', optional($master_4)->name) }}">
+                            <input type="text" class="form-control" name="master_4" id="master_4" value="{{ old('master_4', optional($master_4)->name) }}" placeholder="4人目">
                         </div>
                     </div>
                     <div class="form-group row">
