@@ -9,8 +9,5 @@ class ReservationRepository
     {
         $reservation->fill($request->all());
         $match_connector->reservations()->save($reservation);
-
-        // 保存した予約のIDを取得
-        return $reservation->id;
     }
 }
