@@ -6,7 +6,7 @@
     <div class="container">
         <div class="row pt-3">
             <!-- 検索フォーム -->
-            <div class="col-10">
+            <div class="col-7">
                 <form action="" method="get" class="form-inline">
                     <div class="form-group mr-5">
                         <input type="text" name="keyword" class="form-control" value="{{ $keyword }}" placeholder="出張日、連絡者氏名">
@@ -14,6 +14,15 @@
                     <input type="submit" value="検索" class="btn btn-info">
                 </form>
             </div>
+
+            <!-- 過去・キャンセル表示ボタン -->
+            <div class="col-3 text-right">
+                <form action="" method="get"">
+                    <input type="hidden"" name="pass_cancel" value="pass_cancel">
+                    <input type="submit" value="過去・キャンセル一覧" class="btn btn-secondary">
+                </form>
+            </div>
+
             <!-- 新規登録ボタン -->
             <div class="col-2">
                 <a href="{{ route('reservations.create') }}" class="btn btn-warning">新規登録</a>
