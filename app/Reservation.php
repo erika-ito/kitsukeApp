@@ -10,8 +10,6 @@ class Reservation extends Model
     // タイムスタンプを無効
     public $timestamps = false;
 
-    // private $today = Carbon::now()->toDateString();
-
     // データ挿入カラムを限定
     protected $fillable = [
         // 予約テーブル必須項目

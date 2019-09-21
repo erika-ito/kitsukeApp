@@ -17,7 +17,7 @@
 
             <!-- 過去・キャンセル表示ボタン -->
             <div class="col-3 text-right">
-                <form action="" method="get"">
+                <form action="" method="get">
                     <input type="hidden"" name="pass_cancel" value="pass_cancel">
                     <input type="submit" value="過去・キャンセル一覧" class="btn btn-secondary">
                 </form>
