@@ -10,6 +10,8 @@ class Reservation extends Model
     // タイムスタンプを無効
     public $timestamps = false;
 
+    // private $today = Carbon::now()->toDateString();
+
     // データ挿入カラムを限定
     protected $fillable = [
         // 予約テーブル必須項目
@@ -69,6 +71,7 @@ class Reservation extends Model
     }
 
     // ローカルスコープ
+    // 検索
     public function scopeKeyword ($query, $keyword)
     {
         // キーワードがあるとき
@@ -79,6 +82,26 @@ class Reservation extends Model
                 ->orwhere('furigana', 'like', '%'.$keyword.'%')
                 ->orwhere('location_date', '=', $keyword);
         });
+    }
+
+    // 出張日とステータスによる一覧表示の切り替え
+    public function scopeLocalDate($query, $pass_cansel)
+    {
+        $today = Carbon::now()->toDateString();
+
+        $query->when($pass_cansel, 
+            function($query) use($today) {
+                // 過去・キャンセル表示のボタンが押されたとき
+                return $query
+                    ->where('location_date', '<=', $today)
+                    ->orwhere('status', '=', '7'); // キャンセル
+
+            }, function($query) use($today) {
+                // 通常の一覧表示のとき
+                return $query
+                    ->where('location_date', '>', $today)
+                    ->where('status', '<>', '7');
+            });
     }
 
     // アクセサ

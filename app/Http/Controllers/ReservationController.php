@@ -15,6 +15,7 @@ class ReservationController extends Controller
     public function index(Request $request)
     {
         $keyword = str_replace('/', '-', $request->keyword);
+        $pass_cancel = $request->pass_cancel;
 
         //　一覧表示のカラムを限定
         $columns = [
@@ -28,7 +29,7 @@ class ReservationController extends Controller
         ];
 
         // 検索、並び替え、ページネーション
-        $reservations = Reservation::keyword($keyword)
+        $reservations = Reservation::localDate($pass_cancel)->keyword($keyword)
             ->orderBy('location_date','asc')
             ->orderBy('start_time','asc')
             ->paginate(5, $columns);
