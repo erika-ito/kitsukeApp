@@ -3,13 +3,11 @@
 namespace App\Http\Controllers;
 
 use Carbon\Carbon;
-use App\Reservation;
 use App\Connector;
-use App\Customer;
-use App\Master;
-use App\CustomerReservation;
+use App\Reservation;
 use Illuminate\Http\Request;
 use App\Http\Requests\ReservationRequest;
+use App\Services\ReservationService;
 
 class ReservationController extends Controller
 {
@@ -17,6 +15,7 @@ class ReservationController extends Controller
     public function index(Request $request)
     {
         $keyword = str_replace('/', '-', $request->keyword);
+        $pass_cancel = $request->pass_cancel;
 
         //　一覧表示のカラムを限定
         $columns = [
@@ -30,7 +29,7 @@ class ReservationController extends Controller
         ];
 
         // 検索、並び替え、ページネーション
-        $reservations = Reservation::keyword($keyword)
+        $reservations = Reservation::localDate($pass_cancel)->keyword($keyword)
             ->orderBy('location_date','asc')
             ->orderBy('start_time','asc')
             ->paginate(5, $columns);
@@ -58,6 +57,7 @@ class ReservationController extends Controller
     {
         $connector = null;
         
+        // 再予約ボタンから登録する場合
         if (! empty($connector_id)) {
             $connector = Connector::find($connector_id);
         }
@@ -72,149 +72,9 @@ class ReservationController extends Controller
     }
 
     // 新規登録処理
-    public function create(ReservationRequest $request)
+    public function create(ReservationRequest $request, ReservationService $service)
     {
-        $reservation = new Reservation();
-
-        // 連絡者テーブルの登録・更新
-        // 連絡者の検索
-        $match_connector = Connector::matchConnectorName($request)->first();
-        
-        if (empty($match_connector)) {
-            // 連絡者登録がない場合、新規登録する
-            //　連絡者テーブルの対象カラムを限定
-            $connector_columns = [
-                'name',
-                'furigana',
-                'zip_code',
-                'address',
-                'mark',
-                'home_phone',
-                'cell_phone',
-                'mail',
-                'connect_method',
-                'is_student',
-            ];
-
-            $match_connector = new Connector();
-            $match_connector->fill($request->only($connector_columns));
-            $match_connector->total_count = 1; // 初回
-            $match_connector->current_use_date = $request->location_date;
-            $match_connector->save();
-
-        } else {
-            // 連絡者登録がある場合、利用回数と直近利用日を更新する
-            $match_connector->total_count += 1; // 利用回数に+1
-            $match_connector->current_use_date = $request->location_date;
-            $match_connector->save();
-        }
-
-        // 顧客テーブルの登録・更新
-        // 顧客データの個数をカウント
-        $customer_names = [];
-        for ($i = 1; $i <= 3; $i++) {
-            if ($request->filled('name_'.$i)) {
-                $customer_names[] = 'name_'.$i;
-            }
-        }
-        $customer_counts = count($customer_names);
-
-        // 顧客人数分繰り返し
-        for ($i = 1; $i <= $customer_counts; $i++) {
-            $match_customer = Customer::matchCustomerName($request, $i)->first();
-            
-            if (empty($match_customer)) {
-                // 顧客データがない場合は新規登録
-                $match_customer = new Customer();
-            }
-            // データの登録・更新
-            $match_customer->name = $request->input('name_'.$i);
-            $match_customer->furigana = $request->input('furigana_'.$i);
-            $match_customer->age = $request->input('age_'.$i);
-            $match_customer->height = $request->input('height_'.$i);
-            $match_customer->body_type = $request->input('body_type_'.$i);
-
-            $match_connector->customers()->save($match_customer);
-
-            // 中間テーブル（着付対象者）登録に必要なため、customer_idを保存
-            ${'match_customer_'.$i.'_id'} = $match_customer->id;
-        }
-
-        // 予約テーブル登録
-        // 予約テーブルの対象カラムを限定
-        $reservation_columns = [
-            // 予約テーブル必須項目
-            'status',
-            'user',
-            'reservation_date',
-            'reservation_type',
-            'reply',
-            'location_type',
-            'location_date',
-            'finish_time',
-            'start_time',
-            'count_person',
-            'count_master',
-            'purpose',
-
-            // 初回任意項目
-            'location_name',
-            'location_zip_code',
-            'location_address',
-            'location_phone',
-            'distance',
-            'tool_buying',
-            'total_price',
-            'tool_connect_date',
-            'tool_confirm_date',
-            'master_request_date',
-            'tool_pass_date',
-            'payment',
-            'thoughts',
-            'notes',
-        ];
-
-        $reservation->fill($request->only($reservation_columns));
-        $match_connector->reservations()->save($reservation);
-
-        // 保存した予約のIDを取得
-        $insert_reservation_id = $reservation->id;
-
-        // 中間テーブル（担当講師）への保存
-        // 担当講師データの個数をカウント
-        $master_names = [];
-        for ($i = 1; $i <= 4; $i++) {
-            if ($request->filled('master_'.$i)) {
-                $master_names[] = 'master_'.$i;
-            }
-        }
-
-        if (is_array($master_names)) {
-            $master_counts = count($master_names);
-        } else {
-            $master_counts = 0;
-        }
-
-        // 担当講師がいる場合、予約IDを紐づけ
-        if ($master_counts >= 1) {
-            for ($i = 1; $i <= $master_counts; $i++) {
-                ${'master_reservation_'.$i} = Master::matchMasterName($request, $i)->first();
-                $reservation->masters()->attach(${'master_reservation_'.$i}->id);
-            }
-        }
-
-        // 中間テーブル（着付対象者）への保存
-        for ($i = 1; $i <= $customer_counts; $i++) {
-            $customer_reservation = new CustomerReservation();
-
-            $customer_reservation->reservation_id = $insert_reservation_id;
-            $customer_reservation->customer_id = ${'match_customer_'.$i.'_id'};  // 顧客テーブル作成時の${'match_customer_'.$i.'_id'}を利用
-            $customer_reservation->kimono_type = $request->input('kimono_type_'.$i);
-            $customer_reservation->obi_type = $request->input('obi_type_'.$i);
-            $customer_reservation->obi_knot = $request->input('obi_knot_'.$i);
-    
-            $customer_reservation->save();    
-        }
+        $service->create($request);
 
         return redirect()->route('reservations.index');
     }
@@ -266,150 +126,13 @@ class ReservationController extends Controller
     }
     
     // 編集処理
-    public function edit(ReservationRequest $request, int $id)
+    public function edit(ReservationRequest $request, int $id, ReservationService $service)
     {
-        $reservation = Reservation::find($id);
-
-        // 連絡者テーブルの更新
-        // 連絡者の検索
-        $match_connector = Connector::matchConnectorName($request)->first();
-        
-        //　連絡者テーブルの対象カラムを限定
-        $connector_columns = [
-            'name',
-            'furigana',
-            'zip_code',
-            'address',
-            'mark',
-            'home_phone',
-            'cell_phone',
-            'mail',
-            'connect_method',
-            'is_student',
-        ];
-
-        $match_connector->fill($request->only($connector_columns));
-        $match_connector->save();
-
-        // 顧客テーブルの登録・更新
-        // 顧客データの個数をカウント
-        $customer_names = [];
-        for ($i = 1; $i <= 3; $i++) {
-            if ($request->filled('name_'.$i)) {
-                $customer_names[] = 'name_'.$i;
-            }
-        }
-        $customer_counts = count($customer_names);
-
-        // 顧客人数分繰り返し
-        for ($i = 1; $i <= $customer_counts; $i++) {
-            $match_customer = Customer::matchCustomerName($request, $i)->first();
-            
-            if (empty($match_customer)) {
-                // 顧客データがない場合は新規登録
-                $match_customer = new Customer();
-            }
-            // データの登録・更新
-            $match_customer->name = $request->input('name_'.$i);
-            $match_customer->furigana = $request->input('furigana_'.$i);
-            $match_customer->age = $request->input('age_'.$i);
-            $match_customer->height = $request->input('height_'.$i);
-            $match_customer->body_type = $request->input('body_type_'.$i);
-
-            $match_connector->customers()->save($match_customer);
-
-            // 中間テーブル（着付対象者）登録に必要なため、customer_idを保存
-            ${'match_customer_'.$i.'_id'} = $match_customer->id;
-        }
-
-        // 予約テーブルの編集
-        // 予約テーブルの対象カラムを限定
-        $reservation_columns = [
-            // 予約テーブル必須項目
-            'status',
-            'user',
-            'reservation_date',
-            'reservation_type',
-            'reply',
-            'location_type',
-            'location_date',
-            'finish_time',
-            'start_time',
-            'count_person',
-            'count_master',
-            'purpose',
-
-            // 初回任意項目
-            'location_name',
-            'location_zip_code',
-            'location_address',
-            'location_phone',
-            'distance',
-            'tool_buying',
-            'total_price',
-            'tool_connect_date',
-            'tool_confirm_date',
-            'master_request_date',
-            'tool_pass_date',
-            'payment',
-            'thoughts',
-            'notes',
-        ];
-
-        $reservation->fill($request->only($reservation_columns));
-        $match_connector->reservations()->save($reservation);
-
-        // 保存した予約のIDを取得
-        $insert_reservation_id = $reservation->id;
-
-        // 中間テーブル（担当講師）への保存・更新
-        // 担当講師データの個数をカウント
-        $master_names = [];
-        for ($i = 1; $i <= 4; $i++) {
-            if ($request->filled('master_'.$i)) {
-                $master_names[] = 'master_'.$i;
-            }
-        }
-
-        if (is_array($master_names)) {
-            $master_counts = count($master_names);
-        } else {
-            $master_counts = 0;
-        }
-
-        // 担当講師がいる場合、予約IDを紐づけ
-        if ($master_counts >= 1) {
-            // 予約IDに紐づいた講師データを一度削除
-            $reservation->masters()->detach();
-
-            // 予約IDと講師データを再度紐づけ
-            for ($i = 1; $i <= $master_counts; $i++) {
-                ${'master_reservation_'.$i} = Master::matchMasterName($request, $i)->first();
-                $reservation->masters()->attach(${'master_reservation_'.$i}->id);
-            }
-        }
-
-        // 中間テーブル（着付対象者）への保存・更新
-        // 予約IDに紐づいた顧客データを一度削除
-        $reservation->customers()->detach();
-
-        // 予約IDと顧客データを再度紐づけ
-        for ($i = 1; $i <= $customer_counts; $i++) {
-            $customer_reservation = new CustomerReservation();
-
-            $customer_reservation->reservation_id = $insert_reservation_id;
-            $customer_reservation->customer_id = ${'match_customer_'.$i.'_id'};  // 顧客テーブル作成時の${'match_customer_'.$i.'_id'}を利用
-            $customer_reservation->kimono_type = $request->input('kimono_type_'.$i);
-            $customer_reservation->obi_type = $request->input('obi_type_'.$i);
-            $customer_reservation->obi_knot = $request->input('obi_knot_'.$i);
-    
-            $customer_reservation->save();    
-        }
+        $reservation = $service->edit($request, $id);
 
         return redirect()->route('reservations.show', [
             'reservation' => $reservation,
             'id' => $id,
         ]);
     }
-    
 }

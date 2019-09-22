@@ -10,8 +10,38 @@ class Reservation extends Model
     // タイムスタンプを無効
     public $timestamps = false;
 
-    // 属性保護
-    protected $guarded = ['id'];
+    // データ挿入カラムを限定
+    protected $fillable = [
+        // 予約テーブル必須項目
+        'status',
+        'user',
+        'reservation_date',
+        'reservation_type',
+        'reply',
+        'location_type',
+        'location_date',
+        'finish_time',
+        'start_time',
+        'count_person',
+        'count_master',
+        'purpose',
+
+        // 初回任意項目
+        'location_name',
+        'location_zip_code',
+        'location_address',
+        'location_phone',
+        'distance',
+        'tool_buying',
+        'total_price',
+        'tool_connect_date',
+        'tool_confirm_date',
+        'master_request_date',
+        'tool_pass_date',
+        'payment',
+        'thoughts',
+        'notes',
+    ];
 
     protected $dates = [
         'reservation_date'
@@ -39,6 +69,7 @@ class Reservation extends Model
     }
 
     // ローカルスコープ
+    // 検索
     public function scopeKeyword ($query, $keyword)
     {
         // キーワードがあるとき
@@ -49,6 +80,26 @@ class Reservation extends Model
                 ->orwhere('furigana', 'like', '%'.$keyword.'%')
                 ->orwhere('location_date', '=', $keyword);
         });
+    }
+
+    // 出張日とステータスによる一覧表示の切り替え
+    public function scopeLocalDate($query, $pass_cansel)
+    {
+        $today = Carbon::now()->toDateString();
+
+        $query->when($pass_cansel, 
+            function($query) use($today) {
+                // 過去・キャンセル表示のボタンが押されたとき
+                return $query
+                    ->where('location_date', '<=', $today)
+                    ->orwhere('status', '=', '7'); // キャンセル
+
+            }, function($query) use($today) {
+                // 通常の一覧表示のとき
+                return $query
+                    ->where('location_date', '>', $today)
+                    ->where('status', '<>', '7');
+            });
     }
 
     // アクセサ
