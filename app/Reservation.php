@@ -91,13 +91,13 @@ class Reservation extends Model
             function($query) use($today) {
                 // 過去・キャンセル表示のボタンが押されたとき
                 return $query
-                    ->where('location_date', '<=', $today)
+                    ->where('location_date', '<', $today)
                     ->orwhere('status', '=', '7'); // キャンセル
 
             }, function($query) use($today) {
                 // 通常の一覧表示のとき
                 return $query
-                    ->where('location_date', '>', $today)
+                    ->where('location_date', '>=', $today)
                     ->where('status', '<>', '7');
             });
     }
