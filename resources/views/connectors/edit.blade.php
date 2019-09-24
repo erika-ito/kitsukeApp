@@ -104,7 +104,7 @@
                     </div>
                 </div>
                 <div class="text-right mt-3 mr-5">
-                    <input type="submit" value="保存" class="btn btn-success">
+                    <input type="submit" value="保存" class="btn btn-primary">
                 </div>
             </div>
         </form>
