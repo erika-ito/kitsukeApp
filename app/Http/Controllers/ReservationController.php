@@ -15,6 +15,7 @@ class ReservationController extends Controller
     public function index(Request $request)
     {
         $keyword = str_replace('/', '-', $request->keyword);
+        Log::debug($keyword);
         $pass_cancel = $request->pass_cancel;
 
         //　一覧表示のカラムを限定
