@@ -9,7 +9,7 @@
             <div class="col-7">
                 <form action="" method="get" class="form-inline">
                     <div class="form-group mr-5">
-                        <input type="text" name="keyword" class="form-control" value="{{ $keyword }}" placeholder="出張日">
+                        <input type="text" name="keyword" class="form-control" value="{{ $keyword }}" placeholder="連絡者氏名">
                     </div>
                     <input type="submit" value="検索" class="btn btn-info">
                 </form>
