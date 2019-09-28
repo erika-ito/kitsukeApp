@@ -76,9 +76,7 @@ class Reservation extends Model
         $query->when($keyword, function($query, $keyword) {
             return $query
                 ->join('connectors', 'connectors.id', 'reservations.connector_id')
-                ->where('name', 'like', '%'.$keyword.'%')
-                ->orwhere('furigana', 'like', '%'.$keyword.'%')
-                ->orwhere('location_date', '=', $keyword);
+                ->where('location_date', '=', $keyword);
         });
     }
 
