@@ -1,3 +1,10 @@
+/* ボディ */
+body {
+    display:flex;
+    flex-direction:column;
+    min-height:100vh;
+}
+
 /* ヘッダー */
 header .app-name {
     background-color:skyblue;
@@ -37,6 +44,7 @@ footer p {
 /* 一覧メインコンテンツ */
 main {
     background-color:ghostwhite;
+    flex:1;
 }
 
 /* 一覧画面のテーブル
