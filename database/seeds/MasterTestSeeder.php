@@ -22,8 +22,6 @@ class MasterTestSeeder extends Seeder
                 'address' => '東京都新宿区111-111',
                 'home_phone' => '03-0000-0000',
                 'mail' => 'abc@gmail.com',
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
             ],
             [
                 'rank' => '5',
@@ -33,8 +31,6 @@ class MasterTestSeeder extends Seeder
                 'address' => '東京都新宿区111-111',
                 'home_phone' => '03-0000-0000',
                 'mail' => 'abc@gmail.com',
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
             ],
             [
                 'rank' => '5',
@@ -44,8 +40,6 @@ class MasterTestSeeder extends Seeder
                 'address' => '東京都新宿区111-111',
                 'home_phone' => '03-0000-0000',
                 'mail' => 'abc@gmail.com',
-                'created_at' => Carbon::now(),
-                'updated_at' => Carbon::now(),
             ],
         ]);
         

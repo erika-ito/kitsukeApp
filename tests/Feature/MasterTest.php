@@ -3,9 +3,6 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Master;
-use Carbon\Carbon;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class MasterTest extends TestCase
@@ -163,5 +160,63 @@ class MasterTest extends TestCase
             
             return true;
         });
+    }
+
+    // 新規登録が成功した場合、講師一覧画面へリダイレクトすること
+    public function testCreateMasterSuccess()
+    {
+        // パラメータ
+        $params = [
+            'rank' => '5',
+            'name' => '佐藤絵里香',
+            'furigana' => 'さとうえりか',
+            'zip_code' => '111-1111',
+            'address' => '東京都新宿区111-111',
+            'home_phone' => '03-0000-0000',
+            'mail' => 'abc@gmail.com',
+        ];
+
+        $response = $this->post(route('masters.create'), $params);
+
+        // 検証
+        $response->assertStatus(302);
+        $response->assertRedirect(route('masters.index'));
+        $this->assertDatabaseHas('masters', [
+            'rank' => '5',
+            'name' => '佐藤絵里香',
+            'furigana' => 'さとうえりか',
+            'zip_code' => '111-1111',
+            'address' => '東京都新宿区111-111',
+            'home_phone' => '03-0000-0000',
+            'mail' => 'abc@gmail.com',
+        ]);
+    }
+
+    // 新規登録で必須項目がない場合、登録画面へリダイレクトし、エラーメッセージが表示されること
+    public function testNotRequired ()
+    {
+        // パラメータ
+        $params = [
+            'rank' => null,
+            'name' => null,
+            'furigana' => null,
+            'zip_code' => null,
+            'address' => null,
+            'home_phone' => '03-0000-0000',
+            'mail' => 'abc@gmail.com',
+        ];
+
+        $response = $this->post(route('masters.create'), $params);
+
+        // 検証
+        $response->assertStatus(302);
+        $response->assertRedirect(route('masters.create'));
+        $response->assertSessionHasErrors([
+            'rank' => '優先度は必須項目です。',
+            'name' => '氏名は必須項目です。',
+            'furigana' => 'ふりがなは必須項目です。',
+            'zip_code' => '郵便番号は必須項目です。',
+            'address' => '住所は必須項目です。',
+        ]);
     }
 }
