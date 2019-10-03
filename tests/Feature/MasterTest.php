@@ -3,9 +3,6 @@
 namespace Tests\Feature;
 
 use Tests\TestCase;
-use App\Master;
-use Carbon\Carbon;
-use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class MasterTest extends TestCase
@@ -195,7 +192,7 @@ class MasterTest extends TestCase
         ]);
     }
 
-    // 新規登録で必須項目がない場合、元のページにリダイレクトされること
+    // 新規登録で必須項目がない場合、登録画面へリダイレクトし、エラーメッセージが表示されること
     public function testNotRequired ()
     {
         // パラメータ
@@ -212,8 +209,14 @@ class MasterTest extends TestCase
         $response = $this->post(route('masters.create'), $params);
 
         // 検証
-        $response->assertStatus(422);
-        // $response->assertStatus(302);
+        $response->assertStatus(302);
         $response->assertRedirect(route('masters.create'));
+        $response->assertSessionHasErrors([
+            'rank' => '優先度は必須項目です。',
+            'name' => '氏名は必須項目です。',
+            'furigana' => 'ふりがなは必須項目です。',
+            'zip_code' => '郵便番号は必須項目です。',
+            'address' => '住所は必須項目です。',
+        ]);
     }
 }
