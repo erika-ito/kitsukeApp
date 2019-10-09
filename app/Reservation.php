@@ -250,7 +250,7 @@ class Reservation extends Model
                 return 'D校';
 
             case 6:
-                return 'その他（出張場所）';
+                return 'その他';
         }
     }
 
