@@ -79,10 +79,10 @@
                             <select class="form-control" name="location_type" id="location_type" >
                                 <option value="" >選択してください</option>
                                 <option value="1" @if(old('location_type') == '1') selected @endif>自宅</option>
-                                <option value="2" @if(old('location_type') == '2') selected @endif>青山校</option>
-                                <option value="3" @if(old('location_type') == '3') selected @endif>銀座校</option>
-                                <option value="4" @if(old('location_type') == '4') selected @endif>吉祥寺校</option>
-                                <option value="5" @if(old('location_type') == '5') selected @endif>室町校</option>
+                                <option value="2" @if(old('location_type') == '2') selected @endif>A校</option>
+                                <option value="3" @if(old('location_type') == '3') selected @endif>B校</option>
+                                <option value="4" @if(old('location_type') == '4') selected @endif>C校</option>
+                                <option value="5" @if(old('location_type') == '5') selected @endif>D校</option>
                                 <option value="6" @if(old('location_type') == '6') selected @endif>その他</option>
                             </select>
                         </div>

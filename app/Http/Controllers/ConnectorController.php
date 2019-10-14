@@ -28,7 +28,7 @@ class ConnectorController extends Controller
         // 検索、並び替え、ページネーション
         $connectors = Connector::keyword($keyword)
             ->orderBy('total_count','desc')
-            ->orderBy('name','asc')
+            ->orderBy('furigana','asc')
             ->paginate(5, $columns);
 
         // 連絡者一覧へ

@@ -90,13 +90,13 @@ class Reservation extends Model
             function($query) use($today) {
                 // 過去・キャンセル表示のボタンが押されたとき
                 return $query
-                    ->where('location_date', '<=', $today)
+                    ->where('location_date', '<', $today)
                     ->orwhere('status', '=', '7'); // キャンセル
 
             }, function($query) use($today) {
                 // 通常の一覧表示のとき
                 return $query
-                    ->where('location_date', '>', $today)
+                    ->where('location_date', '>=', $today)
                     ->where('status', '<>', '7');
             });
     }
@@ -249,7 +249,7 @@ class Reservation extends Model
                 return 'D校';
 
             case 6:
-                return 'その他（出張場所）';
+                return 'その他';
         }
     }
 

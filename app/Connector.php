@@ -22,6 +22,7 @@ class Connector extends Model
         'mail',
         'connect_method',
         'is_student',
+        'special',
     ];
 
     // 中間テーブルリレーション
